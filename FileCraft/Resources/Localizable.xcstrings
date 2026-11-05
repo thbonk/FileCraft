@@ -1,0 +1,6304 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "“%@” can't be ejected because it is in use." : {
+      "comment" : "Alert title; %@ is the name of the volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« kann nicht ausgeworfen werden, weil es verwendet wird."
+          }
+        }
+      }
+    },
+    "“%@” can’t be moved to the Trash." : {
+      "comment" : "Alert title for an item in a protected location or on a read-only volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« kann nicht in den Papierkorb gelegt werden."
+          }
+        }
+      }
+    },
+    "“%@” can’t be moved to the Trash. Do you want to delete it immediately?" : {
+      "comment" : "Alert when an item cannot be moved to the Trash.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« kann nicht in den Papierkorb gelegt werden. Möchten Sie das Objekt sofort löschen?"
+          }
+        }
+      }
+    },
+    "“%@” could not be ejected." : {
+      "comment" : "Alert title; %@ is the name of the volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht ausgeworfen werden."
+          }
+        }
+      }
+    },
+    "“%@” could not be moved to the Trash." : {
+      "comment" : "Alert after Delete Alias failed; %@ is the name of the alias.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht in den Papierkorb gelegt werden."
+          }
+        }
+      }
+    },
+    "“%@” could not be renamed. No items were renamed." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht umbenannt werden. Es wurden keine Objekte umbenannt."
+          }
+        }
+      }
+    },
+    "“%@” couldn’t be compressed." : {
+      "comment" : "Error dialog title for Compress.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht komprimiert werden."
+          }
+        }
+      }
+    },
+    "“%@” couldn’t be copied." : {
+      "comment" : "Error dialog title; the argument is the item name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht kopiert werden."
+          }
+        }
+      }
+    },
+    "“%@” couldn’t be deleted." : {
+      "comment" : "Error dialog title for a deletion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht gelöscht werden."
+          }
+        }
+      }
+    },
+    "“%@” couldn’t be expanded." : {
+      "comment" : "Error dialog title for Expand.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht entpackt werden."
+          }
+        }
+      }
+    },
+    "“%@” couldn’t be moved." : {
+      "comment" : "Error dialog title; the argument is the item name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« konnte nicht bewegt werden."
+          }
+        }
+      }
+    },
+    "“%@” in %@" : {
+      "comment" : "A recent search: search text and scope",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« in %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "“%1$@” in %2$@"
+          }
+        }
+      }
+    },
+    "“%@” is not available." : {
+      "comment" : "Alert title for a sidebar favorite whose item cannot be found; %@ is its name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« ist nicht verfügbar."
+          }
+        }
+      }
+    },
+    "%@ (default)" : {
+      "comment" : "Open With menu: %@ is the name of the default application of the selected items.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (Standard)"
+          }
+        }
+      }
+    },
+    "%@ alias" : {
+      "comment" : "Name of a new alias; %@ is the full name of the original item.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Alias"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ alias"
+          }
+        }
+      }
+    },
+    "%@ available" : {
+      "comment" : "Status bar: free space on the volume, for example \"412 GB available\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ verfügbar"
+          }
+        }
+      }
+    },
+    "%@ copy" : {
+      "comment" : "Name of a duplicate; %@ is the original name without its extension.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Kopie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ copy"
+          }
+        }
+      }
+    },
+    "%@ of %@" : {
+      "comment" : "Operations window: processed of total size, for example “1.4 GB of 3.4 GB”.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ von %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ of %2$@"
+          }
+        }
+      }
+    },
+    "%@ of %@ available" : {
+      "comment" : "Sidebar help tag of a volume: available space of total capacity, for example \"412 GB of 1 TB available\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ von %2$@ verfügbar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ of %2$@ available"
+          }
+        }
+      }
+    },
+    "%@/s" : {
+      "comment" : "Operations window: copy speed, for example “45 MB/s”.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/s"
+          }
+        }
+      }
+    },
+    "%lld bytes" : {
+      "comment" : "Inspector: exact size of an item in bytes.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Byte"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Byte"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld byte"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld bytes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld errors" : {
+      "comment" : "Batch rename: number of rows whose new name cannot be used.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld error"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld errors"
+                }
+              }
+            }
+          }
+        },
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Fehler"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Fehler"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld found" : {
+      "comment" : "Number of search results.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld gefunden"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld gefunden"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld found"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld items" : {
+      "comment" : "Status bar item count of the current folder.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld items can’t be moved to the Trash. Do you want to delete them immediately?" : {
+      "comment" : "Alert when several items cannot be moved to the Trash.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt kann nicht in den Papierkorb gelegt werden. Möchten Sie es sofort löschen?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte können nicht in den Papierkorb gelegt werden. Möchten Sie sie sofort löschen?"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld item can’t be moved to the Trash. Do you want to delete it immediately?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld items can’t be moved to the Trash. Do you want to delete them immediately?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld items match" : {
+      "comment" : "Select by Pattern: number of items whose names match the pattern.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt passt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte passen"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld item matches"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld items match"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "comment" : "Operations window: processed of total items, for example “16 of 40”.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld selected" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld ausgewählt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld selected"
+          }
+        }
+      }
+    },
+    "%lld of %lld selected, %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld ausgewählt, %3$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld selected, %3$@"
+          }
+        }
+      }
+    },
+    "1 GB or More" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 GB oder mehr"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 GB or More"
+          }
+        }
+      }
+    },
+    "1 MB to 100 MB" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 MB bis 100 MB"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 MB to 100 MB"
+          }
+        }
+      }
+    },
+    "100 MB to 1 GB" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 MB bis 1 GB"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 MB to 1 GB"
+          }
+        }
+      }
+    },
+    "A folder can’t be copied or moved into itself." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Ordner kann nicht in sich selbst kopiert oder bewegt werden."
+          }
+        }
+      }
+    },
+    "A name can’t be empty." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Name darf nicht leer sein."
+          }
+        }
+      }
+    },
+    "A name can’t contain “:” or “/”." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Name darf weder »:« noch »/« enthalten."
+          }
+        }
+      }
+    },
+    "A preset with the same name is replaced." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine Vorlage mit demselben Namen wird ersetzt."
+          }
+        }
+      }
+    },
+    "A Unicode date pattern, for example yyyy-MM-dd." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Unicode-Datumsmuster, zum Beispiel yyyy-MM-dd."
+          }
+        }
+      }
+    },
+    "About %@ remaining" : {
+      "comment" : "Operations window: estimated remaining time, for example “About 2 minutes remaining”.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch etwa %@"
+          }
+        }
+      }
+    },
+    "Access Control" : {
+      "comment" : "Inspector: heading of the access control entries of an item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugriffssteuerung"
+          }
+        }
+      }
+    },
+    "Action" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktion"
+          }
+        }
+      }
+    },
+    "Add a rule to change the names." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fügen Sie eine Regel hinzu, um die Namen zu ändern."
+          }
+        }
+      }
+    },
+    "Add Criterion" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kriterium hinzufügen"
+          }
+        }
+      }
+    },
+    "Add Rule" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regel hinzufügen"
+          }
+        }
+      }
+    },
+    "Add Tag" : {
+      "comment" : "Placeholder of the inspector field that adds a tag.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag hinzufügen"
+          }
+        }
+      }
+    },
+    "Add to Selection" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zur Auswahl hinzufügen"
+          }
+        }
+      }
+    },
+    "Add to Shelf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Sammelbereich hinzufügen"
+          }
+        }
+      }
+    },
+    "Add to Sidebar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zur Seitenleiste hinzufügen"
+          }
+        }
+      }
+    },
+    "Added" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzugefügt"
+          }
+        }
+      }
+    },
+    "Alias or symbolic link" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alias oder symbolischer Link"
+          }
+        }
+      }
+    },
+    "All Occurrences" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Vorkommen"
+          }
+        }
+      }
+    },
+    "Allow FileCraft’s Helper" : {
+      "comment" : "Title of the helper approval sheet.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfsprogramm von FileCraft erlauben"
+          }
+        }
+      }
+    },
+    "Amount" : {
+      "comment" : "Accessibility label of the number field in a date search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl"
+          }
+        }
+      }
+    },
+    "An item named “%@” already exists in this location." : {
+      "comment" : "Conflict dialog title; the argument is the item name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Objekt namens »%@« ist an diesem Ort bereits vorhanden."
+          }
+        }
+      }
+    },
+    "An item with the same name may be at the original location, or the location no longer exists." : {
+      "comment" : "Put Back failure message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am ursprünglichen Ort befindet sich möglicherweise ein Objekt mit demselben Namen, oder der Ort existiert nicht mehr."
+          }
+        }
+      }
+    },
+    "Application" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programm"
+          }
+        }
+      }
+    },
+    "Applications" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programme"
+          }
+        }
+      }
+    },
+    "Applies To" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gilt für"
+          }
+        }
+      }
+    },
+    "Apply" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anwenden"
+          }
+        }
+      }
+    },
+    "Apply Preset" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage anwenden"
+          }
+        }
+      }
+    },
+    "Apply the permissions of “%@” to all items it contains?" : {
+      "comment" : "%@ is the name of the folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Zugriffsrechte von »%@« auf alle enthaltenen Objekte anwenden?"
+          }
+        }
+      }
+    },
+    "Apply to all conflicts" : {
+      "comment" : "Conflict dialog checkbox.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf alle Konflikte anwenden"
+          }
+        }
+      }
+    },
+    "Apply to all errors" : {
+      "comment" : "Error dialog checkbox; applies Skip to all later errors.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf alle Fehler anwenden"
+          }
+        }
+      }
+    },
+    "Apply to Enclosed Items…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf alle Unterobjekte anwenden…"
+          }
+        }
+      }
+    },
+    "Archive" : {
+      "comment" : "Base name of a ZIP archive created from several items; the extension .zip is appended.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiv"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        }
+      }
+    },
+    "Are you sure you want to change the extension from “.%@” to “.%@”?" : {
+      "comment" : "Rename: confirmation before changing an extension.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie die Erweiterung wirklich von ».%1$@« in ».%2$@« ändern?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Are you sure you want to change the extension from “.%1$@” to “.%2$@”?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to delete “%@” immediately?" : {
+      "comment" : "Delete Immediately confirmation for one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie »%@« wirklich sofort löschen?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to delete these %lld items immediately?" : {
+      "comment" : "Delete Immediately confirmation for several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Möchten Sie dieses %lld Objekt wirklich sofort löschen?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Möchten Sie diese %lld Objekte wirklich sofort löschen?"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Are you sure you want to delete this %lld item immediately?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Are you sure you want to delete these %lld items immediately?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Are you sure you want to permanently erase the items in the Trash?" : {
+      "comment" : "Empty Trash confirmation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie die Objekte im Papierkorb wirklich endgültig löschen?"
+          }
+        }
+      }
+    },
+    "as Columns" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "als Spalten"
+          }
+        }
+      }
+    },
+    "as Icons" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "als Symbole"
+          }
+        }
+      }
+    },
+    "as List" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "als Liste"
+          }
+        }
+      }
+    },
+    "As Prefix" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am Anfang"
+          }
+        }
+      },
+      "comment" : "Where a rule puts text: at the start of the name."
+    },
+    "As Shown" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie angezeigt"
+          }
+        }
+      }
+    },
+    "As Suffix" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am Ende"
+          }
+        }
+      },
+      "comment" : "Where a rule puts text: at the end of the name."
+    },
+    "Ascending" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufsteigend"
+          }
+        }
+      }
+    },
+    "At Position" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An Position"
+          }
+        }
+      }
+    },
+    "Attribute" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attribut"
+          }
+        }
+      }
+    },
+    "Attributes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attribute"
+          }
+        }
+      }
+    },
+    "Audio" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio"
+          }
+        }
+      }
+    },
+    "Authenticate and Retry" : {
+      "comment" : "Error dialog and inspector button that retries through the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentifizieren und wiederholen"
+          }
+        }
+      }
+    },
+    "Authenticate to View" : {
+      "comment" : "Button for a folder FileCraft may not read; lists it through the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Anzeigen authentifizieren"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück"
+          }
+        }
+      }
+    },
+    "Back/Forward" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück/Vorwärts"
+          }
+        }
+      }
+    },
+    "Batch Rename" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehrfach umbenennen"
+          }
+        }
+      },
+      "comment" : "Undo action name of a batch rename."
+    },
+    "Batch Rename %lld Items" : {
+      "comment" : "Title of the batch rename sheet.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Batch Rename %lld Item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Batch Rename %lld Items"
+                }
+              }
+            }
+          }
+        },
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt mehrfach umbenennen"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte mehrfach umbenennen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Batch Rename…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehrfach umbenennen…"
+          }
+        }
+      }
+    },
+    "begins with" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "beginnt mit"
+          }
+        }
+      }
+    },
+    "Bottom" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unten"
+          }
+        }
+      }
+    },
+    "Calculate Folder Sizes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordnergrößen berechnen"
+          }
+        }
+      }
+    },
+    "Calculating Sizes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Größen werden berechnet"
+          }
+        }
+      }
+    },
+    "Calculating…" : {
+      "comment" : "Conflict dialog: a folder size that is being calculated.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird berechnet…"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        }
+      }
+    },
+    "Cancelled" : {
+      "comment" : "Operations window: state of a cancelled operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abgebrochen"
+          }
+        }
+      }
+    },
+    "Cannot Open Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner kann nicht geöffnet werden"
+          }
+        }
+      }
+    },
+    "Cannot Show Info" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informationen können nicht angezeigt werden"
+          }
+        }
+      }
+    },
+    "Change All" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle ändern"
+          }
+        }
+      }
+    },
+    "Change all similar documents to open with “%@”?" : {
+      "comment" : "%@ is the name of the application.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle ähnlichen Dokumente mit »%@« öffnen?"
+          }
+        }
+      }
+    },
+    "Change All…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle ändern…"
+          }
+        }
+      }
+    },
+    "Change Application" : {
+      "comment" : "Name of the undo action after choosing the application that opens a file.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programm ändern"
+          }
+        }
+      }
+    },
+    "Change Case" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groß-/Kleinschreibung ändern"
+          }
+        }
+      }
+    },
+    "Change Extension" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suffix ändern"
+          }
+        }
+      }
+    },
+    "Change Hidden" : {
+      "comment" : "Name of the undo action for the Hidden attribute.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»Unsichtbar« ändern"
+          }
+        }
+      }
+    },
+    "Change Hide Extension" : {
+      "comment" : "Name of the undo action for the Hide Extension attribute.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»Suffix ausblenden« ändern"
+          }
+        }
+      }
+    },
+    "Change Locked" : {
+      "comment" : "Name of the undo action for the Locked attribute.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»Geschützt« ändern"
+          }
+        }
+      }
+    },
+    "Change Permissions" : {
+      "comment" : "Name of the undo action after a permission change.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugriffsrechte ändern"
+          }
+        }
+      }
+    },
+    "Change Tags" : {
+      "comment" : "Name of the undo action after a tag change.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags ändern"
+          }
+        }
+      }
+    },
+    "Choose…" : {
+      "comment" : "Destination sheet: chooses any folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswählen…"
+          }
+        }
+      }
+    },
+    "Clear Finished" : {
+      "comment" : "Operations window toolbar button that removes finished operations from the list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beendete entfernen"
+          }
+        }
+      }
+    },
+    "Clear Menu" : {
+      "comment" : "Go > Recent Folders: removes all entries of the menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einträge löschen"
+          }
+        }
+      }
+    },
+    "Clear Recent Searches" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzte Suchen löschen"
+          }
+        }
+      }
+    },
+    "Clear Shelf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammelbereich leeren"
+          }
+        }
+      }
+    },
+    "Close Other Tabs" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andere Tabs schließen"
+          }
+        }
+      }
+    },
+    "Close Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tab schließen"
+          }
+        }
+      }
+    },
+    "Close Window" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fenster schließen"
+          }
+        }
+      }
+    },
+    "Collapse Folder" : {
+      "comment" : "List view: accessibility label of a folder's disclosure triangle.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner zuklappen"
+          }
+        }
+      }
+    },
+    "Comparison" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleich"
+          }
+        }
+      }
+    },
+    "Completed" : {
+      "comment" : "Operations window: state of a completed operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abgeschlossen"
+          }
+        }
+      }
+    },
+    "Compress" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komprimieren"
+          }
+        }
+      }
+    },
+    "Compress With Format" : {
+      "comment" : "File menu submenu with ZIP and the tar formats.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komprimieren mit Format"
+          }
+        }
+      }
+    },
+    "Compressing “%@”" : {
+      "comment" : "Operations window: title of a compression of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« wird komprimiert"
+          }
+        }
+      }
+    },
+    "Compressing %lld items" : {
+      "comment" : "Operations window: title of a compression of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt wird komprimiert"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte werden komprimiert"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Compressing %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Compressing %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Computer" : {
+      "comment" : "Go menu item and the name of the location that lists all mounted volumes.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Computer"
+          }
+        }
+      }
+    },
+    "Condition" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bedingung"
+          }
+        }
+      }
+    },
+    "contains" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "enthält"
+          }
+        }
+      }
+    },
+    "Contents" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhalt"
+          }
+        }
+      }
+    },
+    "Copies and moves appear here while they run." : {
+      "comment" : "Operations window without operations.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopier- und Bewegungsvorgänge werden hier angezeigt, während sie laufen."
+          }
+        }
+      }
+    },
+    "Copy %lld items to:" : {
+      "comment" : "Destination sheet title of Copy To….",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt kopieren nach:"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte kopieren nach:"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copy %lld item to:"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copy %lld items to:"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Copy Items to Current Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekte in den aktuellen Ordner kopieren"
+          }
+        }
+      }
+    },
+    "Copy of “%@”" : {
+      "comment" : "Undo action name of a copy of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren von »%@«"
+          }
+        }
+      }
+    },
+    "Copy of %lld Items" : {
+      "comment" : "Undo action name of a copy of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Kopieren von %lld Objekt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Kopieren von %lld Objekten"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copy of %lld Item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copy of %lld Items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Copy Path" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad kopieren"
+          }
+        }
+      }
+    },
+    "Copy Path As" : {
+      "comment" : "Edit menu submenu with path formats.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad kopieren als"
+          }
+        }
+      }
+    },
+    "Copy to Other Pane" : {
+      "comment" : "Tools menu command (F5).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In den anderen Bereich kopieren"
+          }
+        }
+      }
+    },
+    "Copy To…" : {
+      "comment" : "File menu command.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren nach…"
+          }
+        }
+      }
+    },
+    "Copying “%@”" : {
+      "comment" : "Operations window: title of a copy of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« wird kopiert"
+          }
+        }
+      }
+    },
+    "Copying %lld items" : {
+      "comment" : "Operations window: title of a copy of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt wird kopiert"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte werden kopiert"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copying %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Copying %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Count" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl"
+          }
+        }
+      },
+      "comment" : "Remove Characters rule: number of characters."
+    },
+    "Created" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellt"
+          }
+        }
+      }
+    },
+    "Current Date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktuelles Datum"
+          }
+        }
+      }
+    },
+    "Current Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktueller Name"
+          }
+        }
+      }
+    },
+    "Date" : {
+      "comment" : "Accessibility label of the date field in a date search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        }
+      }
+    },
+    "Date Added" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzugefügt am"
+          }
+        }
+      }
+    },
+    "Date Created" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellungsdatum"
+          }
+        }
+      }
+    },
+    "Date Last Opened" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt geöffnet"
+          }
+        }
+      }
+    },
+    "Date Modified" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Änderungsdatum"
+          }
+        }
+      }
+    },
+    "days" : {
+      "comment" : "Unit after \"is within the last\" and a number in a date search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tage"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "comment" : "Alert button that deletes without the Trash.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        }
+      }
+    },
+    "Delete Alias" : {
+      "comment" : "Button of the alert shown when the original of an alias is missing.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alias löschen"
+          }
+        }
+      }
+    },
+    "Delete Immediately" : {
+      "comment" : "Alert button for items that cannot be moved to the Trash.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sofort löschen"
+          }
+        }
+      }
+    },
+    "Delete Immediately…" : {
+      "comment" : "File menu command.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sofort löschen…"
+          }
+        }
+      }
+    },
+    "Delete Preset" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage löschen"
+          }
+        }
+      }
+    },
+    "Deleting “%@”" : {
+      "comment" : "Operations window: title of a deletion of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« wird gelöscht"
+          }
+        }
+      }
+    },
+    "Deleting %lld items" : {
+      "comment" : "Operations window: title of a deletion of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt wird gelöscht"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte werden gelöscht"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Deleting %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Deleting %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Descending" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Absteigend"
+          }
+        }
+      }
+    },
+    "Deselect All" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl aufheben"
+          }
+        }
+      }
+    },
+    "Desktop" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schreibtisch"
+          }
+        }
+      }
+    },
+    "Digits" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stellen"
+          }
+        }
+      },
+      "comment" : "Sequence Number rule: minimum number of digits, padded with zeros."
+    },
+    "Dimensions" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abmessungen"
+          }
+        }
+      }
+    },
+    "Do you want to replace it with the one you’re copying?" : {
+      "comment" : "Conflict dialog message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie es durch das Objekt ersetzen, das Sie kopieren?"
+          }
+        }
+      }
+    },
+    "Do you want to replace it with the one you’re moving?" : {
+      "comment" : "Conflict dialog message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie es durch das Objekt ersetzen, das Sie bewegen?"
+          }
+        }
+      }
+    },
+    "Document" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dokument"
+          }
+        }
+      }
+    },
+    "Documents" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dokumente"
+          }
+        }
+      }
+    },
+    "Don’t Quit" : {
+      "comment" : "Quit confirmation button that keeps FileCraft running.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht beenden"
+          }
+        }
+      }
+    },
+    "Downloads" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads"
+          }
+        }
+      }
+    },
+    "Drag items here to collect them." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ziehen Sie Objekte hierher, um sie zu sammeln."
+          }
+        }
+      }
+    },
+    "Dual Pane" : {
+      "comment" : "Mode with two file panes side by side (FileCraft glossary: Doppelansicht).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doppelansicht"
+          }
+        }
+      }
+    },
+    "Duplicate" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplizieren"
+          }
+        }
+      }
+    },
+    "Duplicate name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doppelter Name"
+          }
+        }
+      }
+    },
+    "Duration" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dauer"
+          }
+        }
+      }
+    },
+    "Edit Path" : {
+      "comment" : "Edit menu: turns the path bar into a text field.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad bearbeiten"
+          }
+        }
+      }
+    },
+    "Eject" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswerfen"
+          }
+        }
+      }
+    },
+    "Eject “%@”" : {
+      "comment" : "Accessibility label of the eject button; %@ is the name of the volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« auswerfen"
+          }
+        }
+      }
+    },
+    "Empty name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leerer Name"
+          }
+        }
+      }
+    },
+    "Empty Trash" : {
+      "comment" : "Empty Trash confirmation button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Papierkorb entleeren"
+          }
+        }
+      }
+    },
+    "Empty Trash…" : {
+      "comment" : "FileCraft menu command.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Papierkorb entleeren…"
+          }
+        }
+      }
+    },
+    "Enabled" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviert"
+          }
+        }
+      },
+      "comment" : "Accessibility label of the checkbox that turns a rename rule on or off."
+    },
+    "Enclosing Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übergeordneter Ordner"
+          }
+        }
+      }
+    },
+    "ends with" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "endet mit"
+          }
+        }
+      }
+    },
+    "Enter the path of a folder or file." : {
+      "comment" : "Go to Folder error for input that is not a path.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie den Pfad eines Ordners oder einer Datei ein."
+          }
+        }
+      }
+    },
+    "Equalize Pane Sizes" : {
+      "comment" : "View menu: gives both panes of a dual-pane window the same size.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereiche gleich groß machen"
+          }
+        }
+      }
+    },
+    "Everyone" : {
+      "comment" : "Inspector permissions: all other users.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder"
+          }
+        }
+      }
+    },
+    "Everyone can execute" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder darf ausführen"
+          }
+        }
+      }
+    },
+    "Everyone can read" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder darf lesen"
+          }
+        }
+      }
+    },
+    "Everyone can write" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder darf schreiben"
+          }
+        }
+      }
+    },
+    "Execute" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausführen"
+          }
+        }
+      }
+    },
+    "Existing Item" : {
+      "comment" : "Conflict dialog: heading of the item at the destination.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorhandenes Objekt"
+          }
+        }
+      }
+    },
+    "Expand" : {
+      "comment" : "File menu command that expands archives, and its undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entpacken"
+          }
+        }
+      }
+    },
+    "Expand Folder" : {
+      "comment" : "List view: accessibility label of a folder's disclosure triangle.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner aufklappen"
+          }
+        }
+      }
+    },
+    "Expanding “%@”" : {
+      "comment" : "Operations window: title of expanding one archive.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« wird entpackt"
+          }
+        }
+      }
+    },
+    "Expanding %lld items" : {
+      "comment" : "Operations window: title of expanding several archives.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Archiv wird entpackt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Archive werden entpackt"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Expanding %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Expanding %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Extended Attributes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweiterte Attribute"
+          }
+        }
+      }
+    },
+    "Extension" : {
+      "comment" : "File name extension, used as sort and group key.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suffix"
+          }
+        }
+      }
+    },
+    "Favorites" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten"
+          }
+        }
+      }
+    },
+    "File URL" : {
+      "comment" : "Copy Path As format, for example file:///Users/anna/Report.pdf.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datei-URL"
+          }
+        }
+      }
+    },
+    "FileCraft can’t expand archives of this kind." : {
+      "comment" : "Error reason for an unknown archive type.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft kann Archive dieser Art nicht entpacken."
+          }
+        }
+      }
+    },
+    "FileCraft can’t read the Trash." : {
+      "comment" : "Alert when the Trash needs Full Disk Access.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft kann den Papierkorb nicht lesen."
+          }
+        }
+      }
+    },
+    "FileCraft is not authorized to make this change." : {
+      "comment" : "Privileged helper refused a request without a valid authorization.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft ist nicht berechtigt, diese Änderung vorzunehmen."
+          }
+        }
+      }
+    },
+    "FileCraft needs Full Disk Access to show this folder." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft benötigt den Festplattenvollzugriff, um diesen Ordner anzuzeigen."
+          }
+        }
+      }
+    },
+    "FileCraft wants to change protected files." : {
+      "comment" : "Prompt of the system authentication dialog.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft möchte geschützte Dateien ändern."
+          }
+        }
+      }
+    },
+    "FileCraft’s helper is not allowed to run." : {
+      "comment" : "The user did not install or allow the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm von FileCraft darf nicht ausgeführt werden."
+          }
+        }
+      }
+    },
+    "Filter “%@”: %lld of %lld" : {
+      "comment" : "Status bar while a quick filter is active: filter text, matching items, all items.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter »%1$@«: %2$lld von %3$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter “%1$@”: %2$lld of %3$lld"
+          }
+        }
+      }
+    },
+    "Filter This Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diesen Ordner filtern"
+          }
+        }
+      }
+    },
+    "Find" : {
+      "comment" : "Edit menu command that focuses the search field.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen"
+          }
+        }
+      }
+    },
+    "Finished with %lld errors" : {
+      "comment" : "Operations window: state of an operation that finished with errors.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mit %lld Fehler beendet"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mit %lld Fehlern beendet"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Finished with %lld error"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Finished with %lld errors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "First Occurrence" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstes Vorkommen"
+          }
+        }
+      }
+    },
+    "Folder" : {
+      "comment" : "Kind of item in a search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner"
+          }
+        }
+      }
+    },
+    "Folder Is Empty" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner ist leer"
+          }
+        }
+      }
+    },
+    "Folder not found" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner nicht gefunden"
+          }
+        }
+      }
+    },
+    "Folder Not Found" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner nicht gefunden"
+          }
+        }
+      }
+    },
+    "Folders and executable files keep their execute permission; other files get none." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner und ausführbare Dateien behalten das Recht zum Ausführen, andere Dateien erhalten es nicht."
+          }
+        }
+      }
+    },
+    "Folders and Packages" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size: items without a file size.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner und Pakete"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folders and Packages"
+          }
+        }
+      }
+    },
+    "Folders First" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner zuerst"
+          }
+        }
+      }
+    },
+    "Format" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format"
+          }
+        }
+      },
+      "comment" : "Date rule: the date pattern field."
+    },
+    "Formats" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formate"
+          }
+        }
+      },
+      "comment" : "Date rule: menu of predefined date patterns."
+    },
+    "Forward" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorwärts"
+          }
+        }
+      }
+    },
+    "From End" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vom Ende"
+          }
+        }
+      }
+    },
+    "From Start" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vom Anfang"
+          }
+        }
+      }
+    },
+    "Full Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ganzer Name"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allgemein"
+          }
+        }
+      }
+    },
+    "Get Info" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informationen"
+          }
+        }
+      }
+    },
+    "Go" : {
+      "comment" : "Title of the Go menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gehe zu"
+          }
+        }
+      }
+    },
+    "Go to Folder" : {
+      "comment" : "Title of the Go to Folder sheet.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gehe zum Ordner"
+          }
+        }
+      }
+    },
+    "Go to Folder…" : {
+      "comment" : "Go menu item that opens the Go to Folder sheet.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gehe zum Ordner…"
+          }
+        }
+      }
+    },
+    "Group" : {
+      "comment" : "List view column: the group that owns the item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe"
+          }
+        }
+      }
+    },
+    "Group and Sort" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppieren und sortieren"
+          }
+        }
+      }
+    },
+    "Group By" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppieren nach"
+          }
+        }
+      }
+    },
+    "Group can execute" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe darf ausführen"
+          }
+        }
+      }
+    },
+    "Group can read" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe darf lesen"
+          }
+        }
+      }
+    },
+    "Group can write" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe darf schreiben"
+          }
+        }
+      }
+    },
+    "Group/Sort" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppieren/Sortieren"
+          }
+        }
+      }
+    },
+    "Hidden" : {
+      "comment" : "Inspector attribute that hides the item in views without hidden files.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbar"
+          }
+        }
+      }
+    },
+    "Hidden Files" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbare Dateien"
+          }
+        }
+      }
+    },
+    "Hide Extension" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suffix ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Hidden Files" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbare Dateien ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Inspector" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspektor ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Path Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfadleiste ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Shelf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammelbereich ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Status Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statusleiste ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Tab Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableiste ausblenden"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "comment" : "Go menu item: the user's home folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzerordner"
+          }
+        }
+      }
+    },
+    "iCloud" : {
+      "comment" : "Title of the sidebar section with iCloud Drive.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud"
+          }
+        }
+      }
+    },
+    "iCloud Drive" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Drive"
+          }
+        }
+      }
+    },
+    "Icon Size" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolgröße"
+          }
+        }
+      }
+    },
+    "If you make this change, your document may open in a different application." : {
+      "comment" : "Rename: extension change message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn Sie diese Änderung vornehmen, wird Ihr Dokument möglicherweise mit einer anderen App geöffnet."
+          }
+        }
+      }
+    },
+    "Image" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild"
+          }
+        }
+      }
+    },
+    "In “%@”" : {
+      "comment" : "Operations window: folder of a deletion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In »%@«"
+          }
+        }
+      }
+    },
+    "Include Hidden Items" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbare Objekte einbeziehen"
+          }
+        }
+      }
+    },
+    "Include Package Contents" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paketinhalte einbeziehen"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "comment" : "Title of a Get Info window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informationen"
+          }
+        }
+      }
+    },
+    "Insert Text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text einfügen"
+          }
+        }
+      }
+    },
+    "Inspector" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspektor"
+          }
+        }
+      }
+    },
+    "Install FileCraft’s Helper" : {
+      "comment" : "Title of the sheet that explains the helper before installing it.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfsprogramm von FileCraft installieren"
+          }
+        }
+      }
+    },
+    "Install Helper" : {
+      "comment" : "Button that registers the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfsprogramm installieren"
+          }
+        }
+      }
+    },
+    "Invalid character" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültiges Zeichen"
+          }
+        }
+      }
+    },
+    "Invert Selection" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl umkehren"
+          }
+        }
+      }
+    },
+    "is" : {
+      "comment" : "Search criterion operator: the name is exactly the text.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist"
+          }
+        }
+      }
+    },
+    "is after" : {
+      "comment" : "Date search criterion, followed by a date.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist nach dem"
+          }
+        }
+      }
+    },
+    "is before" : {
+      "comment" : "Date search criterion, followed by a date.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist vor dem"
+          }
+        }
+      }
+    },
+    "is greater than" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist größer als"
+          }
+        }
+      }
+    },
+    "is less than" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist kleiner als"
+          }
+        }
+      }
+    },
+    "is today" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist heute"
+          }
+        }
+      }
+    },
+    "is within the last" : {
+      "comment" : "Date search criterion, followed by a number and a unit such as days.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ist innerhalb der letzten"
+          }
+        }
+      }
+    },
+    "Item Not Found" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekt nicht gefunden"
+          }
+        }
+      }
+    },
+    "Items of this kind can’t be copied." : {
+      "comment" : "Error reason for sockets and device files.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekte dieser Art können nicht kopiert werden."
+          }
+        }
+      }
+    },
+    "Keep .%@" : {
+      "comment" : "Rename: keeps the old extension.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "».%@« beibehalten"
+          }
+        }
+      }
+    },
+    "Keep Both" : {
+      "comment" : "Conflict dialog button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beide behalten"
+          }
+        }
+      }
+    },
+    "Kind" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Art"
+          }
+        }
+      }
+    },
+    "Label Position" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position der Beschriftung"
+          }
+        }
+      }
+    },
+    "Large" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groß"
+          }
+        }
+      }
+    },
+    "Last Occurrence" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letztes Vorkommen"
+          }
+        }
+      }
+    },
+    "Last Opened" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt geöffnet"
+          }
+        }
+      }
+    },
+    "Less Than 1 MB" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weniger als 1 MB"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Less Than 1 MB"
+          }
+        }
+      }
+    },
+    "Library" : {
+      "comment" : "Go menu item shown while Option is held: the user's Library folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Library"
+          }
+        }
+      }
+    },
+    "Location" : {
+      "comment" : "List view column: the folder containing a search result.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ort"
+          }
+        }
+      }
+    },
+    "Locations" : {
+      "comment" : "Title of the sidebar section with the computer and the volumes.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orte"
+          }
+        }
+      }
+    },
+    "Locked" : {
+      "comment" : "Inspector attribute that protects the item from changes.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschützt"
+          }
+        }
+      }
+    },
+    "lowercase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kleinbuchstaben"
+          }
+        }
+      },
+      "comment" : "Change Case rule style, shown in lowercase on purpose."
+    },
+    "macOS protects this location, or its volume is read-only, so it can’t be changed." : {
+      "comment" : "Alert message for an item that can neither be trashed nor deleted.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS schützt diesen Ort oder sein Volume ist schreibgeschützt, daher kann er nicht geändert werden."
+          }
+        }
+      }
+    },
+    "macOS protects this location, so it can’t be changed." : {
+      "comment" : "Privileged helper refused a location protected by System Integrity Protection.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS schützt diesen Ort, daher kann er nicht geändert werden."
+          }
+        }
+      }
+    },
+    "Make Alias" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alias erzeugen"
+          }
+        }
+      }
+    },
+    "Make Lowercase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Kleinbuchstaben"
+          }
+        }
+      }
+    },
+    "Make Symbolic Link" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolischen Link erzeugen"
+          }
+        }
+      }
+    },
+    "Match case" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groß-/Kleinschreibung beachten"
+          }
+        }
+      }
+    },
+    "matches regular expression" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "entspricht regulärem Ausdruck"
+          }
+        }
+      }
+    },
+    "Medium" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittel"
+          }
+        }
+      }
+    },
+    "Merge" : {
+      "comment" : "Conflict dialog button that combines two folders.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zusammenführen"
+          }
+        }
+      }
+    },
+    "Modified" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geändert"
+          }
+        }
+      }
+    },
+    "Modified %@" : {
+      "comment" : "Conflict dialog: modification date of an item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geändert: %@"
+          }
+        }
+      }
+    },
+    "months" : {
+      "comment" : "Unit after \"is within the last\" and a number in a date search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monate"
+          }
+        }
+      }
+    },
+    "More Folders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weitere Ordner"
+          }
+        }
+      }
+    },
+    "Move %lld items to:" : {
+      "comment" : "Destination sheet title of Move To….",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt bewegen nach:"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte bewegen nach:"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Move %lld item to:"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Move %lld items to:"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Move Items Here" : {
+      "comment" : "Edit menu command (⌥⌘V).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekte hierher bewegen"
+          }
+        }
+      }
+    },
+    "Move Items to Current Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekte in den aktuellen Ordner bewegen"
+          }
+        }
+      }
+    },
+    "Move of “%@”" : {
+      "comment" : "Undo action name of a move of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewegen von »%@«"
+          }
+        }
+      }
+    },
+    "Move of %lld Items" : {
+      "comment" : "Undo action name of a move of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Bewegen von %lld Objekt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Bewegen von %lld Objekten"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Move of %lld Item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Move of %lld Items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Move to Other Pane" : {
+      "comment" : "Tab context menu: moves the tab to the other pane of the window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In den anderen Bereich bewegen"
+          }
+        }
+      }
+    },
+    "Move to Trash" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In den Papierkorb legen"
+          }
+        }
+      }
+    },
+    "Move To…" : {
+      "comment" : "File menu command.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewegen nach…"
+          }
+        }
+      }
+    },
+    "Movie" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film"
+          }
+        }
+      }
+    },
+    "Moving “%@”" : {
+      "comment" : "Operations window: title of a move of one item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« wird bewegt"
+          }
+        }
+      }
+    },
+    "Moving %lld items" : {
+      "comment" : "Operations window: title of a move of several items.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekt wird bewegt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Objekte werden bewegt"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Moving %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Moving %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "Name already exists" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name existiert bereits"
+          }
+        }
+      }
+    },
+    "Name Only" : {
+      "comment" : "Copy Path As format: the file name without its folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur Name"
+          }
+        }
+      }
+    },
+    "Name too long" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name zu lang"
+          }
+        }
+      }
+    },
+    "New Extension" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Suffix"
+          }
+        }
+      }
+    },
+    "New Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Ordner"
+          }
+        }
+      }
+    },
+    "New Folder with Selection" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Ordner mit Auswahl"
+          }
+        }
+      }
+    },
+    "New Item" : {
+      "comment" : "Conflict dialog: heading of the item being copied or moved.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Objekt"
+          }
+        }
+      }
+    },
+    "New Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Name"
+          }
+        }
+      }
+    },
+    "New Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Tab"
+          }
+        }
+      }
+    },
+    "New tabs use these options." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Tabs verwenden diese Optionen."
+          }
+        }
+      }
+    },
+    "New Text File" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Textdatei"
+          }
+        }
+      }
+    },
+    "No Access to This Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Zugriff auf diesen Ordner"
+          }
+        }
+      }
+    },
+    "No Date" : {
+      "comment" : "Header of a group of items in a grouped file view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Datum"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Date"
+          }
+        }
+      }
+    },
+    "No Extension" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by file name extension.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Suffix"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Extension"
+          }
+        }
+      }
+    },
+    "No Operations" : {
+      "comment" : "Operations window without operations.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Vorgänge"
+          }
+        }
+      }
+    },
+    "No Presets" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Vorlagen"
+          }
+        }
+      }
+    },
+    "No Recent Searches" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine letzten Suchen"
+          }
+        }
+      }
+    },
+    "No Rules" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Regeln"
+          }
+        }
+      }
+    },
+    "No Selection" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Auswahl"
+          }
+        }
+      }
+    },
+    "No Subfolders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Unterordner"
+          }
+        }
+      }
+    },
+    "No Tags" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by tag.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Tags"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Tags"
+          }
+        }
+      }
+    },
+    "No terminal application was found." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es wurde kein Terminalprogramm gefunden."
+          }
+        }
+      }
+    },
+    "No Window" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Fenster"
+          }
+        }
+      }
+    },
+    "None" : {
+      "comment" : "Group By menu entry that turns grouping off.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ohne"
+          }
+        }
+      }
+    },
+    "Not found" : {
+      "comment" : "Inspector: the original of an alias or symbolic link is missing.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht gefunden"
+          }
+        }
+      }
+    },
+    "Octal" : {
+      "comment" : "Inspector: the permissions as an octal number, for example 0755.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oktal"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "comment" : "Button that closes an error alert.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "On Disk" : {
+      "comment" : "Inspector: the space an item takes on its volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf dem Volume"
+          }
+        }
+      }
+    },
+    "Only for This Mac" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur für »Dieser Mac«"
+          }
+        }
+      }
+    },
+    "Only some of the selected items have this tag." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur einige der ausgewählten Objekte haben dieses Tag."
+          }
+        }
+      }
+    },
+    "Open" : {
+      "comment" : "Context menu command that opens the selected items.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen"
+          }
+        }
+      }
+    },
+    "Open %lld info windows?" : {
+      "comment" : "Confirmation before File > Get Info opens more than ten windows.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Informationsfenster öffnen?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Informationsfenster öffnen?"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Open %lld info window?"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Open %lld info windows?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Open in New Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In neuem Tab öffnen"
+          }
+        }
+      }
+    },
+    "Open in Other Pane" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im anderen Bereich öffnen"
+          }
+        }
+      }
+    },
+    "Open in Terminal" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Terminal öffnen"
+          }
+        }
+      }
+    },
+    "Open Privacy & Security Settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen für »Datenschutz & Sicherheit« öffnen"
+          }
+        }
+      }
+    },
+    "Open System Settings" : {
+      "comment" : "Alert button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Systemeinstellungen öffnen"
+          }
+        }
+      }
+    },
+    "Open With" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen mit"
+          }
+        }
+      }
+    },
+    "Operations" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorgänge"
+          }
+        }
+      }
+    },
+    "Operator" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operator"
+          }
+        }
+      }
+    },
+    "Option" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Option"
+          }
+        }
+      },
+      "comment" : "Accessibility label of a rule option picker."
+    },
+    "Options" : {
+      "comment" : "Search bar menu with the hidden items and package contents options.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optionen"
+          }
+        }
+      }
+    },
+    "Order" : {
+      "comment" : "Sort direction menu in the Group/Sort toolbar menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reihenfolge"
+          }
+        }
+      }
+    },
+    "Order:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reihenfolge:"
+          }
+        }
+      }
+    },
+    "Original" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original"
+          }
+        }
+      }
+    },
+    "Other Kinds" : {
+      "comment" : "Header of a group of items in a grouped file view. Items whose kind is unknown.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andere Arten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other Kinds"
+          }
+        }
+      }
+    },
+    "Other Pane" : {
+      "comment" : "Destination sheet section.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anderer Bereich"
+          }
+        }
+      }
+    },
+    "Other…" : {
+      "comment" : "Open With menu item that lets the user choose any application.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andere…"
+          }
+        }
+      }
+    },
+    "Owner" : {
+      "comment" : "List view column: the user that owns the item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigentümer"
+          }
+        }
+      }
+    },
+    "Owner can execute" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigentümer darf ausführen"
+          }
+        }
+      }
+    },
+    "Owner can read" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigentümer darf lesen"
+          }
+        }
+      }
+    },
+    "Owner can write" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigentümer darf schreiben"
+          }
+        }
+      }
+    },
+    "Pane Layout" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anordnung der Bereiche"
+          }
+        }
+      }
+    },
+    "Partially copied items are removed." : {
+      "comment" : "Quit confirmation message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilweise kopierte Objekte werden entfernt."
+          }
+        }
+      }
+    },
+    "Path" : {
+      "comment" : "Placeholder of the path bar when it is edited as text.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad"
+          }
+        }
+      }
+    },
+    "Path Relative to Home" : {
+      "comment" : "Copy Path As format, for example ~/Documents/Report.pdf.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad relativ zum Benutzerordner"
+          }
+        }
+      }
+    },
+    "Pattern" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muster"
+          }
+        }
+      }
+    },
+    "Pattern:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muster:"
+          }
+        }
+      }
+    },
+    "Pause" : {
+      "comment" : "Operations window button that pauses an operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anhalten"
+          }
+        }
+      }
+    },
+    "Paused" : {
+      "comment" : "Operations window: state of a paused operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angehalten"
+          }
+        }
+      }
+    },
+    "PDF" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        }
+      }
+    },
+    "Permissions" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugriffsrechte"
+          }
+        }
+      }
+    },
+    "Position" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position"
+          }
+        }
+      },
+      "comment" : "Character position, counted from 0, in Insert Text and Remove Characters rules."
+    },
+    "POSIX Path" : {
+      "comment" : "Copy Path As format, for example /Users/anna/Report.pdf.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "POSIX-Pfad"
+          }
+        }
+      }
+    },
+    "Preparing…" : {
+      "comment" : "Operations window: an operation counting its items.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird vorbereitet…"
+          }
+        }
+      }
+    },
+    "Preset Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name der Vorlage"
+          }
+        }
+      }
+    },
+    "Presets" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlagen"
+          }
+        }
+      }
+    },
+    "Preview" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorschau"
+          }
+        }
+      }
+    },
+    "Previous 7 Days" : {
+      "comment" : "Header of a group of items in a grouped file view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorherige 7 Tage"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous 7 Days"
+          }
+        }
+      }
+    },
+    "Previous 30 Days" : {
+      "comment" : "Header of a group of items in a grouped file view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorherige 30 Tage"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous 30 Days"
+          }
+        }
+      }
+    },
+    "Put Back" : {
+      "comment" : "File menu command and undo action name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurücklegen"
+          }
+        }
+      }
+    },
+    "Quick Look" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersicht"
+          }
+        }
+      }
+    },
+    "Quit the applications that use the volume, then try again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beenden Sie die Programme, die das Volume verwenden, und versuchen Sie es erneut."
+          }
+        }
+      }
+    },
+    "Read" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesen"
+          }
+        }
+      }
+    },
+    "Recent Folders" : {
+      "comment" : "Go menu submenu with the folders visited most recently.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzte Ordner"
+          }
+        }
+      }
+    },
+    "Recent Searches" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzte Suchen"
+          }
+        }
+      }
+    },
+    "Recently Closed Tabs" : {
+      "comment" : "Window menu submenu listing the tabs closed most recently.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt geschlossene Tabs"
+          }
+        }
+      }
+    },
+    "Regular Expression" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regulärer Ausdruck"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernen"
+          }
+        }
+      },
+      "comment" : "Change Extension rule option: remove the extension."
+    },
+    "Remove “%@”" : {
+      "comment" : "Accessibility label of the remove button of a tag; %@ is the tag name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»%@« entfernen"
+          }
+        }
+      }
+    },
+    "Remove Characters" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeichen entfernen"
+          }
+        }
+      }
+    },
+    "Remove Criterion" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kriterium entfernen"
+          }
+        }
+      }
+    },
+    "Remove from Shelf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus dem Sammelbereich entfernen"
+          }
+        }
+      }
+    },
+    "Remove from Sidebar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus der Seitenleiste entfernen"
+          }
+        }
+      }
+    },
+    "Remove Rule" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regel entfernen"
+          }
+        }
+      }
+    },
+    "Remove Tag" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag entfernen"
+          }
+        }
+      }
+    },
+    "Rename" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umbenennen"
+          }
+        }
+      }
+    },
+    "Reopen Closed Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschlossenen Tab wieder öffnen"
+          }
+        }
+      }
+    },
+    "Replace" : {
+      "comment" : "Conflict dialog button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ersetzen"
+          }
+        }
+      }
+    },
+    "Replace Selection" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auswahl ersetzen"
+          }
+        }
+      }
+    },
+    "Replace Text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text ersetzen"
+          }
+        }
+      }
+    },
+    "Replace With" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ersetzen durch"
+          }
+        }
+      }
+    },
+    "Replacement, for example $1" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ersetzung, zum Beispiel $1"
+          }
+        }
+      }
+    },
+    "Resume" : {
+      "comment" : "Operations window button that resumes a paused operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsetzen"
+          }
+        }
+      }
+    },
+    "Retry" : {
+      "comment" : "Error dialog button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiederholen"
+          }
+        }
+      }
+    },
+    "Reveal in Finder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Finder zeigen"
+          }
+        }
+      }
+    },
+    "Reveal in Pane" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Bereich zeigen"
+          }
+        }
+      }
+    },
+    "Right" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechts"
+          }
+        }
+      }
+    },
+    "Rule" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regel"
+          }
+        }
+      },
+      "comment" : "Accessibility label of the rule type picker."
+    },
+    "Save" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sichern"
+          }
+        }
+      },
+      "comment" : "Button that saves a batch rename preset."
+    },
+    "Save as Preset…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als Vorlage sichern…"
+          }
+        }
+      }
+    },
+    "Save Preset" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage sichern"
+          }
+        }
+      }
+    },
+    "Search for “%@”" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suche nach »%@«"
+          }
+        }
+      }
+    },
+    "Search In" : {
+      "comment" : "Header of the search scopes in the search field menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen in"
+          }
+        }
+      }
+    },
+    "Search Results" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchergebnisse"
+          }
+        }
+      }
+    },
+    "Search Subfolders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterordner durchsuchen"
+          }
+        }
+      }
+    },
+    "Search This Mac" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diesen Mac durchsuchen"
+          }
+        }
+      }
+    },
+    "Searching… %lld found" : {
+      "comment" : "A search is running; number of results so far.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Suche läuft… %lld gefunden"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Suche läuft… %lld gefunden"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Searching… %lld found"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Searching… %lld found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Select by Pattern" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach Muster auswählen"
+          }
+        }
+      }
+    },
+    "Select by Pattern…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach Muster auswählen…"
+          }
+        }
+      }
+    },
+    "Selected" : {
+      "comment" : "Inspector summary of several items: how many are selected.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausgewählt"
+          }
+        }
+      }
+    },
+    "Sentence case" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Satzanfang groß"
+          }
+        }
+      }
+    },
+    "Separator" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trennzeichen"
+          }
+        }
+      }
+    },
+    "Sequence Number" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laufende Nummer"
+          }
+        }
+      }
+    },
+    "Share" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilen"
+          }
+        }
+      }
+    },
+    "Shelf" : {
+      "comment" : "Name of the panel that collects file references (FileCraft glossary: Sammelbereich).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammelbereich"
+          }
+        }
+      }
+    },
+    "Shell-Escaped Path" : {
+      "comment" : "Copy Path As format, for example /Users/anna/My\\ Report.pdf.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfad mit Shell-Maskierung"
+          }
+        }
+      }
+    },
+    "Show Columns" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spalten einblenden"
+          }
+        }
+      }
+    },
+    "Show Errors" : {
+      "comment" : "Operations window button that shows the errors of an operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler anzeigen"
+          }
+        }
+      }
+    },
+    "Show Hidden Files" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbare Dateien einblenden"
+          }
+        }
+      }
+    },
+    "Show Icon Previews" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolvorschau einblenden"
+          }
+        }
+      }
+    },
+    "Show in Browser" : {
+      "comment" : "Help tag of the inspector location link, which shows the item in a browser window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Browserfenster zeigen"
+          }
+        }
+      }
+    },
+    "Show Inspector" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspektor einblenden"
+          }
+        }
+      }
+    },
+    "Show Item Info" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objektinformationen einblenden"
+          }
+        }
+      }
+    },
+    "Show Next Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächsten Tab anzeigen"
+          }
+        }
+      }
+    },
+    "Show Original" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original zeigen"
+          }
+        }
+      }
+    },
+    "Show Package Contents" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paketinhalt zeigen"
+          }
+        }
+      }
+    },
+    "Show Path Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfadleiste einblenden"
+          }
+        }
+      }
+    },
+    "Show Preview Column" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorschauspalte einblenden"
+          }
+        }
+      }
+    },
+    "Show Previous Tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorherigen Tab anzeigen"
+          }
+        }
+      }
+    },
+    "Show Same Folder in Other Pane" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gleichen Ordner im anderen Bereich zeigen"
+          }
+        }
+      }
+    },
+    "Show Shelf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammelbereich einblenden"
+          }
+        }
+      }
+    },
+    "Show Status Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statusleiste einblenden"
+          }
+        }
+      }
+    },
+    "Show Subfolders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterordner anzeigen"
+          }
+        }
+      }
+    },
+    "Show Tab Bar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableiste einblenden"
+          }
+        }
+      }
+    },
+    "Show View Options" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darstellungsoptionen einblenden"
+          }
+        }
+      }
+    },
+    "Side by Side" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nebeneinander"
+          }
+        }
+      }
+    },
+    "Size" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Größe"
+          }
+        }
+      }
+    },
+    "Skip" : {
+      "comment" : "Conflict and error dialog button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überspringen"
+          }
+        }
+      }
+    },
+    "Small" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klein"
+          }
+        }
+      }
+    },
+    "Some items could not be created." : {
+      "comment" : "Failure of Make Alias or Make Symbolic Link.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht erstellt werden."
+          }
+        }
+      }
+    },
+    "Some items could not be moved into the new folder." : {
+      "comment" : "Failure of New Folder with Selection.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht in den neuen Ordner bewegt werden."
+          }
+        }
+      }
+    },
+    "Some items could not be put back." : {
+      "comment" : "Put Back failure title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht zurückgelegt werden."
+          }
+        }
+      }
+    },
+    "Some items could not get the tag “%@”." : {
+      "comment" : "Alert after dropping items on a tag in the sidebar; %@ is the tag name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Tag »%@« konnte nicht allen Objekten hinzugefügt werden."
+          }
+        }
+      }
+    },
+    "Some items couldn’t be compressed." : {
+      "comment" : "Error summary title for Compress.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht komprimiert werden."
+          }
+        }
+      }
+    },
+    "Some items couldn’t be copied." : {
+      "comment" : "Error summary title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht kopiert werden."
+          }
+        }
+      }
+    },
+    "Some items couldn’t be deleted." : {
+      "comment" : "Error summary title for a deletion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht gelöscht werden."
+          }
+        }
+      }
+    },
+    "Some items couldn’t be expanded." : {
+      "comment" : "Error summary title for Expand.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht entpackt werden."
+          }
+        }
+      }
+    },
+    "Some items couldn’t be moved." : {
+      "comment" : "Error summary title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte konnten nicht bewegt werden."
+          }
+        }
+      }
+    },
+    "Sort By" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortieren nach"
+          }
+        }
+      }
+    },
+    "Stacked" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übereinander"
+          }
+        }
+      }
+    },
+    "Start" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      },
+      "comment" : "Sequence Number rule: the first number."
+    },
+    "Status" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        }
+      },
+      "comment" : "Batch rename preview column: whether the new name can be used."
+    },
+    "Step" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritt"
+          }
+        }
+      },
+      "comment" : "Sequence Number rule: the increment."
+    },
+    "Stop" : {
+      "comment" : "Conflict and error dialog button that ends the operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stoppen"
+          }
+        }
+      }
+    },
+    "Stop Operations and Quit" : {
+      "comment" : "Quit confirmation button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorgänge stoppen und beenden"
+          }
+        }
+      }
+    },
+    "Stop the operations and quit?" : {
+      "comment" : "Quit confirmation title while operations run.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorgänge stoppen und FileCraft beenden?"
+          }
+        }
+      }
+    },
+    "Subfolders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterordner"
+          }
+        }
+      }
+    },
+    "Swap Panes" : {
+      "comment" : "View menu: exchanges the contents of the two panes.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereiche tauschen"
+          }
+        }
+      }
+    },
+    "Syntax:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Syntax:"
+          }
+        }
+      }
+    },
+    "Tag" : {
+      "comment" : "Placeholder of the tag name field in a Tags search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
+          }
+        }
+      }
+    },
+    "Tags" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
+          }
+        }
+      }
+    },
+    "Text" : {
+      "comment" : "Kind of item (text files) and placeholder of the Contents search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text"
+          }
+        }
+      }
+    },
+    "Text Size" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textgröße"
+          }
+        }
+      }
+    },
+    "The archive could not be processed." : {
+      "comment" : "Error reason when an archive tool fails without a message.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Archiv konnte nicht verarbeitet werden."
+          }
+        }
+      }
+    },
+    "The folder could not be created." : {
+      "comment" : "New Folder failure.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Ordner konnte nicht erstellt werden."
+          }
+        }
+      }
+    },
+    "The folder could not be listed: %@" : {
+      "comment" : "Authenticate to View failed; the argument is the reason.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Ordner konnte nicht aufgelistet werden: %@"
+          }
+        }
+      }
+    },
+    "The folder no longer exists." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Ordner existiert nicht mehr."
+          }
+        }
+      }
+    },
+    "The helper could not complete the operation." : {
+      "comment" : "Generic failure of the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm konnte den Vorgang nicht abschließen."
+          }
+        }
+      }
+    },
+    "The helper is missing from FileCraft. Please reinstall FileCraft." : {
+      "comment" : "Helper approval sheet when the app bundle lacks the helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm fehlt in FileCraft. Bitte installieren Sie FileCraft neu."
+          }
+        }
+      }
+    },
+    "The item is too large for the format of the destination volume." : {
+      "comment" : "Error reason, for example for a file over 4 GB on a FAT32 volume.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Objekt ist zu groß für das Format des Zielvolumes."
+          }
+        }
+      }
+    },
+    "The item may have been deleted, or it is on a volume that is not connected." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Objekt wurde möglicherweise gelöscht oder befindet sich auf einem Volume, das nicht verbunden ist."
+          }
+        }
+      }
+    },
+    "The items can’t be moved there." : {
+      "comment" : "Alert title when a drop is refused.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Objekte können nicht dorthin bewegt werden."
+          }
+        }
+      }
+    },
+    "The name “%@” is already taken. Please choose a different name." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Name »%@« ist bereits vergeben. Bitte wählen Sie einen anderen Namen."
+          }
+        }
+      }
+    },
+    "The name is too long." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Name ist zu lang."
+          }
+        }
+      }
+    },
+    "The order in which sequence numbers count the items." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Reihenfolge, in der laufende Nummern die Objekte zählen."
+          }
+        }
+      }
+    },
+    "The original item can't be found." : {
+      "comment" : "Title of the alert shown when the original of an alias or symbolic link is missing.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Original wurde nicht gefunden."
+          }
+        }
+      }
+    },
+    "The original of “%@” no longer exists. You can move the alias to the Trash." : {
+      "comment" : "%@ is the name of the alias or symbolic link.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Original von »%@« existiert nicht mehr. Sie können den Alias in den Papierkorb legen."
+          }
+        }
+      }
+    },
+    "The part of the name the rule changes." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Teil des Namens, den die Regel ändert."
+          }
+        }
+      }
+    },
+    "The regular expression is not valid." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der reguläre Ausdruck ist ungültig."
+          }
+        }
+      }
+    },
+    "The text file could not be created." : {
+      "comment" : "New Text File failure.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Textdatei konnte nicht erstellt werden."
+          }
+        }
+      }
+    },
+    "There is no folder or file at “%@”." : {
+      "comment" : "Go to Folder error; %@ is the path the user typed.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unter »%@« gibt es keinen Ordner und keine Datei."
+          }
+        }
+      }
+    },
+    "This applies to all documents of the kind “%@”." : {
+      "comment" : "%@ is the kind of the document, for example \"Markdown document\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das gilt für alle Dokumente der Art »%@«."
+          }
+        }
+      }
+    },
+    "This Folder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Ordner"
+          }
+        }
+      }
+    },
+    "This Mac" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Mac"
+          }
+        }
+      }
+    },
+    "Title Case" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wortanfänge groß"
+          }
+        }
+      }
+    },
+    "To “%@”" : {
+      "comment" : "Operations window: destination folder of an operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach »%@«"
+          }
+        }
+      }
+    },
+    "To change protected files, FileCraft installs a helper that runs with administrator rights. It performs only the file operations you start, after you authenticate as an administrator. macOS then asks you to allow the helper in System Settings." : {
+      "comment" : "Sheet that explains the helper before installing it.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um geschützte Dateien zu ändern, installiert FileCraft ein Hilfsprogramm mit Administratorrechten. Es führt nur die Dateivorgänge aus, die Sie starten, nachdem Sie sich als Administrator authentifiziert haben. Anschließend fragt macOS, ob Sie das Hilfsprogramm in den Systemeinstellungen erlauben."
+          }
+        }
+      }
+    },
+    "To change protected files, FileCraft uses a helper that runs with administrator rights. Turn on FileCraft in System Settings > General > Login Items & Extensions, then return to FileCraft." : {
+      "comment" : "Helper approval sheet explanation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um geschützte Dateien zu ändern, verwendet FileCraft ein Hilfsprogramm mit Administratorrechten. Aktivieren Sie FileCraft unter Systemeinstellungen > Allgemein > Anmeldeobjekte und Erweiterungen und kehren Sie dann zu FileCraft zurück."
+          }
+        }
+      }
+    },
+    "To empty the Trash, allow Full Disk Access for FileCraft in System Settings > Privacy & Security." : {
+      "comment" : "Empty Trash without Full Disk Access.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erlauben Sie FileCraft unter Systemeinstellungen > Datenschutz & Sicherheit den Festplattenvollzugriff, um den Papierkorb zu entleeren."
+          }
+        }
+      }
+    },
+    "Today" : {
+      "comment" : "Header of a group of items in a grouped file view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "Today, %@" : {
+      "comment" : "Relative date in list view; %@ is the time, for example \"Today, 10:42\".",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute, %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today, %@"
+          }
+        }
+      }
+    },
+    "Tools" : {
+      "comment" : "Title of the Tools menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkzeuge"
+          }
+        }
+      }
+    },
+    "Treat Packages as Folders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pakete als Ordner behandeln"
+          }
+        }
+      }
+    },
+    "Turns the rule on or off." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schaltet die Regel ein oder aus."
+          }
+        }
+      }
+    },
+    "Unavailable" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht verfügbar"
+          }
+        }
+      }
+    },
+    "Unchanged" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unverändert"
+          }
+        }
+      }
+    },
+    "Unit" : {
+      "comment" : "Accessibility label of a unit picker in a search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einheit"
+          }
+        }
+      }
+    },
+    "untitled" : {
+      "comment" : "Base name of a new plain-text file; the extension .txt is appended.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbenannt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "untitled"
+          }
+        }
+      }
+    },
+    "untitled folder" : {
+      "comment" : "Name of a new folder.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Ordner"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "untitled folder"
+          }
+        }
+      }
+    },
+    "UPPERCASE" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GROSSBUCHSTABEN"
+          }
+        }
+      },
+      "comment" : "Change Case rule style, shown in uppercase on purpose."
+    },
+    "Use .%@" : {
+      "comment" : "Rename: uses the new extension.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "».%@« verwenden"
+          }
+        }
+      }
+    },
+    "Use as Defaults" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als Standard verwenden"
+          }
+        }
+      }
+    },
+    "Use Relative Dates" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relative Datumsangaben verwenden"
+          }
+        }
+      }
+    },
+    "Use this application to open all documents like this one." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Programm für alle Dokumente dieser Art verwenden."
+          }
+        }
+      }
+    },
+    "Used Space" : {
+      "comment" : "Accessibility label of the usage bar of a volume in the sidebar.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belegter Speicher"
+          }
+        }
+      }
+    },
+    "Utilities" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dienstprogramme"
+          }
+        }
+      }
+    },
+    "verification failed" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überprüfung fehlgeschlagen"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "comment" : "List view column: the version of an app or bundle.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
+    },
+    "View" : {
+      "comment" : "Label of the toolbar control that switches between icon, list and column view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darstellung"
+          }
+        }
+      }
+    },
+    "View Options" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darstellungsoptionen"
+          }
+        }
+      }
+    },
+    "Waiting for your decision" : {
+      "comment" : "Operations window: an operation waiting for a dialog answer.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartet auf Ihre Entscheidung"
+          }
+        }
+      }
+    },
+    "Waiting…" : {
+      "comment" : "Operations window: a queued operation.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartet…"
+          }
+        }
+      }
+    },
+    "weeks" : {
+      "comment" : "Unit after \"is within the last\" and a number in a date search criterion.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wochen"
+          }
+        }
+      }
+    },
+    "Where" : {
+      "comment" : "Inspector: the folder that contains the item.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ort"
+          }
+        }
+      }
+    },
+    "Wildcards" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platzhalter"
+          }
+        }
+      }
+    },
+    "Wildcards: * matches any text, ? one character, [abc] one of the characters." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platzhalter: * steht für beliebigen Text, ? für ein Zeichen, [abc] für eines der Zeichen."
+          }
+        }
+      }
+    },
+    "Write" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schreiben"
+          }
+        }
+      }
+    },
+    "Yesterday" : {
+      "comment" : "Header of a group of items in a grouped file view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday"
+          }
+        }
+      }
+    },
+    "Yesterday, %@" : {
+      "comment" : "Relative date in list view; %@ is the time, for example \"Yesterday, 09:13\".",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestern, %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday, %@"
+          }
+        }
+      }
+    },
+    "You can’t undo this action." : {
+      "comment" : "Message of deletion confirmations.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie können diese Aktion nicht widerrufen."
+          }
+        }
+      }
+    },
+    "Zero Bytes" : {
+      "comment" : "Header of a group of items in a grouped file view. Grouping by size: empty files.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Null Byte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zero Bytes"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

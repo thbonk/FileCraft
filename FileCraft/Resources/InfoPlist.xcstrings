@@ -1,0 +1,35 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleName" : {
+      "comment" : "Name of the app; not translated.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "FileCraft"
+          }
+        }
+      }
+    },
+    "FileCraft Tab" : {
+      "comment" : "Description of the type of tabs dragged between FileCraft windows.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft-Tab"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
