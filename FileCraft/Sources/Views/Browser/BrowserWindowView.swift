@@ -95,6 +95,9 @@ internal struct BrowserWindowView: View {
     .sheet(isPresented: $model.isShowingSelectByPattern) {
       SelectByPatternSheet(tab: model.activeTab)
     }
+    .sheet(isPresented: $model.isShowingTags) {
+      TagsSheet(urls: model.activeTab.pathTargets)
+    }
     .sheet(item: $model.batchRename) { batchRename in
       BatchRenameSheet(model: batchRename, commands: model.fileCommands)
     }
@@ -105,6 +108,9 @@ internal struct BrowserWindowView: View {
     }
     .onChange(of: model.closeRequest) {
       dismissWindow()
+    }
+    .onChange(of: model.newWindowRequest) {
+      openWindow(id: "browser")
     }
     .onChange(of: model.infoWindowRequest) { _, references in
       if references.isEmpty == false, references.count <= BrowserWindowModel.infoWindowLimit {
@@ -136,6 +142,15 @@ internal struct BrowserWindowView: View {
       // this window closed: the action belongs to the app's scenes, not to this window.
       OperationQueueModel.shared.presentWindow = { [openWindow] in
         openWindow(id: OperationsView.windowID)
+      }
+      // The welcome window opens once, in front of the first browser window, until the user finished or skipped it.
+      if Self.hasOfferedWelcome == false, AppEnvironment.isTestHost == false, WelcomeModel.showsAtLaunch() {
+        Self.hasOfferedWelcome = true
+        openWindow(id: WelcomeView.windowID)
+      }
+      // The Dock menu's New Window, which also works after the last window closed.
+      AppDelegate.openBrowserWindow = { [openWindow] in
+        openWindow(id: "browser")
       }
     }
     .task {
@@ -240,6 +255,10 @@ internal struct BrowserWindowView: View {
     hasStartedRestoring = true
     // The stored state of a restored window arrives only once AppKit restores the window.
     await LaunchRestoration.waitUntilFinished()
+    // A window opened for a particular folder has no stored state; it shows that folder instead of the default.
+    if storedSnapshot == nil, let location = NewWindowQueue.pop() {
+      model.activeTab.replaceLocation(with: location)
+    }
     defer {
       hasRestored = true
       // Stores the state at once, also when nothing was restored.
@@ -269,6 +288,9 @@ internal struct BrowserWindowView: View {
     let modes = resolvedSnapshot.primaryPane.tabs.map(\.viewSettings.viewMode.rawValue)
     Self.restorationLogger.info("Restored a window with view modes \(modes, privacy: .public)")
   }
+
+  /// Whether this launch already opened the welcome window.
+  private static var hasOfferedWelcome = false
 
   private static func newWindowLocation() -> Location {
     let settings = SettingsStore()

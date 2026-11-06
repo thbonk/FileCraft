@@ -46,14 +46,15 @@ internal struct BatchRenameSheet: View {
         .font(.headline)
       HSplitView {
         ruleList
-          .frame(minWidth: 340, idealWidth: 380, maxWidth: 480)
+          .frame(minWidth: 340, idealWidth: 360, maxWidth: 480)
         BatchRenamePreview(rows: rows)
-          .frame(minWidth: 360)
+          .frame(minWidth: 480)
       }
       footer(errorCount: errorCount, moves: moves)
     }
     .padding(20)
-    .frame(minWidth: 820, idealWidth: 920, minHeight: 480, idealHeight: 560)
+    // A sheet takes its minimum size, so the size is fixed: wide enough for the rules and a preview without scrolling.
+    .frame(width: 940, height: 580)
     .task {
       await model.loadFolderNames()
       await presets.loadIfNeeded()
@@ -188,16 +189,18 @@ private struct BatchRenamePreview: View {
           .lineLimit(1)
           .truncationMode(.middle)
       }
+      .width(min: 100, ideal: 140)
       TableColumn("New Name") { row in
         Text(verbatim: row.newName)
           .lineLimit(1)
           .truncationMode(.middle)
           .foregroundStyle(row.status == .unchanged ? AnyShapeStyle(.secondary) : AnyShapeStyle(.primary))
       }
+      .width(min: 100, ideal: 140)
       TableColumn("Status") { row in
         status(row.status)
       }
-      .width(min: 90, ideal: 160)
+      .width(min: 90, ideal: 110)
     }
   }
 

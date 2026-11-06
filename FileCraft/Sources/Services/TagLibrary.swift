@@ -52,6 +52,11 @@ nonisolated internal enum TagLibrary {
 
   /// The color tags of `labels`, which are ordered like `NSWorkspace.fileLabels`, in Finder's order, followed by
   /// the other `found` tags sorted by name.
+  /// The localized names of the seven color tags in Finder's order.
+  internal static var colorTags: [String] {
+    ordered(standard: NSWorkspace.shared.fileLabels, found: [])
+  }
+
   internal static func ordered(standard labels: [String], found: Set<String>) -> [String] {
     let colorTags = finderOrder.compactMap { labels.indices.contains($0) ? labels[$0] : nil }
     let otherTags = found.subtracting(colorTags).sorted { $0.localizedStandardCompare($1) == .orderedAscending }

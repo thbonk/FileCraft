@@ -489,7 +489,7 @@ internal final class FileCommandModel {
     }
   }
 
-  /// FileCraft > Empty Trash…: asks for confirmation first, unless the warning is turned off.
+  /// File > Empty Trash…: asks for confirmation first, unless the warning is turned off.
   internal func requestEmptyTrash() async {
     if settings.value(for: SettingsKeys.warnsBeforeEmptyingTrash) {
       isConfirmingEmptyTrash = true

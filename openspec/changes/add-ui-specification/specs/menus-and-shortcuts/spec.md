@@ -3,9 +3,9 @@
 ### Requirement: Menu bar structure
 The menu bar SHALL contain the menus FileCraft, File, Edit, View, Go, Tools, Window and Help with at least these commands, in this order:
 
-- **FileCraft**: About FileCraft, Check for Updates…, Settings…, Empty Trash…, Services, Hide FileCraft, Hide Others, Show All, Quit FileCraft
-- **File**: New Window, New Tab, New Folder, New Folder with Selection, New Text File, Open, Open With, Open in New Tab, Open in Other Pane, Close Tab, Close Window, Get Info, Rename, Duplicate, Make Alias, Make Symbolic Link, Show Original, Quick Look, Add to Sidebar, Add to Shelf, Copy To…, Move To…, Compress, Compress With Format, Expand, Move to Trash, Delete Immediately…, Put Back, Eject, Tags…
-- **Edit**: Undo, Redo, Cut, Copy, Paste, Move Items Here, Copy Path, Copy Path As, Edit Path, Select All, Deselect All, Invert Selection, Select by Pattern…, Find
+- **FileCraft**: About FileCraft, Check for Updates…, Settings…, Services, Hide FileCraft, Hide Others, Show All, Quit FileCraft
+- **File**: New Window, New Tab, New Folder, New Folder with Selection, New Text File, Open, Open With, Open in New Tab, Open in Other Pane, Close Tab, Close Window, Get Info, Rename, Duplicate, Make Alias, Make Symbolic Link, Show Original, Quick Look, Add to Sidebar, Add to Shelf, Copy To…, Move To…, Compress, Compress With Format, Expand, Move to Trash, Delete Immediately…, Put Back, Empty Trash…, Eject, Tags…
+- **Edit**: Undo, Redo, Cut, Copy, Paste, Select All, Move Items Here, Copy Path, Copy Path As, Edit Path, Deselect All, Invert Selection, Select by Pattern…, Find
 - **View**: as Icons, as List, as Columns, Group By, Sort By, Folders First, Show Hidden Files, Treat Packages as Folders, Reload, Show Sidebar, Show Inspector, Show Shelf, Dual Pane, Pane Layout, Equalize Pane Sizes, Swap Panes, Show Tab Bar, Show Path Bar, Show Status Bar, Hide Toolbar, Customize Toolbar…, Show View Options, Enter Full Screen
 - **Go**: Back, Forward, Enclosing Folder, Recent Folders, Computer, Home, Desktop, Documents, Downloads, Applications, Utilities, iCloud Drive, Library (with ⌥), Go to Folder…
 - **Tools**: Batch Rename…, Copy to Other Pane, Move to Other Pane, Show Same Folder in Other Pane, Open in Terminal, Reveal in Finder
@@ -69,7 +69,7 @@ Shortcuts SHALL adapt to the active keyboard layout so that each shortcut is typ
 - **THEN** the Back and Forward commands have shortcuts that can be typed on that layout and the menu shows them
 
 ### Requirement: Item context menu
-Secondary-clicking a selected item SHALL show a context menu with Open, Open With, Open in New Tab, Open in Other Pane (with dual pane on), Quick Look, Get Info, Rename, Duplicate, Make Alias, Copy, Copy Path, Compress, Move to Trash, tag colors, Add to Shelf, Add to Sidebar, Reveal in Finder, Open in Terminal for folders, and the applicable system Services. Commands SHALL act on all selected items.
+Secondary-clicking a selected item SHALL show a context menu with Open, Open With, Open in New Tab, Open in Other Pane (with dual pane on), Quick Look, Get Info, Rename, Duplicate, Make Alias, Copy, Copy Path, Compress, Move to Trash, tag colors, Add to Shelf, Add to Sidebar, Reveal in Finder and Open in Terminal for folders. Commands SHALL act on all selected items. The context menu does not offer the system Services, because SwiftUI windows cannot provide their selection to Services.
 
 #### Scenario: Context menu on several items
 - **WHEN** the user secondary-clicks one of three selected files

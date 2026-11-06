@@ -332,7 +332,8 @@ internal struct TabModelTests {
   @Test
   internal func `Quick Look browses every item for one selected item and only the selection for several`() {
     let items = [file("/tmp/a.txt"), file("/tmp/b.txt"), file("/tmp/c.txt")]
-    let tab = TabModel(location: .tag("Test"), listing: DirectoryListing(staticItems: items))
+    // List view, independent of the default view mode in the user's settings.
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: items))
 
     tab.select(items[1].id)
     let singleSelectionURLs = tab.quickLookURLs

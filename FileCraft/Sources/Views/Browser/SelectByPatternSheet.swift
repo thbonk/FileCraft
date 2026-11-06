@@ -47,34 +47,57 @@ internal struct SelectByPatternSheet: View {
         .font(.headline)
       Form {
         TextField("Pattern:", text: $text, prompt: Text(verbatim: syntax == .wildcard ? "*.jpg" : "^IMG_\\d+"))
-        Picker("Syntax:", selection: $syntax) {
-          Text("Wildcards").tag(NamePattern.Syntax.wildcard)
-          Text("Regular Expression").tag(NamePattern.Syntax.regularExpression)
+        // Segments while they fit, a pop-up menu for long translations.
+        ViewThatFits(in: .horizontal) {
+          syntaxPicker
+            .pickerStyle(.segmented)
+            .fixedSize()
+          syntaxPicker
+            .pickerStyle(.menu)
         }
-        .pickerStyle(.segmented)
         Toggle("Match case", isOn: $isCaseSensitive)
       }
       result
         .font(.callout)
-      HStack {
-        Spacer()
-        Button("Cancel", role: .cancel) {
-          dismiss()
+        .fixedSize(horizontal: false, vertical: true)
+      // The buttons stand side by side when they fit and are stacked when long translations need more room.
+      ViewThatFits(in: .horizontal) {
+        HStack {
+          Spacer()
+          buttons
         }
-        .keyboardShortcut(.cancelAction)
-        Button("Add to Selection") {
-          apply(addingToSelection: true)
+        VStack(alignment: .trailing) {
+          buttons
         }
-        .disabled(isValid == false)
-        Button("Replace Selection") {
-          apply(addingToSelection: false)
-        }
-        .keyboardShortcut(.defaultAction)
-        .disabled(isValid == false)
+        .frame(maxWidth: .infinity, alignment: .trailing)
       }
     }
     .padding(20)
-    .frame(width: 440)
+    .frame(width: 480)
+  }
+
+  private var syntaxPicker: some View {
+    Picker("Syntax:", selection: $syntax) {
+      Text("Wildcards").tag(NamePattern.Syntax.wildcard)
+      Text("Regular Expression").tag(NamePattern.Syntax.regularExpression)
+    }
+  }
+
+  @ViewBuilder
+  private var buttons: some View {
+    Button("Cancel", role: .cancel) {
+      dismiss()
+    }
+    .keyboardShortcut(.cancelAction)
+    Button("Add to Selection") {
+      apply(addingToSelection: true)
+    }
+    .disabled(isValid == false)
+    Button("Replace Selection") {
+      apply(addingToSelection: false)
+    }
+    .keyboardShortcut(.defaultAction)
+    .disabled(isValid == false)
   }
 
   @ViewBuilder

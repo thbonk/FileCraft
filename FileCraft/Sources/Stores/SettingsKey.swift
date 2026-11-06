@@ -89,12 +89,16 @@ nonisolated internal struct SettingsKey<Value: SettingsValue>: Sendable {
   internal let pane: SettingsPane
   /// Whether the key suppresses a warning, so that Reset Warnings restores it.
   internal let isWarning: Bool
+  /// Whether the key records state rather than a setting, such as the last folder shown; Restore Defaults of its
+  /// pane keeps it, Reset All Settings does not.
+  internal let isState: Bool
 
-  internal init(_ name: String, default defaultValue: Value, pane: SettingsPane, isWarning: Bool = false) {
+  internal init(_ name: String, default defaultValue: Value, pane: SettingsPane, isWarning: Bool = false, isState: Bool = false) {
     self.name = name
     self.defaultValue = defaultValue
     self.pane = pane
     self.isWarning = isWarning
+    self.isState = isState
   }
 }
 
@@ -104,12 +108,14 @@ nonisolated internal struct AnySettingsKey: Sendable {
   internal let defaultValue: any Sendable
   internal let pane: SettingsPane
   internal let isWarning: Bool
+  internal let isState: Bool
 
   internal init<Value>(_ key: SettingsKey<Value>) {
     name = key.name
     defaultValue = key.defaultValue.propertyListValue
     pane = key.pane
     isWarning = key.isWarning
+    isState = key.isState
   }
 }
 
@@ -124,9 +130,9 @@ nonisolated internal enum SettingsKeys {
   internal static let newWindowFolderPath = SettingsKey("general.newWindowFolderPath", default: "", pane: .general)
   internal static let folderOpeningBehavior = SettingsKey("general.folderOpeningBehavior", default: FolderOpeningBehavior.sameTab, pane: .general)
   internal static let restoresWindows = SettingsKey("general.restoresWindows", default: true, pane: .general)
-  internal static let hasCompletedWelcome = SettingsKey("general.hasCompletedWelcome", default: false, pane: .general)
+  internal static let hasCompletedWelcome = SettingsKey("general.hasCompletedWelcome", default: false, pane: .general, isState: true)
   /// The folder shown last, used when new windows open at the last location.
-  internal static let lastFolderPath = SettingsKey("general.lastFolderPath", default: "", pane: .general)
+  internal static let lastFolderPath = SettingsKey("general.lastFolderPath", default: "", pane: .general, isState: true)
 
   // MARK: - Browser
 
@@ -180,6 +186,8 @@ nonisolated internal enum SettingsKeys {
   internal static let terminalBundleIdentifier = SettingsKey("integration.terminalBundleIdentifier", default: "com.apple.Terminal", pane: .integration)
   internal static let usesFileCraftAsFileViewer = SettingsKey("integration.usesFileCraftAsFileViewer", default: false, pane: .integration)
   internal static let removesShelfItemsAfterDrag = SettingsKey("integration.removesShelfItemsAfterDrag", default: false, pane: .integration)
+  internal static let quitsFinderOnLaunch = SettingsKey("integration.quitsFinderOnLaunch", default: false, pane: .integration)
+  internal static let hidesFinderDesktop = SettingsKey("integration.hidesFinderDesktop", default: false, pane: .integration)
 
   // MARK: - Advanced
 
@@ -228,6 +236,8 @@ nonisolated internal enum SettingsKeys {
     AnySettingsKey(terminalBundleIdentifier),
     AnySettingsKey(usesFileCraftAsFileViewer),
     AnySettingsKey(removesShelfItemsAfterDrag),
+    AnySettingsKey(quitsFinderOnLaunch),
+    AnySettingsKey(hidesFinderDesktop),
     AnySettingsKey(sizeUnits),
   ]
 }

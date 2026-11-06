@@ -83,8 +83,14 @@ internal final class TabModel: Identifiable {
   internal private(set) var refreshGeneration = 0
   /// Increases when the tab's file view should take keyboard focus, as after Tab in the other pane.
   internal private(set) var focusRequest = 0
+  /// Increases with View > Reload, which loads the location again.
+  internal private(set) var reloadGeneration = 0
   /// The pane that holds the tab; the pane sets it.
   @ObservationIgnored internal weak var pane: PaneModel?
+  /// Where double-clicked folders open; tests replace it instead of changing the user's settings.
+  @ObservationIgnored internal var folderOpeningBehavior: () -> FolderOpeningBehavior = {
+    SettingsStore().value(for: SettingsKeys.folderOpeningBehavior)
+  }
 
   /// Folders whose children expand as soon as they are loaded, after an ⌥-click.
   @ObservationIgnored private var recursivelyExpandedFolders: Set<FileItem.ID> = []
@@ -322,7 +328,7 @@ internal final class TabModel: Identifiable {
   internal func open(_ item: FileItem) {
     cancelScheduledRename()
     if opensAsFolder(item) {
-      navigate(toFolder: item.url)
+      openFolder(item)
     } else {
       openFiles([item])
     }
@@ -337,7 +343,32 @@ internal final class TabModel: Identifiable {
       return
     }
     openInNewTabs(folders.dropFirst(), selects: false)
-    navigate(toFolder: first.url)
+    openFolder(first)
+  }
+
+  /// Shows a folder the user opened where the General settings say: in this tab, a new tab or a new window.
+  private func openFolder(_ folder: FileItem) {
+    switch folderOpeningBehavior() {
+    case .sameTab:
+      navigate(toFolder: folder.url)
+    case .newTab:
+      openInNewTabs([folder])
+    case .newWindow:
+      guard let window = pane?.window, let reference = try? FileReference(url: folder.url) else {
+        navigate(toFolder: folder.url)
+        return
+      }
+      window.requestNewWindow(showing: .folder(reference))
+    }
+  }
+
+  /// Replaces the location without adding history, as a window opened for a particular folder does.
+  internal func replaceLocation(with location: Location) {
+    guard location != history.current else {
+      return
+    }
+    history.replaceCurrent(with: location)
+    didChangeLocation()
   }
 
   /// Opens each folder among `items` in a new tab right after this one; with `selects`, the first new tab
@@ -440,6 +471,11 @@ internal final class TabModel: Identifiable {
     if let match = TypeSelectBuffer.firstMatch(for: prefix, in: entries, locale: locale) {
       selectionModel.select(match)
     }
+  }
+
+  /// View > Reload: loads the tab's location again.
+  internal func reload() {
+    reloadGeneration += 1
   }
 
   internal func selectAll() {

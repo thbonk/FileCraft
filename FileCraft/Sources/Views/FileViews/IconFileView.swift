@@ -90,6 +90,9 @@ internal struct IconFileView: View {
               }
             }
             .gesture(rubberBandGesture(over: Set(items.map(\.id))))
+            .contextMenu {
+              FileBackgroundContextMenu(tab: tab, folder: nil)
+            }
         }
         .overlay(alignment: .topLeading) {
           rubberBandOverlay

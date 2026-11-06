@@ -72,7 +72,8 @@ internal struct PaneView: View {
         Divider()
       }
       FileViewContainer(tab: tab)
-        .task(id: ListingKey(tab: tab.id, location: tab.location, includesHiddenItems: showsHiddenFiles)) {
+        .task(id: ListingKey(
+            tab: tab.id, location: tab.location, includesHiddenItems: showsHiddenFiles, reload: tab.reloadGeneration)) {
           switch tab.location {
           case .folder(let reference):
             await tab.listing.observe(reference.lastKnownURL, includingHiddenItems: showsHiddenFiles)
@@ -109,6 +110,8 @@ nonisolated private struct ListingKey: Hashable {
   let tab: TabModel.ID
   let location: Location
   let includesHiddenItems: Bool
+  /// View > Reload changes it.
+  let reload: Int
 }
 
 #Preview {

@@ -116,6 +116,38 @@ internal final class SettingsStoreTests {
   }
 
   @Test
+  internal func `Restore Defaults of each pane resets exactly the keys of that pane`() {
+    for pane in SettingsPane.allCases {
+      for key in SettingsKeys.all {
+        defaults.set("changed", forKey: key.name)
+      }
+
+      store.restoreDefaults(of: pane)
+
+      let stored = defaults.persistentDomain(forName: suiteName) ?? [:]
+      for key in SettingsKeys.all {
+        let isReset = stored[key.name] == nil
+        #expect(isReset == (key.pane == pane && key.isState == false), "\(key.name) after restoring \(pane)")
+      }
+    }
+  }
+
+  @Test
+  internal func `Reset All Settings restores every key and the view defaults`() {
+    store.set(true, for: SettingsKeys.showsHiddenFiles)
+    store.set(SizeUnits.binary, for: SettingsKeys.sizeUnits)
+    store.set(FolderOpeningBehavior.newWindow, for: SettingsKeys.folderOpeningBehavior)
+    store.saveListColumnDefaults(Data([1, 2, 3]))
+
+    store.resetAll()
+
+    #expect(store.value(for: SettingsKeys.showsHiddenFiles) == false)
+    #expect(store.value(for: SettingsKeys.sizeUnits) == .decimal)
+    #expect(store.value(for: SettingsKeys.folderOpeningBehavior) == .sameTab)
+    #expect(store.listColumnDefaults() == nil)
+  }
+
+  @Test
   internal func `Every key has a unique name`() {
     let names = SettingsKeys.all.map(\.name)
 

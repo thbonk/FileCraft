@@ -154,25 +154,27 @@
 
 ## 14. Settings
 
-- [ ] 14.1 Build the `Settings` scene with all nine panes and Restore Defaults per pane
-- [ ] 14.2 Build the General, Browser, Sidebar and Tabs & Panes panes; the "Restore windows" toggle calls `SettingsStore.applyWindowRestoration()` when it changes
-- [ ] 14.3 Build the File Operations and Compression panes
-- [ ] 14.4 Build the Integration pane: terminal chooser, the default file viewer toggle (`NSFileViewer` plus the `public.folder` handler, restoring Finder when turned off, with a drift check on launch) and shelf behavior
-- [ ] 14.5 Build the Helper and Advanced panes (size units, Reset Warnings, Reset All Settings)
+- [x] 14.1 Build the `Settings` scene with all nine panes and Restore Defaults per pane
+- [x] 14.2 Build the General, Browser, Sidebar and Tabs & Panes panes; the "Restore windows" toggle calls `SettingsStore.applyWindowRestoration()` when it changes
+- [x] 14.3 Build the File Operations and Compression panes
+- [x] 14.4 Build the Integration pane: terminal chooser, the default file viewer toggle (`NSFileViewer`, restoring Finder when turned off, with a drift check on launch; the `public.folder` handler cannot be changed on macOS 27, see D13) and shelf behavior
+- [x] 14.5 Build the Helper and Advanced panes (size units, Reset Warnings, Reset All Settings)
+- [x] 14.6 Add "Quit Finder when FileCraft launches" to the Integration pane: warning when turned on, Finder quit at launch and relaunched when FileCraft quits, with tests against a fake Finder controller
+- [x] 14.7 Add "Hide Finder's desktop" to the Integration pane: Finder's `CreateDesktop` preference and a Finder relaunch, undone by turning it off, Restore Defaults and Reset All Settings, with tests against fake preferences
 
 ## 15. Menus and shortcuts
 
-- [ ] 15.1 Build the menu bar in the specified structure with command validation and state-dependent titles
-- [ ] 15.2 Assign the default shortcut table with keyboard-layout adaptation and check it against macOS system shortcuts
-- [ ] 15.3 Build the context menus for items, background, sidebar, tabs, path bar and shelf
-- [ ] 15.4 Build the Keyboard Shortcuts window with search
-- [ ] 15.5 Build the Dock menu
+- [x] 15.1 Build the menu bar in the specified structure with command validation and state-dependent titles
+- [x] 15.2 Assign the default shortcut table with keyboard-layout adaptation and check it against macOS system shortcuts
+- [x] 15.3 Build the context menus for items, background, sidebar, tabs, path bar and shelf (without system Services, see D19)
+- [x] 15.4 Build the Keyboard Shortcuts window with search
+- [x] 15.5 Build the Dock menu
 
 ## 16. Onboarding
 
-- [ ] 16.1 Build the welcome window with its steps and first-launch logic
-- [ ] 16.2 Implement the Full Disk Access probe, status refresh on activation and the settings deep link
-- [ ] 16.3 Add the default file viewer step and reopening from Help and Settings
+- [x] 16.1 Build the welcome window with its steps and first-launch logic
+- [x] 16.2 Implement the Full Disk Access probe, status refresh on activation and the settings deep link
+- [x] 16.3 Add the default file viewer step and reopening from Help and Settings
 
 ## 17. Software updates (Sparkle)
 
@@ -184,13 +186,13 @@
 
 ## 18. Localization
 
-- [ ] 18.1 Translate all strings into German following the owner-approved glossary, with translator comments for ambiguous keys
-- [ ] 18.2 Add plural variants for all count-dependent strings
-- [ ] 18.3 Add the localization coverage test that fails on missing or stale German translations
-- [ ] 18.4 Test generated names and value formatting under the German locale
-- [ ] 18.5 Run German and double-length pseudolanguage passes and fix all truncation
-- [ ] 18.6 Localize the Info.plist strings and map helper error codes to localized messages
-- [ ] 18.7 Have the owner spot-check the German UI and apply the reported corrections
+- [x] 18.1 Translate all strings into German following the owner-approved glossary, with translator comments for ambiguous keys
+- [x] 18.2 Add plural variants for all count-dependent strings
+- [x] 18.3 Add the localization coverage test that fails on missing or stale German translations
+- [x] 18.4 Test generated names and value formatting under the German locale
+- [x] 18.5 Run German and double-length pseudolanguage passes and fix all truncation
+- [x] 18.6 Localize the Info.plist strings and map helper error codes to localized messages
+- [x] 18.7 Have the owner spot-check the German UI and apply the reported corrections
 
 ## 19. Appearance and accessibility
 

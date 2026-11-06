@@ -141,7 +141,11 @@ private struct BrowserColumn: View {
     .font(tab.viewSettings.textSize.font)
     .focused(focusedColumn, equals: index)
     .contextMenu(forSelectionType: FileItem.ID.self) { identifiers in
-      FileItemContextMenu(items: items.filter { identifiers.contains($0.id) }, tab: tab)
+      if identifiers.isEmpty {
+        FileBackgroundContextMenu(tab: tab, folder: folder)
+      } else {
+        FileItemContextMenu(items: items.filter { identifiers.contains($0.id) }, tab: tab)
+      }
     } primaryAction: { identifiers in
       tab.open(items.filter { identifiers.contains($0.id) })
     }

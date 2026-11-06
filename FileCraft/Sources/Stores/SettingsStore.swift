@@ -64,9 +64,9 @@ nonisolated internal struct SettingsStore {
 
   // MARK: - Resetting
 
-  /// Restores the defaults of all keys shown in `pane`.
+  /// Restores the defaults of all settings shown in `pane`; state such as the last folder stays.
   internal func restoreDefaults(of pane: SettingsPane) {
-    remove(SettingsKeys.all.filter { $0.pane == pane })
+    remove(SettingsKeys.all.filter { $0.pane == pane && $0.isState == false })
   }
 
   /// Shows all warnings again that the user turned off.

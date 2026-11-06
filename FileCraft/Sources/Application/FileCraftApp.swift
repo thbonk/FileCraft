@@ -39,6 +39,17 @@ import SwiftUI
     // Started before the first window, so that its sidebar appears with volumes, tags and favorites.
     SidebarSources.shared.start()
     OperationQueueModel.shared.start()
+    // Another application may have taken over the file viewer, or a reset left FileCraft in it.
+    DefaultFileViewer().correctDrift(usesFileCraft: SettingsStore().value(for: SettingsKeys.usesFileCraftAsFileViewer))
+    // Test runs launch FileCraft as their host and must not quit the user's Finder.
+    if AppEnvironment.isTestHost == false {
+      Task {
+        let settings = SettingsStore()
+        await FinderReplacement().applyAtLaunch(
+          quitsFinder: settings.value(for: SettingsKeys.quitsFinderOnLaunch),
+          hidesDesktop: settings.value(for: SettingsKeys.hidesFinderDesktop))
+      }
+    }
     Task {
       await FavoritesStore.shared.loadIfNeeded()
     }
@@ -67,9 +78,22 @@ import SwiftUI
       BrowserCommands(favorites: .shared)
       GoCommands(recents: .shared)
       ToolsCommands()
+      HelpCommands()
     }
 
     // One Get Info window per item; opening an item's window again brings the existing one forward.
+    Settings {
+      SettingsView()
+    }
+    Window("Welcome to FileCraft", id: WelcomeView.windowID) {
+      WelcomeView()
+    }
+    .windowResizability(.contentSize)
+    .commandsRemoved()
+    Window("Keyboard Shortcuts", id: KeyboardShortcutsView.windowID) {
+      KeyboardShortcutsView()
+    }
+    .commandsRemoved()
     WindowGroup("Info", id: InfoWindowView.windowID, for: FileReference.self) { $reference in
       InfoWindowView(reference: reference)
     }

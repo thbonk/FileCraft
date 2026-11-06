@@ -231,6 +231,21 @@ private struct PathSegmentButton: View {
       }
       .buttonStyle(.borderless)
       .fileDropTarget(segment.url, tab: tab, springsOpen: true)
+      .contextMenu {
+        Button("Open in New Tab") {
+          guard let reference = try? FileReference(url: segment.url) else {
+            return
+          }
+          tab.pane?.window?.show(.folder(reference), inNewTab: true)
+        }
+        Button("Copy Path") {
+          PasteboardActions.copyPaths(of: [segment.url], as: .posix)
+        }
+        Button("Open in Terminal") {
+          WorkspaceActions.openInTerminal(
+            [segment.url], bundleIdentifier: SettingsStore().value(for: SettingsKeys.terminalBundleIdentifier))
+        }
+      }
       Button {
         showsSubfolders = true
       } label: {

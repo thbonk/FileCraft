@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+import AppKit
 import SwiftUI
 
 /// The tab commands of the File and Window menus. They act on the active pane of the key browser window.
@@ -41,13 +42,17 @@ internal struct TabCommands: Commands {
       .keyboardShortcut("t", modifiers: .command)
       .disabled(window == nil)
     }
-    // Replaces the standard Close items: ⌘W closes the tab, ⇧⌘W the window.
+    // Replaces the standard Close items: ⌘W closes the tab, ⇧⌘W the window. While another window is in front, such as
+    // Settings or Keyboard Shortcuts, ⌘W closes that window, as the replaced system item did.
     CommandGroup(replacing: .saveItem) {
-      Button("Close Tab") {
-        window?.closeTab()
+      Button(window == nil ? "Close" : "Close Tab") {
+        if let window {
+          window.closeTab()
+        } else {
+          NSApp.keyWindow?.performClose(nil)
+        }
       }
       .keyboardShortcut("w", modifiers: .command)
-      .disabled(window == nil)
       Button("Close Window") {
         window?.requestClose()
       }

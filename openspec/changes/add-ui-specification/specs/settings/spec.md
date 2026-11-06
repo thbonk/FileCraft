@@ -69,19 +69,35 @@ The Compression pane SHALL offer: default format for Compress (ZIP, tar.gz, tar.
 - **THEN** the extracted item appears and "data.zip" is in the Trash
 
 ### Requirement: Integration settings
-The Integration pane SHALL offer: the terminal application for Open in Terminal (default Terminal); a "Use FileCraft as default file viewer" toggle (default off) that sets the system's file viewer preference, so that other applications' "Show in Finder" requests that honor it open in FileCraft, and makes FileCraft the default application for opening folders; and removing items from the shelf after dragging them out (default off). Turning the toggle off SHALL make Finder the file viewer and the default application for folders again.
+The Integration pane SHALL offer: the terminal application for Open in Terminal (default Terminal); a "Use FileCraft as default file viewer" toggle (default off) that sets the system's file viewer preference, so that other applications' "Show in Finder" requests that honor it open in FileCraft; and removing items from the shelf after dragging them out (default off). Turning the toggle off SHALL make Finder the file viewer again. If the preference cannot be stored, the pane SHALL name the preferences file. The toggle SHALL NOT change which application opens folders, because macOS does not allow other applications to replace Finder as the default application for folders. The pane SHALL also offer "Quit Finder when FileCraft launches" (default off): while it is on, FileCraft quits Finder when it launches and opens Finder again when FileCraft quits; turning it on SHALL first warn that some system features, such as Time Machine, may not work correctly while Finder is not running. And it SHALL offer "Hide Finder's desktop" (default off): FileCraft sets Finder's desktop preference and relaunches Finder, so that the desktop icons stay hidden even while FileCraft is not running; turning it off, Restore Defaults and Reset All Settings SHALL show the desktop again. FileCraft does not draw a desktop of its own.
 
 #### Scenario: Become the default file viewer
 - **WHEN** the user turns on "Use FileCraft as default file viewer" and another app that honors this preference reveals a file
 - **THEN** FileCraft shows the file's folder with the file selected
 
-#### Scenario: Open a folder from Terminal
+#### Scenario: Folders opened by other applications
 - **WHEN** the toggle is on and the user runs `open ~/Documents` in Terminal
-- **THEN** FileCraft shows "~/Documents"
+- **THEN** Finder opens "~/Documents", because macOS keeps Finder as the application for folders
 
 #### Scenario: Turn the toggle off
-- **WHEN** the user turns the toggle off and runs `open ~/Documents` in Terminal
-- **THEN** Finder opens "~/Documents"
+- **WHEN** the user turns the toggle off and another app that honors the file viewer preference reveals a file
+- **THEN** Finder shows the file's folder with the file selected
+
+#### Scenario: Quit Finder on launch
+- **WHEN** "Quit Finder when FileCraft launches" is on and FileCraft launches
+- **THEN** Finder is no longer running
+
+#### Scenario: Finder returns when FileCraft quits
+- **WHEN** "Quit Finder when FileCraft launches" is on and the user quits FileCraft
+- **THEN** Finder runs again
+
+#### Scenario: Hide Finder's desktop
+- **WHEN** the user turns on "Hide Finder's desktop"
+- **THEN** Finder relaunches and the desktop shows no icons
+
+#### Scenario: Show Finder's desktop again
+- **WHEN** the user turns "Hide Finder's desktop" off or clicks Restore Defaults in the Integration pane
+- **THEN** Finder relaunches and the desktop shows its icons again
 
 ### Requirement: Helper settings
 The Helper pane SHALL show the privileged helper status and offer the management actions defined in the `privileged-helper` capability.

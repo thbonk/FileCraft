@@ -34,6 +34,14 @@ internal enum PasteboardActions {
   }
 
   /// Copies the paths of `urls` in `format`, one per line.
+  /// Puts the files at `urls` on the pasteboard, as Copy in a context menu does; a cut waiting to be pasted is
+  /// forgotten.
+  internal static func copyFiles(_ urls: [URL], to pasteboard: NSPasteboard = .general) {
+    pasteboard.clearContents()
+    pasteboard.writeObjects(urls as [NSURL])
+    FileClipboard.shared.clear()
+  }
+
   internal static func copyPaths(of urls: [URL], as format: PathFormat, to pasteboard: NSPasteboard = .general) {
     guard urls.isEmpty == false else {
       return

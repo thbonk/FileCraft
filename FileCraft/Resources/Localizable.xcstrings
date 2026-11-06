@@ -149,6 +149,16 @@
         }
       }
     },
+    "“Show in Finder” in other applications shows files in FileCraft. Applications that are already running must be restarted first. Folders that other applications open, as with “open” in Terminal, still open in Finder." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»Im Finder zeigen« in anderen Programmen zeigt Dateien in FileCraft. Bereits geöffnete Programme müssen dafür neu gestartet werden. Ordner, die andere Programme öffnen, etwa mit »open« im Terminal, öffnen sich weiterhin im Finder."
+          }
+        }
+      }
+    },
     "%@ (default)" : {
       "comment" : "Open With menu: %@ is the name of the default application of the selected items.",
       "localizations" : {
@@ -296,24 +306,6 @@
     "%lld errors" : {
       "comment" : "Batch rename: number of rows whose new name cannot be used.",
       "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld error"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld errors"
-                }
-              }
-            }
-          }
-        },
         "de" : {
           "variations" : {
             "plural" : {
@@ -327,6 +319,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld Fehler"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld error"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld errors"
                 }
               }
             }
@@ -674,11 +684,22 @@
       }
     },
     "Action" : {
+      "comment" : "Toolbar menu with commands for the selected items.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktion"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
           }
         }
       }
@@ -755,11 +776,23 @@
       }
     },
     "Added" : {
+      "comment" : "Inspector label: date the item was added to its folder.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hinzugefügt"
+          }
+        }
+      }
+    },
+    "Advanced" : {
+      "comment" : "Settings pane.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweitert"
           }
         }
       }
@@ -784,6 +817,26 @@
         }
       }
     },
+    "All settings return to their defaults. Favorites, the shelf and presets stay." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Einstellungen erhalten wieder ihre Standardwerte. Favoriten, Sammelbereich und Vorlagen bleiben erhalten."
+          }
+        }
+      }
+    },
+    "All warnings are shown again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Warnungen werden wieder angezeigt."
+          }
+        }
+      }
+    },
     "Allow FileCraft’s Helper" : {
       "comment" : "Title of the helper approval sheet.",
       "localizations" : {
@@ -791,6 +844,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hilfsprogramm von FileCraft erlauben"
+          }
+        }
+      }
+    },
+    "Always show file extensions" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Dateinamensuffixe einblenden"
           }
         }
       }
@@ -829,6 +892,7 @@
       }
     },
     "Application" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -859,6 +923,7 @@
       }
     },
     "Apply" : {
+      "comment" : "Button that applies the chosen settings.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1050,6 +1115,7 @@
       }
     },
     "As Prefix" : {
+      "comment" : "Where a rule puts text: at the start of the name.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1057,8 +1123,7 @@
             "value" : "Am Anfang"
           }
         }
-      },
-      "comment" : "Where a rule puts text: at the start of the name."
+      }
     },
     "As Shown" : {
       "localizations" : {
@@ -1071,6 +1136,7 @@
       }
     },
     "As Suffix" : {
+      "comment" : "Where a rule puts text: at the end of the name.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1078,10 +1144,10 @@
             "value" : "Am Ende"
           }
         }
-      },
-      "comment" : "Where a rule puts text: at the end of the name."
+      }
     },
     "Ascending" : {
+      "comment" : "Sort order.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1112,6 +1178,7 @@
       }
     },
     "Attributes" : {
+      "comment" : "Inspector section with permissions and flags.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1122,6 +1189,7 @@
       }
     },
     "Audio" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1164,6 +1232,7 @@
       }
     },
     "Back/Forward" : {
+      "comment" : "Toolbar item name of the Back and Forward buttons.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1174,6 +1243,7 @@
       }
     },
     "Batch Rename" : {
+      "comment" : "Undo action name of a batch rename.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1181,30 +1251,11 @@
             "value" : "Mehrfach umbenennen"
           }
         }
-      },
-      "comment" : "Undo action name of a batch rename."
+      }
     },
     "Batch Rename %lld Items" : {
       "comment" : "Title of the batch rename sheet.",
       "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Batch Rename %lld Item"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Batch Rename %lld Items"
-                }
-              }
-            }
-          }
-        },
         "de" : {
           "variations" : {
             "plural" : {
@@ -1218,6 +1269,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld Objekte mehrfach umbenennen"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Batch Rename %lld Item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Batch Rename %lld Items"
                 }
               }
             }
@@ -1245,12 +1314,44 @@
         }
       }
     },
+    "Binary (1 KiB = 1,024 bytes)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Binär (1 KiB = 1.024 Byte)"
+          }
+        }
+      }
+    },
     "Bottom" : {
+      "comment" : "Label position in icon view: label below the icon.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unten"
+          }
+        }
+      }
+    },
+    "Browser" : {
+      "comment" : "Settings pane for the file views.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browser"
+          }
+        }
+      }
+    },
+    "Calculate folder sizes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordnergrößen berechnen"
           }
         }
       }
@@ -1266,6 +1367,7 @@
       }
     },
     "Calculating Sizes" : {
+      "comment" : "Status bar: folder sizes are being calculated.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1328,6 +1430,7 @@
       }
     },
     "Change All" : {
+      "comment" : "Open With: use the chosen application for all files of this kind.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1349,6 +1452,7 @@
       }
     },
     "Change All…" : {
+      "comment" : "Open With: use the chosen application for all files of this kind.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1497,6 +1601,17 @@
         }
       }
     },
+    "Close" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        }
+      },
+      "comment" : "File menu: closes the window in front, such as Settings."
+    },
     "Close Other Tabs" : {
       "localizations" : {
         "de" : {
@@ -1538,6 +1653,16 @@
         }
       }
     },
+    "Compares each copied file with its original, which takes longer." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleicht jede kopierte Datei mit dem Original. Das dauert länger."
+          }
+        }
+      }
+    },
     "Comparison" : {
       "localizations" : {
         "de" : {
@@ -1565,6 +1690,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Komprimieren"
+          }
+        }
+      }
+    },
+    "Compress as:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komprimieren als:"
           }
         }
       }
@@ -1632,6 +1767,17 @@
         }
       }
     },
+    "Compression" : {
+      "comment" : "Settings pane for archives.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komprimierung"
+          }
+        }
+      }
+    },
     "Computer" : {
       "comment" : "Go menu item and the name of the location that lists all mounted volumes.",
       "localizations" : {
@@ -1664,11 +1810,22 @@
       }
     },
     "Contents" : {
+      "comment" : "Search criterion: text inside documents.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inhalt"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortfahren"
           }
         }
       }
@@ -1680,6 +1837,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kopier- und Bewegungsvorgänge werden hier angezeigt, während sie laufen."
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "comment" : "Command: copy the selected items to the pasteboard.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren"
           }
         }
       }
@@ -1883,6 +2051,7 @@
       }
     },
     "Count" : {
+      "comment" : "Remove Characters rule: number of characters.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1890,10 +2059,10 @@
             "value" : "Anzahl"
           }
         }
-      },
-      "comment" : "Remove Characters rule: number of characters."
+      }
     },
     "Created" : {
+      "comment" : "Inspector label: creation date of the item.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1913,12 +2082,34 @@
         }
       }
     },
+    "Current Location" : {
+      "comment" : "New tabs show the folder of the current tab.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktueller Ort"
+          }
+        }
+      }
+    },
     "Current Name" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktueller Name"
+          }
+        }
+      }
+    },
+    "Cut" : {
+      "comment" : "Command: cut the selected items.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausschneiden"
           }
         }
       }
@@ -1981,6 +2172,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tage"
+          }
+        }
+      }
+    },
+    "Decimal (1 KB = 1,000 bytes)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dezimal (1 KB = 1.000 Byte)"
+          }
+        }
+      }
+    },
+    "Default File Viewer" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard-Dateibrowser"
+          }
+        }
+      }
+    },
+    "Default view:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standarddarstellung:"
+          }
+        }
+      }
+    },
+    "Delay:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verzögerung:"
           }
         }
       }
@@ -2092,6 +2323,7 @@
       }
     },
     "Descending" : {
+      "comment" : "Sort order.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2122,6 +2354,7 @@
       }
     },
     "Digits" : {
+      "comment" : "Sequence Number rule: minimum number of digits, padded with zeros.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2129,10 +2362,10 @@
             "value" : "Stellen"
           }
         }
-      },
-      "comment" : "Sequence Number rule: minimum number of digits, padded with zeros."
+      }
     },
     "Dimensions" : {
+      "comment" : "Inspector label: width and height of an image or movie.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2165,6 +2398,7 @@
       }
     },
     "Document" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2191,6 +2425,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nicht beenden"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig"
           }
         }
       }
@@ -2226,6 +2470,16 @@
         }
       }
     },
+    "Dual pane layout:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anordnung der Doppelansicht:"
+          }
+        }
+      }
+    },
     "Duplicate" : {
       "comment" : "File menu command and undo action name.",
       "localizations" : {
@@ -2248,11 +2502,23 @@
       }
     },
     "Duration" : {
+      "comment" : "Inspector label: length of a movie or sound.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dauer"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "comment" : "Menu name in the Keyboard Shortcuts window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bearbeiten"
           }
         }
       }
@@ -2322,6 +2588,7 @@
       }
     },
     "Enabled" : {
+      "comment" : "Accessibility label of the checkbox that turns a rename rule on or off.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2329,8 +2596,7 @@
             "value" : "Aktiviert"
           }
         }
-      },
-      "comment" : "Accessibility label of the checkbox that turns a rename rule on or off."
+      }
     },
     "Enclosing Folder" : {
       "localizations" : {
@@ -2348,6 +2614,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "endet mit"
+          }
+        }
+      }
+    },
+    "Enter Full Screen" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vollbildmodus"
           }
         }
       }
@@ -2370,6 +2646,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bereiche gleich groß machen"
+          }
+        }
+      }
+    },
+    "Error: %@" : {
+      "comment" : "Helper status with the error description.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler: %@"
           }
         }
       }
@@ -2416,6 +2703,7 @@
       }
     },
     "Execute" : {
+      "comment" : "Permission: may run the file or open the folder.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2443,6 +2731,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entpacken"
+          }
+        }
+      }
+    },
+    "Expand archives in FileCraft when opened" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive beim Öffnen in FileCraft entpacken"
           }
         }
       }
@@ -2511,6 +2809,7 @@
       }
     },
     "Extended Attributes" : {
+      "comment" : "Inspector section listing the extended attributes of a file.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2531,12 +2830,44 @@
         }
       }
     },
+    "F5 copies and F6 moves to the other pane, F7 creates a folder, F8 moves to the Trash." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "F5 kopiert und F6 bewegt in den anderen Bereich, F7 erstellt einen Ordner, F8 legt in den Papierkorb."
+          }
+        }
+      }
+    },
     "Favorites" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favoriten"
+          }
+        }
+      }
+    },
+    "File" : {
+      "comment" : "Menu name in the Keyboard Shortcuts window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ablage"
+          }
+        }
+      }
+    },
+    "File Operations" : {
+      "comment" : "Settings pane.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dateivorgänge"
           }
         }
       }
@@ -2548,6 +2879,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datei-URL"
+          }
+        }
+      }
+    },
+    "FileCraft" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft"
+          }
+        }
+      }
+    },
+    "FileCraft browses, organizes and manages your files with tabs, two panes, a shelf, batch renaming and more." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft durchsucht, ordnet und verwaltet Ihre Dateien mit Tabs, Doppelansicht, Sammelbereich, Mehrfach-Umbenennen und mehr."
+          }
+        }
+      }
+    },
+    "FileCraft can take Finder's place when other applications show files, for example with “Show in Finder”." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft kann den Finder ersetzen, wenn andere Programme Dateien zeigen, zum Beispiel mit »Im Finder zeigen«."
           }
         }
       }
@@ -2606,6 +2967,26 @@
         }
       }
     },
+    "FileCraft works without it too; protected folders then show a hint instead of their contents." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft funktioniert auch ohne; geschützte Ordner zeigen dann einen Hinweis statt ihres Inhalts."
+          }
+        }
+      }
+    },
+    "FileCraft’s helper belongs to another version of FileCraft. Restart FileCraft and try again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm gehört zu einer anderen Version von FileCraft. Starten Sie FileCraft neu und versuchen Sie es erneut."
+          }
+        }
+      }
+    },
     "FileCraft’s helper is not allowed to run." : {
       "comment" : "The user did not install or allow the privileged helper.",
       "localizations" : {
@@ -2651,6 +3032,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suchen"
+          }
+        }
+      }
+    },
+    "Finder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        }
+      }
+    },
+    "Finder starts again when FileCraft quits." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Finder startet wieder, wenn FileCraft beendet wird."
           }
         }
       }
@@ -2776,6 +3177,7 @@
       }
     },
     "Folders First" : {
+      "comment" : "View option: keep folders above files when sorting.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2786,6 +3188,7 @@
       }
     },
     "Format" : {
+      "comment" : "Date rule: the date pattern field.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2793,10 +3196,10 @@
             "value" : "Format"
           }
         }
-      },
-      "comment" : "Date rule: the date pattern field."
+      }
     },
     "Formats" : {
+      "comment" : "Date rule: menu of predefined date patterns.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2804,8 +3207,7 @@
             "value" : "Formate"
           }
         }
-      },
-      "comment" : "Date rule: menu of predefined date patterns."
+      }
     },
     "Forward" : {
       "localizations" : {
@@ -2837,6 +3239,16 @@
         }
       }
     },
+    "Full Disk Access" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Festplattenvollzugriff"
+          }
+        }
+      }
+    },
     "Full Name" : {
       "localizations" : {
         "de" : {
@@ -2848,6 +3260,7 @@
       }
     },
     "General" : {
+      "comment" : "Settings pane.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2896,6 +3309,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehe zum Ordner…"
+          }
+        }
+      }
+    },
+    "Granted" : {
+      "comment" : "Full Disk Access status.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erteilt"
           }
         }
       }
@@ -2962,11 +3386,23 @@
       }
     },
     "Group/Sort" : {
+      "comment" : "Toolbar item name of the group and sort menu.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gruppieren/Sortieren"
+          }
+        }
+      }
+    },
+    "Helper" : {
+      "comment" : "Settings pane of the privileged helper.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfsprogramm"
           }
         }
       }
@@ -2983,6 +3419,7 @@
       }
     },
     "Hidden Files" : {
+      "comment" : "Hidden files and folders, which macOS does not show by default.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2993,11 +3430,22 @@
       }
     },
     "Hide Extension" : {
+      "comment" : "Inspector checkbox: hide the file name extension.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suffix ausblenden"
+          }
+        }
+      }
+    },
+    "Hide Finder's desktop" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schreibtisch des Finders ausblenden"
           }
         }
       }
@@ -3042,6 +3490,16 @@
         }
       }
     },
+    "Hide Sidebar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seitenleiste ausblenden"
+          }
+        }
+      }
+    },
     "Hide Status Bar" : {
       "localizations" : {
         "de" : {
@@ -3058,6 +3516,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tableiste ausblenden"
+          }
+        }
+      }
+    },
+    "Hide the tab bar when there is only one tab" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableiste ausblenden, wenn nur ein Tab geöffnet ist"
+          }
+        }
+      }
+    },
+    "Hide Toolbar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolleiste ausblenden"
           }
         }
       }
@@ -3095,6 +3573,7 @@
       }
     },
     "Icon Size" : {
+      "comment" : "View option: size of the icons in icon view.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3116,6 +3595,7 @@
       }
     },
     "Image" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3178,6 +3658,7 @@
       }
     },
     "Inspector" : {
+      "comment" : "Panel at the right of a window with information about the selection.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3205,6 +3686,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hilfsprogramm installieren"
+          }
+        }
+      }
+    },
+    "Integration" : {
+      "comment" : "Settings pane for the terminal, the file viewer and Finder options.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration"
           }
         }
       }
@@ -3346,7 +3838,28 @@
         }
       }
     },
+    "Keep folders on top" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner oben anzeigen"
+          }
+        }
+      }
+    },
+    "Keyboard Shortcuts" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tastaturkurzbefehle"
+          }
+        }
+      }
+    },
     "Kind" : {
+      "comment" : "Type of item, such as \"PDF document\"; list column and inspector label.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3357,6 +3870,7 @@
       }
     },
     "Label Position" : {
+      "comment" : "View option: where icon view shows names.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3367,11 +3881,23 @@
       }
     },
     "Large" : {
+      "comment" : "Text or icon size option.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Groß"
+          }
+        }
+      }
+    },
+    "Last Location" : {
+      "comment" : "New windows show the folder shown last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzter Ort"
           }
         }
       }
@@ -3387,6 +3913,7 @@
       }
     },
     "Last Opened" : {
+      "comment" : "Inspector label: date the item was last opened.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3459,6 +3986,7 @@
       }
     },
     "lowercase" : {
+      "comment" : "Change Case rule style, shown in lowercase on purpose.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3466,8 +3994,17 @@
             "value" : "kleinbuchstaben"
           }
         }
-      },
-      "comment" : "Change Case rule style, shown in lowercase on purpose."
+      }
+    },
+    "macOS protects some folders, such as Mail, Messages, Safari and Time Machine backups. A file manager needs Full Disk Access to show and manage them." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS schützt einige Ordner, etwa Mail, Nachrichten, Safari und Time-Machine-Backups. Ein Dateimanager benötigt Festplattenvollzugriff, um sie anzuzeigen und zu verwalten."
+          }
+        }
+      }
     },
     "macOS protects this location, or its volume is read-only, so it can’t be changed." : {
       "comment" : "Alert message for an item that can neither be trashed nor deleted.",
@@ -3524,6 +4061,7 @@
       }
     },
     "Match case" : {
+      "comment" : "Option: upper and lower case must match.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3544,6 +4082,7 @@
       }
     },
     "Medium" : {
+      "comment" : "Text or icon size option.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3564,7 +4103,18 @@
         }
       }
     },
+    "Minimize" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Dock ablegen"
+          }
+        }
+      }
+    },
     "Modified" : {
+      "comment" : "Inspector label: modification date of the item.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3597,6 +4147,7 @@
       }
     },
     "More Folders" : {
+      "comment" : "Path bar menu with collapsed folders.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3720,6 +4271,16 @@
         }
       }
     },
+    "Move the archive to the Trash after expanding" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiv nach dem Entpacken in den Papierkorb legen"
+          }
+        }
+      }
+    },
     "Move to Other Pane" : {
       "comment" : "Tab context menu: moves the tab to the other pane of the window.",
       "localizations" : {
@@ -3753,6 +4314,7 @@
       }
     },
     "Movie" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3815,6 +4377,7 @@
       }
     },
     "Name" : {
+      "comment" : "File name; list column, sort key and search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3917,12 +4480,32 @@
         }
       }
     },
+    "New tabs show:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Tabs zeigen:"
+          }
+        }
+      }
+    },
     "New tabs use these options." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neue Tabs verwenden diese Optionen."
+          }
+        }
+      }
+    },
+    "New Tag" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Tag"
           }
         }
       }
@@ -3934,6 +4517,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neue Textdatei"
+          }
+        }
+      }
+    },
+    "New Window" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Fenster"
+          }
+        }
+      }
+    },
+    "New windows show:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Fenster zeigen:"
           }
         }
       }
@@ -3980,6 +4583,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Extension"
+          }
+        }
+      }
+    },
+    "No folder chosen" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Ordner ausgewählt"
           }
         }
       }
@@ -4036,6 +4649,7 @@
       }
     },
     "No Subfolders" : {
+      "comment" : "Path bar menu of a folder without subfolders.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4074,6 +4688,7 @@
       }
     },
     "No Window" : {
+      "comment" : "Shown when no browser window is open.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4105,6 +4720,27 @@
         }
       }
     },
+    "Not granted" : {
+      "comment" : "Full Disk Access status.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht erteilt"
+          }
+        }
+      }
+    },
+    "Not installed" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht installiert"
+          }
+        }
+      }
+    },
     "Octal" : {
       "comment" : "Inspector: the permissions as an octal number, for example 0755.",
       "localizations" : {
@@ -4116,6 +4752,17 @@
         }
       }
     },
+    "Off" : {
+      "comment" : "Accessibility value of a tag in the Tags sheet.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus"
+          }
+        }
+      }
+    },
     "OK" : {
       "comment" : "Button that closes an error alert.",
       "localizations" : {
@@ -4123,6 +4770,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "On" : {
+      "comment" : "Accessibility value of a tag in the Tags sheet.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein"
           }
         }
       }
@@ -4210,6 +4868,16 @@
         }
       }
     },
+    "Open folders in:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordner öffnen in:"
+          }
+        }
+      }
+    },
     "Open in New Tab" : {
       "localizations" : {
         "de" : {
@@ -4240,12 +4908,22 @@
         }
       }
     },
+    "Open in Terminal uses:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "»Im Terminal öffnen« verwendet:"
+          }
+        }
+      }
+    },
     "Open Privacy & Security Settings" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Einstellungen für »Datenschutz & Sicherheit« öffnen"
+            "value" : "Einstellungen für Datenschutz & Sicherheit öffnen"
           }
         }
       }
@@ -4271,7 +4949,28 @@
         }
       }
     },
+    "Opens the item" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet das Objekt"
+          }
+        }
+      }
+    },
+    "Opens the window when an operation takes longer than five seconds." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet das Fenster, wenn ein Vorgang länger als fünf Sekunden dauert."
+          }
+        }
+      }
+    },
     "Operations" : {
+      "comment" : "Window that lists running file operations.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4292,6 +4991,7 @@
       }
     },
     "Option" : {
+      "comment" : "Accessibility label of a rule option picker.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4299,8 +4999,7 @@
             "value" : "Option"
           }
         }
-      },
-      "comment" : "Accessibility label of a rule option picker."
+      }
     },
     "Options" : {
       "comment" : "Search bar menu with the hidden items and package contents options.",
@@ -4325,6 +5024,7 @@
       }
     },
     "Order:" : {
+      "comment" : "Batch rename: the order in which items are numbered.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4335,11 +5035,23 @@
       }
     },
     "Original" : {
+      "comment" : "Inspector label: the item an alias or symbolic link points to.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Original"
+          }
+        }
+      }
+    },
+    "Other Folder" : {
+      "comment" : "Option to choose a folder.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anderer Ordner"
           }
         }
       }
@@ -4446,6 +5158,17 @@
         }
       }
     },
+    "Paste" : {
+      "comment" : "Command: paste the items on the pasteboard.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einsetzen"
+          }
+        }
+      }
+    },
     "Path" : {
       "comment" : "Placeholder of the path bar when it is edited as text.",
       "localizations" : {
@@ -4469,6 +5192,7 @@
       }
     },
     "Pattern" : {
+      "comment" : "Regular expression of a rename rule.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4511,6 +5235,7 @@
       }
     },
     "PDF" : {
+      "comment" : "Kind of item in a search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4531,6 +5256,7 @@
       }
     },
     "Position" : {
+      "comment" : "Character position, counted from 0, in Insert Text and Remove Characters rules.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4538,8 +5264,7 @@
             "value" : "Position"
           }
         }
-      },
-      "comment" : "Character position, counted from 0, in Insert Text and Remove Characters rules."
+      }
     },
     "POSIX Path" : {
       "comment" : "Copy Path As format, for example /Users/anna/Report.pdf.",
@@ -4584,6 +5309,7 @@
       }
     },
     "Preview" : {
+      "comment" : "Inspector section showing a preview of the item.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4650,6 +5376,26 @@
         }
       }
     },
+    "Quit Finder when FileCraft launches" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder beim Start von FileCraft beenden"
+          }
+        }
+      }
+    },
+    "Quit Finder when FileCraft launches?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder beim Start von FileCraft beenden?"
+          }
+        }
+      }
+    },
     "Quit the applications that use the volume, then try again." : {
       "localizations" : {
         "de" : {
@@ -4661,6 +5407,7 @@
       }
     },
     "Read" : {
+      "comment" : "Permission: may read the item.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4702,6 +5449,16 @@
         }
       }
     },
+    "Redo" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiederholen"
+          }
+        }
+      }
+    },
     "Regular Expression" : {
       "localizations" : {
         "de" : {
@@ -4712,7 +5469,18 @@
         }
       }
     },
+    "Reload" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu laden"
+          }
+        }
+      }
+    },
     "Remove" : {
+      "comment" : "Change Extension rule option: remove the extension.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4720,8 +5488,7 @@
             "value" : "Entfernen"
           }
         }
-      },
-      "comment" : "Change Extension rule option: remove the extension."
+      }
     },
     "Remove “%@”" : {
       "comment" : "Accessibility label of the remove button of a tag; %@ is the tag name.",
@@ -4774,6 +5541,26 @@
         }
       }
     },
+    "Remove Helper" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfsprogramm entfernen"
+          }
+        }
+      }
+    },
+    "Remove items from the shelf after dragging them out" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objekte nach dem Herausziehen aus dem Sammelbereich entfernen"
+          }
+        }
+      }
+    },
     "Remove Rule" : {
       "localizations" : {
         "de" : {
@@ -4800,6 +5587,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Umbenennen"
+          }
+        }
+      }
+    },
+    "Renames the item" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benennt das Objekt um"
           }
         }
       }
@@ -4865,6 +5662,86 @@
         }
       }
     },
+    "Reset All Settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Einstellungen zurücksetzen"
+          }
+        }
+      }
+    },
+    "Reset all settings?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Einstellungen zurücksetzen?"
+          }
+        }
+      }
+    },
+    "Reset All Settings…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Einstellungen zurücksetzen…"
+          }
+        }
+      }
+    },
+    "Reset Warnings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warnungen zurücksetzen"
+          }
+        }
+      }
+    },
+    "Restore Defaults" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standardwerte wiederherstellen"
+          }
+        }
+      }
+    },
+    "Restore windows when FileCraft opens" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fenster beim Öffnen von FileCraft wiederherstellen"
+          }
+        }
+      }
+    },
+    "Restores the default values of this pane." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stellt die Standardwerte dieses Bereichs wieder her."
+          }
+        }
+      }
+    },
+    "Restores the defaults of all settings, including the view defaults." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stellt die Standardwerte aller Einstellungen wieder her, auch die der Darstellung."
+          }
+        }
+      }
+    },
     "Resume" : {
       "comment" : "Operations window button that resumes a paused operation.",
       "localizations" : {
@@ -4883,6 +5760,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiederholen"
+          }
+        }
+      }
+    },
+    "Return key:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeilenschalter:"
           }
         }
       }
@@ -4908,6 +5795,7 @@
       }
     },
     "Right" : {
+      "comment" : "Label position in icon view: label right of the icon.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4918,6 +5806,7 @@
       }
     },
     "Rule" : {
+      "comment" : "Accessibility label of the rule type picker.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4925,10 +5814,21 @@
             "value" : "Regel"
           }
         }
-      },
-      "comment" : "Accessibility label of the rule type picker."
+      }
+    },
+    "Same Tab" : {
+      "comment" : "Settings: open folders in the same tab. German follows \"Ordner öffnen in:\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demselben Tab"
+          }
+        }
+      }
     },
     "Save" : {
+      "comment" : "Button that saves a batch rename preset.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4936,8 +5836,17 @@
             "value" : "Sichern"
           }
         }
-      },
-      "comment" : "Button that saves a batch rename preset."
+      }
+    },
+    "Save archives and expanded items in:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive und entpackte Objekte sichern in:"
+          }
+        }
+      }
     },
     "Save as Preset…" : {
       "localizations" : {
@@ -4986,6 +5895,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suchergebnisse"
+          }
+        }
+      }
+    },
+    "Search Shortcuts" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurzbefehle suchen"
           }
         }
       }
@@ -5051,6 +5970,16 @@
         }
       }
     },
+    "Select All" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles auswählen"
+          }
+        }
+      }
+    },
     "Select by Pattern" : {
       "localizations" : {
         "de" : {
@@ -5067,6 +5996,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nach Muster auswählen…"
+          }
+        }
+      }
+    },
+    "Select the result" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ergebnis auswählen"
           }
         }
       }
@@ -5093,6 +6032,7 @@
       }
     },
     "Separator" : {
+      "comment" : "Characters between the name and an inserted number or date.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5112,7 +6052,18 @@
         }
       }
     },
+    "Settings…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen…"
+          }
+        }
+      }
+    },
     "Share" : {
+      "comment" : "Toolbar button that shares the selected items.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5145,6 +6096,7 @@
       }
     },
     "Show Columns" : {
+      "comment" : "View Options: columns shown in list view.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5165,12 +6117,32 @@
         }
       }
     },
+    "Show hidden files" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsichtbare Dateien einblenden"
+          }
+        }
+      }
+    },
     "Show Hidden Files" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unsichtbare Dateien einblenden"
+          }
+        }
+      }
+    },
+    "Show icon previews" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolvorschau anzeigen"
           }
         }
       }
@@ -5192,6 +6164,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Im Browserfenster zeigen"
+          }
+        }
+      }
+    },
+    "Show in the sidebar:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In der Seitenleiste anzeigen:"
           }
         }
       }
@@ -5296,6 +6278,16 @@
         }
       }
     },
+    "Show Sidebar" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seitenleiste einblenden"
+          }
+        }
+      }
+    },
     "Show Status Bar" : {
       "localizations" : {
         "de" : {
@@ -5307,6 +6299,7 @@
       }
     },
     "Show Subfolders" : {
+      "comment" : "Path bar button that lists the subfolders.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5326,12 +6319,52 @@
         }
       }
     },
+    "Show the Operations window automatically" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fenster »Vorgänge« automatisch anzeigen"
+          }
+        }
+      }
+    },
     "Show View Options" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Darstellungsoptionen einblenden"
+          }
+        }
+      }
+    },
+    "Show volume usage" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belegung der Volumes anzeigen"
+          }
+        }
+      }
+    },
+    "Show Welcome Window…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommensfenster anzeigen…"
+          }
+        }
+      }
+    },
+    "Shows all warnings again that you turned off." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeigt alle Warnungen wieder an, die Sie ausgeschaltet haben."
           }
         }
       }
@@ -5346,12 +6379,34 @@
         }
       }
     },
+    "Sidebar" : {
+      "comment" : "Window area at the left with favorites and locations.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seitenleiste"
+          }
+        }
+      }
+    },
     "Size" : {
+      "comment" : "File size; list column, sort key and search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Größe"
+          }
+        }
+      }
+    },
+    "Size units:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Größeneinheiten:"
           }
         }
       }
@@ -5368,11 +6423,23 @@
       }
     },
     "Small" : {
+      "comment" : "Text or icon size option.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klein"
+          }
+        }
+      }
+    },
+    "Some Items" : {
+      "comment" : "Accessibility value of a tag that some selected items carry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Objekte"
           }
         }
       }
@@ -5476,6 +6543,16 @@
         }
       }
     },
+    "Some system features, such as Time Machine, may not work correctly while Finder is not running." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Systemfunktionen, etwa Time Machine, funktionieren möglicherweise nicht richtig, solange der Finder nicht läuft."
+          }
+        }
+      }
+    },
     "Sort By" : {
       "localizations" : {
         "de" : {
@@ -5486,7 +6563,29 @@
         }
       }
     },
+    "Space" : {
+      "comment" : "The space bar in a keyboard shortcut.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leertaste"
+          }
+        }
+      }
+    },
+    "Spring-loaded folders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufspringende Ordner"
+          }
+        }
+      }
+    },
     "Stacked" : {
+      "comment" : "Dual pane layout: one pane above the other.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5497,6 +6596,7 @@
       }
     },
     "Start" : {
+      "comment" : "Sequence Number rule: the first number.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5504,10 +6604,10 @@
             "value" : "Start"
           }
         }
-      },
-      "comment" : "Sequence Number rule: the first number."
+      }
     },
     "Status" : {
+      "comment" : "Batch rename preview column: whether the new name can be used.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5515,10 +6615,21 @@
             "value" : "Status"
           }
         }
-      },
-      "comment" : "Batch rename preview column: whether the new name can be used."
+      }
+    },
+    "Status:" : {
+      "comment" : "Label before a status, such as the helper status.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status:"
+          }
+        }
+      }
     },
     "Step" : {
+      "comment" : "Sequence Number rule: the increment.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5526,8 +6637,23 @@
             "value" : "Schritt"
           }
         }
-      },
-      "comment" : "Sequence Number rule: the increment."
+      }
+    },
+    "Step %lld of %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritt %lld von %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Step %1$lld of %2$lld"
+          }
+        }
+      }
     },
     "Stop" : {
       "comment" : "Conflict and error dialog button that ends the operation.",
@@ -5563,6 +6689,7 @@
       }
     },
     "Subfolders" : {
+      "comment" : "Search scope: the current folder and all folders below it.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5593,6 +6720,16 @@
         }
       }
     },
+    "Tabs & Panes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tabs & Bereiche"
+          }
+        }
+      }
+    },
     "Tag" : {
       "comment" : "Placeholder of the tag name field in a Tags search criterion.",
       "localizations" : {
@@ -5605,11 +6742,63 @@
       }
     },
     "Tags" : {
+      "comment" : "Finder tags; list column, sidebar section and search criterion.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        }
+      }
+    },
+    "Tags of %lld Items" : {
+      "comment" : "Title of the Tags sheet.",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tags von %lld Objekt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tags von %lld Objekten"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tags of %lld Item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tags of %lld Items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Tags…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags…"
           }
         }
       }
@@ -5626,11 +6815,22 @@
       }
     },
     "Text Size" : {
+      "comment" : "View option: size of the text in file views.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Textgröße"
+          }
+        }
+      }
+    },
+    "Text size:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textgröße:"
           }
         }
       }
@@ -5642,6 +6842,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Das Archiv konnte nicht verarbeitet werden."
+          }
+        }
+      }
+    },
+    "The desktop shows no icons, also while FileCraft is not running. Turn this off before you remove FileCraft." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Schreibtisch zeigt keine Symbole, auch wenn FileCraft nicht läuft. Schalten Sie dies aus, bevor Sie FileCraft entfernen."
+          }
+        }
+      }
+    },
+    "The file viewer could not be stored in “%@”." : {
+      "comment" : "Error of the default file viewer setting; the value is the path of the global preferences file.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Dateibrowser konnte nicht in »%@« gespeichert werden."
           }
         }
       }
@@ -5678,13 +6899,23 @@
         }
       }
     },
-    "The helper could not complete the operation." : {
-      "comment" : "Generic failure of the privileged helper.",
+    "The Folder of the Original" : {
+      "comment" : "Settings: save archives in the folder of the original item; follows \"Save archives and expanded items in:\".",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Das Hilfsprogramm konnte den Vorgang nicht abschließen."
+            "value" : "Dem Ordner des Originals"
+          }
+        }
+      }
+    },
+    "The helper did not understand the request." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm hat die Anfrage nicht verstanden."
           }
         }
       }
@@ -5696,6 +6927,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Das Hilfsprogramm fehlt in FileCraft. Bitte installieren Sie FileCraft neu."
+          }
+        }
+      }
+    },
+    "The helper is missing from the FileCraft application. Reinstall FileCraft." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dem Programm FileCraft fehlt das Hilfsprogramm. Installieren Sie FileCraft erneut."
+          }
+        }
+      }
+    },
+    "The helper no longer knows this operation. Try again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm kennt diesen Vorgang nicht mehr. Versuchen Sie es erneut."
+          }
+        }
+      }
+    },
+    "The helper performs file operations that need administrator rights. macOS asks you to allow it in System Settings once." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hilfsprogramm führt Dateivorgänge aus, die Administratorrechte benötigen. macOS bittet Sie einmalig, es in den Systemeinstellungen zu erlauben."
           }
         }
       }
@@ -5794,6 +7055,16 @@
         }
       }
     },
+    "The path is not valid or changed while FileCraft used it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Pfad ist ungültig oder hat sich geändert, während FileCraft ihn verwendet hat."
+          }
+        }
+      }
+    },
     "The regular expression is not valid." : {
       "localizations" : {
         "de" : {
@@ -5838,6 +7109,7 @@
       }
     },
     "This Folder" : {
+      "comment" : "Search scope: only the current folder.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5848,6 +7120,7 @@
       }
     },
     "This Mac" : {
+      "comment" : "Search scope: the whole Mac through Spotlight.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5958,12 +7231,53 @@
         }
       }
     },
+    "Trash" : {
+      "comment" : "Search word that finds Delete Immediately… in the Keyboard Shortcuts window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Papierkorb"
+          }
+        }
+      }
+    },
+    "Treat packages as folders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pakete wie Ordner behandeln"
+          }
+        }
+      }
+    },
     "Treat Packages as Folders" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pakete als Ordner behandeln"
+          }
+        }
+      }
+    },
+    "Turn On" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einschalten"
+          }
+        }
+      }
+    },
+    "Turn on FileCraft in the Full Disk Access list, then return to FileCraft." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schalten Sie FileCraft in der Liste »Festplattenvollzugriff« ein und kehren Sie dann zu FileCraft zurück."
           }
         }
       }
@@ -5978,7 +7292,18 @@
         }
       }
     },
+    "Two settings help FileCraft work best. You can change both later in Settings." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zwei Einstellungen helfen FileCraft, am besten zu funktionieren. Sie können beide später in den Einstellungen ändern."
+          }
+        }
+      }
+    },
     "Unavailable" : {
+      "comment" : "A sidebar favorite whose folder cannot be found.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5989,11 +7314,22 @@
       }
     },
     "Unchanged" : {
+      "comment" : "Batch rename preview: the name stays the same.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unverändert"
+          }
+        }
+      }
+    },
+    "Undo" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widerrufen"
           }
         }
       }
@@ -6005,6 +7341,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einheit"
+          }
+        }
+      }
+    },
+    "Unknown" : {
+      "comment" : "Full Disk Access status that cannot be determined.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannt"
           }
         }
       }
@@ -6046,6 +7393,7 @@
       }
     },
     "UPPERCASE" : {
+      "comment" : "Change Case rule style, shown in uppercase on purpose.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6053,8 +7401,7 @@
             "value" : "GROSSBUCHSTABEN"
           }
         }
-      },
-      "comment" : "Change Case rule style, shown in uppercase on purpose."
+      }
     },
     "Use .%@" : {
       "comment" : "Rename: uses the new extension.",
@@ -6073,6 +7420,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Als Standard verwenden"
+          }
+        }
+      }
+    },
+    "Use FileCraft as default file viewer" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft als Standard-Dateibrowser verwenden"
+          }
+        }
+      }
+    },
+    "Use function keys for file commands" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funktionstasten für Dateibefehle verwenden"
+          }
+        }
+      }
+    },
+    "Use relative dates" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relative Datumsangaben verwenden"
           }
         }
       }
@@ -6119,11 +7496,22 @@
       }
     },
     "verification failed" : {
+      "comment" : "Operations window: the copy differs from its original.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Überprüfung fehlgeschlagen"
+          }
+        }
+      }
+    },
+    "Verify copies" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopien überprüfen"
           }
         }
       }
@@ -6160,6 +7548,16 @@
         }
       }
     },
+    "Waiting for approval" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartet auf Erlaubnis"
+          }
+        }
+      }
+    },
     "Waiting for your decision" : {
       "comment" : "Operations window: an operation waiting for a dialog answer.",
       "localizations" : {
@@ -6182,6 +7580,26 @@
         }
       }
     },
+    "Warn before changing an extension" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vor dem Ändern eines Suffixes warnen"
+          }
+        }
+      }
+    },
+    "Warn before emptying the Trash" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vor dem Entleeren des Papierkorbs warnen"
+          }
+        }
+      }
+    },
     "weeks" : {
       "comment" : "Unit after \"is within the last\" and a number in a date search criterion.",
       "localizations" : {
@@ -6189,6 +7607,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wochen"
+          }
+        }
+      }
+    },
+    "Welcome to FileCraft" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei FileCraft"
+          }
+        }
+      }
+    },
+    "Welcome to FileCraft…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei FileCraft…"
+          }
+        }
+      }
+    },
+    "Welcome window:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommensfenster:"
           }
         }
       }
@@ -6205,6 +7653,7 @@
       }
     },
     "Wildcards" : {
+      "comment" : "Pattern syntax with * and ?.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6224,7 +7673,19 @@
         }
       }
     },
+    "Window" : {
+      "comment" : "Menu name in the Keyboard Shortcuts window.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fenster"
+          }
+        }
+      }
+    },
     "Write" : {
+      "comment" : "Permission: may change the item.",
       "localizations" : {
         "de" : {
           "stringUnit" : {

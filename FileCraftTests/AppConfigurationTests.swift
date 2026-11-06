@@ -38,4 +38,10 @@ internal struct AppConfigurationTests {
   internal func `App runs outside the App Sandbox`() {
     #expect(ProcessInfo.processInfo.environment["APP_SANDBOX_CONTAINER_ID"] == nil)
   }
+
+  @Test
+  internal func `App bundle contains the compiled app icon`() {
+    #expect(Bundle.main.object(forInfoDictionaryKey: "CFBundleIconName") as? String == "AppIcon")
+    #expect(Bundle.main.url(forResource: "AppIcon", withExtension: "icns") != nil)
+  }
 }

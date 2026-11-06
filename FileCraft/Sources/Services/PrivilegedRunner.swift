@@ -43,8 +43,14 @@ nonisolated internal struct PrivilegedRunner: Sendable {
         String(localized: "FileCraft is not authorized to make this change.")
       case .helper(.posix(let code)):
         POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO).localizedDescription
-      case .helper:
-        String(localized: "The helper could not complete the operation.")
+      case .helper(.invalidPath):
+        String(localized: "The path is not valid or changed while FileCraft used it.")
+      case .helper(.invalidRequest):
+        String(localized: "The helper did not understand the request.")
+      case .helper(.versionMismatch):
+        String(localized: "FileCraft’s helper belongs to another version of FileCraft. Restart FileCraft and try again.")
+      case .helper(.unknownJob):
+        String(localized: "The helper no longer knows this operation. Try again.")
       }
     }
   }

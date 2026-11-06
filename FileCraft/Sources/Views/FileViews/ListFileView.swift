@@ -43,7 +43,11 @@ internal struct ListFileView: View {
     table
       .font(tab.viewSettings.textSize.font)
       .contextMenu(forSelectionType: FileItem.ID.self) { identifiers in
-        FileItemContextMenu(items: rows.filter { identifiers.contains($0.id) }.map(\.item), tab: tab)
+        if identifiers.isEmpty {
+          FileBackgroundContextMenu(tab: tab, folder: nil)
+        } else {
+          FileItemContextMenu(items: rows.filter { identifiers.contains($0.id) }.map(\.item), tab: tab)
+        }
       } primaryAction: { identifiers in
         tab.open(rows.filter { identifiers.contains($0.id) }.map(\.item))
       }

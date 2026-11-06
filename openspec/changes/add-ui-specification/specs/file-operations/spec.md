@@ -61,7 +61,7 @@ File > Delete Immediately… (⌥⌘⌫) SHALL ask for confirmation, stating tha
 - **THEN** FileCraft asks for confirmation and deletes the files only after the user confirms
 
 ### Requirement: Empty Trash
-FileCraft > Empty Trash… (⇧⌘⌫) SHALL empty the Trash after confirmation, unless the warning is turned off in Settings.
+File > Empty Trash… (⇧⌘⌫) SHALL empty the Trash after confirmation, unless the warning is turned off in Settings.
 
 #### Scenario: Empty the Trash
 - **WHEN** the user presses ⇧⌘⌫ and confirms

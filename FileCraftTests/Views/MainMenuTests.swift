@@ -92,11 +92,28 @@ internal struct MainMenuTests {
     #expect(title(of: "t", .command) == String(localized: "New Tab"))
     #expect(title(of: "t", [.shift, .command]) == String(localized: "Reopen Closed Tab"))
     #expect(title(of: "w", [.shift, .command]) == String(localized: "Close Window"))
-    #expect(closeItems.map(\.title) == [String(localized: "Close Tab")])
+    // Without a browser window in front, as in the test host, the ⌘W item closes the key window.
+    #expect(closeItems.count == 1)
+    #expect([String(localized: "Close Tab"), String(localized: "Close")].contains(closeItems.first?.title ?? ""))
     #expect(items.contains { $0.title == String(localized: "Show Next Tab") && $0.keyEquivalent.isEmpty == false })
     #expect(items.first { $0.title == String(localized: "Recently Closed Tabs") }?.hasSubmenu == true)
     #expect(items.contains { $0.title == String(localized: "Swap Panes") })
     #expect(items.contains { $0.title == String(localized: "Show Same Folder in Other Pane") })
+  }
+
+  @Test
+  internal func `Empty Trash is in the File menu, after Put Back`() throws {
+    let menu = try #require(NSApp.mainMenu)
+    let appMenu = try #require(menu.items.first?.submenu)
+    // The File menu is the one with Move to Trash.
+    let fileMenu = try #require(
+      menu.items.compactMap(\.submenu).first { $0.items.contains { $0.title == String(localized: "Move to Trash") } })
+    let titles = fileMenu.items.map(\.title)
+    let emptyTrash = try #require(titles.firstIndex(of: String(localized: "Empty Trash…")))
+    let putBack = try #require(titles.firstIndex(of: String(localized: "Put Back")))
+
+    #expect(emptyTrash == putBack + 1)
+    #expect(appMenu.items.contains { $0.title == String(localized: "Empty Trash…") } == false)
   }
 
   @Test
@@ -146,6 +163,131 @@ internal struct MainMenuTests {
   }
 
   // MARK: - Helpers
+
+  // MARK: - Shortcut Catalog
+
+  @Test
+  internal func `Every menu shortcut of the catalog belongs to its command`() throws {
+    let items = Self.items(in: try #require(NSApp.mainMenu))
+    var problems: [String] = []
+    for entry in ShortcutCatalog.entries {
+      guard let first = entry.shortcuts.first, Self.isCheckable(first) else {
+        continue
+      }
+      let expected = Self.menuShortcut(first)
+      let matches = items.filter { Self.shortcut(of: $0) == expected }
+      if entry.isSystem {
+        if matches.isEmpty {
+          problems.append("no menu item for \(String(localized: entry.title)) \(first.symbols)")
+        }
+        continue
+      }
+      let titles = [entry.title, entry.alternateTitle].compactMap { $0 }.map { String(localized: $0) }
+      if matches.contains(where: { titles.contains($0.title) }) {
+        continue
+      }
+      // Keys such as [ ] and / move with the keyboard layout; macOS then stores an adapted key equivalent, for
+      // example ö for [ on a German keyboard. The command's item must still have a shortcut.
+      let adapted = items.first { titles.contains($0.title) && $0.keyEquivalent.isEmpty == false }
+      if adapted == nil || Self.layoutDependentKeys.contains(first.key) == false {
+        problems.append("\(first.symbols): expected \(titles), found \(matches.map(\.title))")
+      }
+    }
+    #expect(problems.isEmpty, "\(problems)")
+  }
+
+  @Test
+  internal func `No default shortcut collides with a macOS shortcut or another command`() {
+    let shortcuts = ShortcutCatalog.entries.flatMap(\.shortcuts)
+
+    #expect(Set(shortcuts).isDisjoint(with: ShortcutCatalog.systemShortcuts))
+    #expect(Set(shortcuts).count == shortcuts.count)
+  }
+
+  @Test
+  internal func `Shortcuts adapt to the keyboard layout`() {
+    // macOS shows ⌘[ and ⌘] as keys that can be typed on the active layout, for example ⌘Ö and ⌘Ä in German.
+    #expect(NSApp.mainMenu?.items.allSatisfy { $0.allowsAutomaticKeyEquivalentLocalization } == true)
+  }
+
+  // MARK: - Structure
+
+  @Test
+  internal func `The View menu lists the view commands before the toolbar commands`() throws {
+    let view = try #require(Self.menu(containing: "as Icons"))
+    let titles = view.items.map(\.title)
+    func index(_ key: String.LocalizationValue) -> Int? {
+      titles.firstIndex(of: String(localized: key))
+    }
+
+    let groupBy = try #require(index("Group By"))
+    let sortBy = try #require(index("Sort By"))
+    let foldersFirst = try #require(index("Folders First"))
+    let reload = try #require(index("Reload"))
+    let sidebar = try #require(index("Show Sidebar") ?? index("Hide Sidebar"))
+    let statusBar = try #require(index("Show Status Bar") ?? index("Hide Status Bar"))
+    let viewOptions = try #require(index("Show View Options"))
+    let customize = try #require(view.items.firstIndex { $0.action == #selector(NSWindow.runToolbarCustomizationPalette(_:)) })
+
+    #expect(groupBy < sortBy && sortBy < foldersFirst && foldersFirst < reload && reload < sidebar)
+    #expect(statusBar < customize && customize < viewOptions)
+  }
+
+  @Test
+  internal func `Edit commands follow Select All, File has Tags and Help has Keyboard Shortcuts`() throws {
+    let edit = try #require(Self.menu(containing: "Move Items Here"))
+    let titles = edit.items.map(\.title)
+    let moveItemsHere = try #require(titles.firstIndex(of: String(localized: "Move Items Here")))
+    let copyPath = try #require(titles.firstIndex(of: String(localized: "Copy Path")))
+    let deselectAll = try #require(titles.firstIndex(of: String(localized: "Deselect All")))
+    let find = try #require(titles.firstIndex(of: String(localized: "Find")))
+
+    #expect(moveItemsHere < copyPath && copyPath < deselectAll && deselectAll < find)
+    #expect(Self.menu(containing: "Tags…") != nil)
+    #expect(Self.menu(containing: "Keyboard Shortcuts") != nil)
+    #expect(Self.menu(containing: "Welcome to FileCraft…") != nil)
+  }
+
+  @Test
+  internal func `Item commands are disabled without a selection`() throws {
+    let items = Self.items(in: try #require(NSApp.mainMenu))
+    for key: String.LocalizationValue in ["Duplicate", "Make Alias", "Show Original", "Move to Trash"] {
+      let item = try #require(items.first { $0.title == String(localized: key) })
+      #expect(item.isEnabled == false, "\(item.title)")
+    }
+  }
+
+  /// Keys whose position differs between keyboard layouts, so that macOS adapts their shortcuts.
+  private static let layoutDependentKeys: Set<String> = ["[", "]", "/", ".", ",", "'", ";", "-", "="]
+
+  /// F5 and F6 are menu shortcuts only while a file view has focus, and the second shortcuts of a command work in
+  /// file views; full screen uses the system's own shortcut.
+  private static func isCheckable(_ shortcut: FileCraft.Shortcut) -> Bool {
+    ![FileCraft.Shortcut.f5, FileCraft.Shortcut.f6].contains(shortcut.key) && shortcut != FileCraft.Shortcut("f", [.control, .command])
+  }
+
+  private static func menuShortcut(_ shortcut: FileCraft.Shortcut) -> Shortcut {
+    var modifiers: NSEvent.ModifierFlags = []
+    if shortcut.modifiers.contains(.command) {
+      modifiers.insert(.command)
+    }
+    if shortcut.modifiers.contains(.shift) {
+      modifiers.insert(.shift)
+    }
+    if shortcut.modifiers.contains(.option) {
+      modifiers.insert(.option)
+    }
+    if shortcut.modifiers.contains(.control) {
+      modifiers.insert(.control)
+    }
+    return Shortcut(key: shortcut.key, modifiers: modifiers)
+  }
+
+  /// The menu of the menu bar that contains an item titled `key`.
+  private static func menu(containing key: String.LocalizationValue) -> NSMenu? {
+    let title = String(localized: key)
+    return NSApp.mainMenu?.items.compactMap(\.submenu).first { $0.items.contains { $0.title == title } }
+  }
 
   private struct Shortcut: Equatable {
     let key: String

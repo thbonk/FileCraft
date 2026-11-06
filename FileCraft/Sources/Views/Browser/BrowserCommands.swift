@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-/// The View menu commands of browser windows. They act on the key window through `FocusedValues.browserWindow`.
+/// The File, Edit and View menu commands of browser windows. They act on the key window through `FocusedValues.browserWindow`.
 internal struct BrowserCommands: Commands {
 
   // MARK: - Properties
@@ -36,7 +36,9 @@ internal struct BrowserCommands: Commands {
   // MARK: - Body
 
   internal var body: some Commands {
-    SidebarCommands()
+    // FileCraft's own Show Sidebar replaces the system's, so that it can follow the view commands in the order of
+    // the menus spec; the system group would sit after the toolbar commands.
+    CommandGroup(replacing: .sidebar) {}
     ToolbarCommands()
     CommandGroup(after: .newItem) {
       newItemButtons
@@ -118,18 +120,30 @@ internal struct BrowserCommands: Commands {
       archiveButtons
       Divider()
       trashButtons
-    }
-    CommandGroup(after: .appSettings) {
-      Button("Empty Trash…") {
-        run { await $0.requestEmptyTrash() }
+      Button("Tags…") {
+        window?.isShowingTags = true
       }
-      .keyboardShortcut(.delete, modifiers: [.shift, .command])
-      .disabled(window == nil)
+      .disabled(window?.activeTab.hasPathTargets != true)
     }
     CommandGroup(before: .toolbar) {
       viewModeButton("as Icons", mode: .icons, key: "1")
       viewModeButton("as List", mode: .list, key: "2")
       viewModeButton("as Columns", mode: .columns, key: "3")
+      Divider()
+      Picker("Group By", selection: grouping) {
+        ForEach(GroupingKey.allCases, id: \.self) { key in
+          Text(key.title).tag(key)
+        }
+      }
+      .disabled(window == nil)
+      Picker("Sort By", selection: sortKey) {
+        ForEach(SortKey.allCases, id: \.self) { key in
+          Text(key.title).tag(key)
+        }
+      }
+      .disabled(window == nil)
+      Toggle("Folders First", isOn: foldersFirst)
+        .disabled(window == nil)
       Divider()
       Button(title(isVisible: showsHiddenFiles, show: "Show Hidden Files", hide: "Hide Hidden Files")) {
         showsHiddenFiles.toggle()
@@ -137,54 +151,16 @@ internal struct BrowserCommands: Commands {
       .keyboardShortcut(".", modifiers: [.shift, .command])
       Toggle("Treat Packages as Folders", isOn: treatsPackagesAsFolders)
         .disabled(window == nil)
-      Divider()
-    }
-    CommandGroup(after: .pasteboard) {
-      Button("Move Items Here") {
-        run { await $0.moveItemsHere() }
-      }
-      .keyboardShortcut("v", modifiers: [.option, .command])
-      .disabled(fileCommands?.canCreateItems != true || fileViewHasFocus == false)
-      Button("Deselect All") {
-        window?.activeTab.deselectAll()
-      }
-      .keyboardShortcut("a", modifiers: [.option, .command])
-      .disabled(window == nil)
-      Button("Invert Selection") {
-        window?.activeTab.invertSelection()
-      }
-      .disabled(window == nil)
-      Button("Select by Pattern…") {
-        window?.isShowingSelectByPattern = true
+      Button("Reload") {
+        window?.activeTab.reload()
       }
       .disabled(window == nil)
       Divider()
-      Button("Find") {
-        window?.focusSearchField()
+      Button(title(isVisible: window?.layout.isSidebarVisible, show: "Show Sidebar", hide: "Hide Sidebar")) {
+        window?.layout.isSidebarVisible.toggle()
       }
-      .keyboardShortcut("f", modifiers: .command)
+      .keyboardShortcut("s", modifiers: [.control, .command])
       .disabled(window == nil)
-      Divider()
-      Button("Copy Path") {
-        window?.activeTab.copyPaths(as: .posix)
-      }
-      .keyboardShortcut("c", modifiers: [.option, .command])
-      .disabled(window?.activeTab.hasPathTargets != true)
-      Menu("Copy Path As") {
-        ForEach(PathFormat.allCases, id: \.self) { format in
-          Button(format.title) {
-            window?.activeTab.copyPaths(as: format)
-          }
-        }
-      }
-      .disabled(window?.activeTab.hasPathTargets != true)
-      Button("Edit Path") {
-        window?.layout.isPathBarVisible = true
-        window?.activeTab.isEditingPath = true
-      }
-      .disabled(window?.activeTab.folderURL == nil)
-    }
-    CommandGroup(after: .sidebar) {
       Button(title(isVisible: window?.layout.isInspectorVisible, show: "Show Inspector", hide: "Hide Inspector")) {
         window?.layout.isInspectorVisible.toggle()
       }
@@ -226,11 +202,60 @@ internal struct BrowserCommands: Commands {
       }
       .keyboardShortcut("/", modifiers: .command)
       .disabled(window == nil)
-      Divider()
+    }
+    // After the system's Hide Toolbar and Customize Toolbar…, in the order of the menus spec.
+    CommandGroup(after: .toolbar) {
       Button("Show View Options") {
         openWindow(id: ViewOptionsView.windowID)
       }
       .keyboardShortcut("j", modifiers: .command)
+    }
+    // The system's Cut, Copy, Paste and Select All stay, because file views copy and paste through them; FileCraft's
+    // Edit commands follow Select All.
+    CommandGroup(after: .pasteboard) {
+      Button("Move Items Here") {
+        run { await $0.moveItemsHere() }
+      }
+      .keyboardShortcut("v", modifiers: [.option, .command])
+      .disabled(fileCommands?.canCreateItems != true || fileViewHasFocus == false)
+      Button("Copy Path") {
+        window?.activeTab.copyPaths(as: .posix)
+      }
+      .keyboardShortcut("c", modifiers: [.option, .command])
+      .disabled(window?.activeTab.hasPathTargets != true)
+      Menu("Copy Path As") {
+        ForEach(PathFormat.allCases, id: \.self) { format in
+          Button(format.title) {
+            window?.activeTab.copyPaths(as: format)
+          }
+        }
+      }
+      .disabled(window?.activeTab.hasPathTargets != true)
+      Button("Edit Path") {
+        window?.layout.isPathBarVisible = true
+        window?.activeTab.isEditingPath = true
+      }
+      .disabled(window?.activeTab.folderURL == nil)
+      Divider()
+      Button("Deselect All") {
+        window?.activeTab.deselectAll()
+      }
+      .keyboardShortcut("a", modifiers: [.option, .command])
+      .disabled(window == nil)
+      Button("Invert Selection") {
+        window?.activeTab.invertSelection()
+      }
+      .disabled(window == nil)
+      Button("Select by Pattern…") {
+        window?.isShowingSelectByPattern = true
+      }
+      .disabled(window == nil)
+      Divider()
+      Button("Find") {
+        window?.focusSearchField()
+      }
+      .keyboardShortcut("f", modifiers: .command)
+      .disabled(window == nil)
     }
   }
 
@@ -337,6 +362,11 @@ internal struct BrowserCommands: Commands {
       run { await $0.putBack(urls) }
     }
     .disabled(fileCommands?.canPutBack(selectedURLs) != true)
+    Button("Empty Trash…") {
+      run { await $0.requestEmptyTrash() }
+    }
+    .keyboardShortcut(.delete, modifiers: [.shift, .command])
+    .disabled(window == nil)
     Button("Eject") {
       run { await $0.eject() }
     }
@@ -382,6 +412,30 @@ internal struct BrowserCommands: Commands {
       window?.activeTab.viewSettings.treatsPackagesAsFolders ?? false
     } set: { treatsPackagesAsFolders in
       window?.activeTab.viewSettings.treatsPackagesAsFolders = treatsPackagesAsFolders
+    }
+  }
+
+  private var grouping: Binding<GroupingKey> {
+    Binding {
+      window?.activeTab.viewSettings.grouping ?? .none
+    } set: { grouping in
+      window?.activeTab.viewSettings.grouping = grouping
+    }
+  }
+
+  private var sortKey: Binding<SortKey> {
+    Binding {
+      window?.activeTab.viewSettings.sortOrder.key ?? .name
+    } set: { key in
+      window?.activeTab.viewSettings.sortOrder.key = key
+    }
+  }
+
+  private var foldersFirst: Binding<Bool> {
+    Binding {
+      window?.activeTab.viewSettings.sortOrder.foldersFirst ?? true
+    } set: { foldersFirst in
+      window?.activeTab.viewSettings.sortOrder.foldersFirst = foldersFirst
     }
   }
 

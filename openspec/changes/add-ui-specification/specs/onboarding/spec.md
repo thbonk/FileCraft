@@ -26,7 +26,7 @@ FileCraft SHALL remain fully usable without Full Disk Access, except for protect
 - **THEN** the home folder is shown normally
 
 ### Requirement: Default file viewer step
-The Default File Viewer step SHALL explain that, with this option on, "Show in Finder" requests and folders opened by other applications go to FileCraft, and SHALL offer the same toggle as the Integration settings, set to off by default.
+The Default File Viewer step SHALL explain that, with this option on, "Show in Finder" requests of applications that honor the file viewer preference go to FileCraft, while folders opened by other applications still open in Finder, and SHALL offer the same toggle as the Integration settings, set to off by default.
 
 #### Scenario: Enable from the welcome window
 - **WHEN** the user turns on the toggle in the welcome window

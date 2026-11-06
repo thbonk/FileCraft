@@ -405,7 +405,11 @@ internal struct FileCommandTests {
     tab.select(first.id)
 
     tab.scheduleRename(of: first, after: .milliseconds(50))
-    try await Task.sleep(for: .milliseconds(300))
+    // Waits for the scheduled rename instead of a fixed time, which a busy machine can exceed.
+    let deadline = ContinuousClock.now + .seconds(5)
+    while tab.renamingItemID == nil, ContinuousClock.now < deadline {
+      try await Task.sleep(for: .milliseconds(20))
+    }
     let renamed = tab.renamingItemID
     tab.cancelRename()
     tab.scheduleRename(of: first, after: .milliseconds(50))

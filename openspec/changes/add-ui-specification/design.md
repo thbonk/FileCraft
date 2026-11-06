@@ -69,7 +69,7 @@ Set `SUPPORTED_PLATFORMS = macosx`, drop the iOS and visionOS deployment targets
 | `Settings` | Settings window with one tab per pane |
 | `UtilityWindow(id: "viewOptions")` | View Options panel; it receives the main window's focused values. Its automatic menu command is removed (`commandsRemoved()`), because it is a generic "Show Window" without a shortcut; View > Show View Options (⌘J) opens it with `openWindow(id:)` |
 
-Menus are built with `.commands` (`CommandMenu` for Go and Tools, `CommandGroup` replacements elsewhere). Commands reach the frontmost window through `@FocusedValue` entries that publish the window's `@Observable` model, never closures. Folder open requests and Dock drops use SwiftUI's `onOpenURL` with `handlesExternalEvents`, because SwiftUI then creates a browser window when none is open, which an application delegate cannot do; the `Info.plist` declares `public.folder` (Viewer, rank Alternate) and `public.item` (rank None, so that dropped files are accepted without FileCraft being offered for opening files). The Dock menu and quit confirmation use an `@NSApplicationDelegateAdaptor`, because SwiftUI has no API for them.
+Menus are built with `.commands` (`CommandMenu` for Go and Tools, `CommandGroup` replacements elsewhere). The system's Cut, Copy, Paste and Select All stay, because file views copy and paste through `.copyable`, `.cuttable` and `.pasteDestination`, which use them; FileCraft's Edit commands therefore follow Select All. FileCraft replaces the system's sidebar command group with its own Show Sidebar (⌃⌘S), so that the view commands come before the system's toolbar commands, as the menus spec orders them. `ShortcutCatalog` holds the default shortcut table for the Keyboard Shortcuts window, and a test compares it with the live menu bar; keys that move between keyboard layouts are adapted by macOS (`allowsAutomaticKeyEquivalentLocalization`). Commands reach the frontmost window through `@FocusedValue` entries that publish the window's `@Observable` model, never closures. Folder open requests and Dock drops use SwiftUI's `onOpenURL` with `handlesExternalEvents`, because SwiftUI then creates a browser window when none is open, which an application delegate cannot do; the `Info.plist` declares `public.folder` (Viewer, rank Alternate) and `public.item` (rank None, so that dropped files are accepted without FileCraft being offered for opening files). The Dock menu and quit confirmation use an `@NSApplicationDelegateAdaptor`, because SwiftUI has no API for them.
 
 `FileReference` is a `Codable`, `Hashable` value holding bookmark data and the last known path, so that windows and stores survive renames and moves.
 
@@ -182,7 +182,7 @@ Seed glossary (to be approved by the project owner):
 
 ### D13: Settings and persistence
 
-Simple preferences use `@AppStorage`, with keys and defaults defined in one `SettingsKey` type. Favorites, the shelf, recent items, rename presets and Put Back records are versioned JSON files in Application Support that contain bookmark data. Window state lives in `@SceneStorage`, which macOS discards on ⌘Q while "Close windows when quitting an application" is on in System Settings, as it is by default; so at launch, and whenever "Restore windows" changes, FileCraft writes that setting's value as `NSQuitAlwaysKeepsWindows` into its own defaults domain, which overrides the system setting for FileCraft only. SwiftUI fills a restored window's `@SceneStorage` only when AppKit restores the window, after the window's first `.task` started, so a window waits for `NSApplication.didFinishRestoringWindowsNotification` (`LaunchRestoration`, at most 3 seconds) before it reads its stored state, and stores changes only after that. The default-file-viewer toggle sets `NSFileViewer` in the global preferences domain and makes FileCraft the default application for `public.folder` through `NSWorkspace.setDefaultApplication(at:toOpen:)`; turning it off restores Finder (`com.apple.finder`) for both. On launch, FileCraft compares both values with the toggle and corrects any drift.
+Simple preferences use `@AppStorage`, with keys and defaults defined in one `SettingsKey` type. Favorites, the shelf, recent items, rename presets and Put Back records are versioned JSON files in Application Support that contain bookmark data. Window state lives in `@SceneStorage`, which macOS discards on ⌘Q while "Close windows when quitting an application" is on in System Settings, as it is by default; so at launch, and whenever "Restore windows" changes, FileCraft writes that setting's value as `NSQuitAlwaysKeepsWindows` into its own defaults domain, which overrides the system setting for FileCraft only. SwiftUI fills a restored window's `@SceneStorage` only when AppKit restores the window, after the window's first `.task` started, so a window waits for `NSApplication.didFinishRestoringWindowsNotification` (`LaunchRestoration`, at most 3 seconds) before it reads its stored state, and stores changes only after that. The default-file-viewer toggle sets `NSFileViewer` in the global preferences domain and reads it back; turning it off sets Finder (`com.apple.finder`). It does not touch the default application for folders: on macOS 27, Launch Services answers `paramErr` (-50) to every change of the handler of `public.folder` and `public.directory`, through `NSWorkspace.setDefaultApplication(at:toOpen:)` as well as `LSSetDefaultRoleHandlerForContentType`, even for the handler already set, while the same call succeeds for other types (verified 2026-11-05). On launch, FileCraft compares `NSFileViewer` with the toggle and corrects any drift. With the toggle on, FileCraft takes both roles back. With it off, only roles that still name FileCraft go back to Finder, so another file viewer the user chose stays. Keys that record state, such as the last folder shown or whether the welcome window was completed, are marked `isState`: Restore Defaults of their pane keeps them, and Reset All Settings clears them too. "Quit Finder when FileCraft launches" and "Hide Finder's desktop" follow Path Finder (analysis of 26.1.10, 2026-11-05): `FinderReplacement` quits Finder with `NSRunningApplication.terminate()` at launch and starts it again with `/usr/bin/open -g -b com.apple.finder` when FileCraft quits, because a request FileCraft would have to wait for does not outlive it. Hiding the desktop sets `CreateDesktop = false` in Finder's preferences domain and restarts a running Finder; showing it removes the key. Test runs, which host FileCraft, never quit Finder. Browser windows open without a value, so a folder that opens in a new window waits in `NewWindowQueue`, and the new window, which has no stored state, takes it when it appears.
 
 ### D14: Assets
 
@@ -214,6 +214,15 @@ Subfolders searches enumerate with `FileManager` on the concurrent executor and 
 
 Rename rules are value types (`RenameRule`). Each rule keeps the settings of every rule type, so the editor binds to them directly and switching a rule's type keeps what the user entered. `RenameEngine` prepares regular expressions and date formatters once and applies the enabled rules in order. `BatchRenameValidator` checks each folder separately, ignoring case on case-insensitive volumes. An item that keeps its name still counts as taking that name, and names that the batch frees count as free. `BatchRenamer` first gives every item a unique temporary name in its folder and then its new name, both with `RENAME_EXCL`. This allows exchanging names and never replaces an item outside the batch. If any rename fails, the renames already made are undone in reverse order. Undo is one action that applies the reversed moves the same way. The Date rule offers four preset formats plus a custom Unicode pattern (user choice, 2026-11-05). Presets are stored in `RenamePresets.json`.
 
+### D19: No system Services for selected files
+
+The item context menu does not offer the system Services, and FileCraft > Services does not receive the selected files (owner decision, 2026-11-06). For Services, AppKit asks the key window's responder chain whether a responder can send the selection. Every attempt to insert such a responder failed, as the running app showed (2026-11-06):
+- The app delegate behind `@NSApplicationDelegateAdaptor` is never asked, because `NSApp.delegate` is SwiftUI's own `AppDelegate`.
+- SwiftUI resets the next responders of its window, content view and window controller.
+- SwiftUI's `AppDelegate` answers `validRequestor(forSendType:returnType:)` with nil without asking further, so a responder appended to the application's chain is never reached.
+
+SwiftUI file views also never become AppKit's first responder. Supporting Services would require patching private SwiftUI classes at runtime or rebuilding the file views in AppKit. Both were rejected.
+
 ### Roadmap of the analyzed feature set
 
 | Area | FileCraft decision |
@@ -242,7 +251,7 @@ Rename rules are value types (`RenameRule`). Each rule keeps the settings of eve
 - [Tag listing has no complete public API beyond the standard color labels] → Standard labels through `NSWorkspace`, additional tags discovered through Spotlight queries.
 - [Put Back works only for items FileCraft trashed itself] → Documented in Help; Finder-trashed items can still be dragged out of the Trash.
 - [Sparkle adds a third-party supply-chain dependency] → Pinned version reviewed before each bump, EdDSA-signed appcast over HTTPS, private key kept out of the repository.
-- [Claiming `public.folder` changes how every application opens folders] → Off by default, restores Finder when turned off, drift check on launch; LaunchServices falls back to Finder if FileCraft is removed.
+- [Folders opened by other applications always open in Finder] → macOS refuses to change the handler of `public.folder` (D13); FileCraft becomes the file viewer for reveal requests only and says so in Settings and onboarding.
 
 ## Migration Plan
 
@@ -250,7 +259,7 @@ FileCraft has no users or data yet, so no data migration is needed. Project chan
 
 ## Open Questions
 
-1. Which HTTPS URL hosts the Sparkle appcast (`SUFeedURL`), and who runs the release step that signs and publishes it?
+1. Which HTTPS URL hosts the Sparkle appcast (`SUFeedURL`), and who runs the release step that signs and publishes it? Partly answered by the owner on 2026-11-06: the appcast is hosted with GitHub Pages and the update archives as GitHub release assets; Claude creates the EdDSA key pair with `generate_keys` on the owner's Mac when task group 17 is carried out. The exact repository URL is still open. Group 17 is deferred until after groups 18 and 19.
 
 Resolved with the project owner on 2026-10-30:
 
@@ -258,5 +267,5 @@ Resolved with the project owner on 2026-10-30:
 - German review: the owner approves the glossary first and spot-checks the translations (D12).
 - App icon: provided by the owner as an Icon Composer file (D14).
 - Updates: Sparkle approved as a dependency exception (D16).
-- Folder handler: the default-file-viewer toggle also claims `public.folder` (D13).
+- Folder handler: dropped. The default-file-viewer toggle only sets `NSFileViewer`, because macOS refuses changes to the `public.folder` handler (D13, 2026-11-05).
 - Minimum system version: macOS 27.0 (D3).

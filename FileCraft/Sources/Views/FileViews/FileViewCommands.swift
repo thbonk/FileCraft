@@ -57,6 +57,9 @@ internal struct FileItemContextMenu: View {
       Button("Quick Look") {
         tab.quickLook(items)
       }
+      Button("Get Info") {
+        tab.pane?.window?.infoWindowRequest = urls.compactMap { try? FileReference(url: $0) }
+      }
       if items.count == 1, let item = items.first {
         if item.isPackage {
           Button("Show Package Contents") {
@@ -107,13 +110,26 @@ internal struct FileItemContextMenu: View {
         }
       }
       Divider()
+      Button("Copy") {
+        PasteboardActions.copyFiles(urls)
+      }
       Button("Copy Path") {
         PasteboardActions.copyPaths(of: urls, as: .posix)
       }
+      tagsMenu(for: items)
+      Divider()
       Button("Add to Shelf") {
         tab.pane?.window?.layout.isShelfVisible = true
         Task {
           await ShelfStore.shared.add(urls)
+        }
+      }
+      if items.contains(where: tab.opensAsFolder) {
+        Button("Add to Sidebar") {
+          let folders = items.filter(tab.opensAsFolder).map(\.url)
+          Task {
+            await FavoritesStore.shared.add(folders)
+          }
         }
       }
       Button("Reveal in Finder") {
@@ -133,6 +149,33 @@ internal struct FileItemContextMenu: View {
 
   // MARK: - Private
 
+  /// The color tags; choosing one turns it on for all items, or off when all of them carry it.
+  private func tagsMenu(for items: [FileItem]) -> some View {
+    let assignment = TagAssignment(tags: Dictionary(items.map { ($0.url, $0.tagNames) }, uniquingKeysWith: { first, _ in first }))
+    return Menu("Tags") {
+      ForEach(TagLibrary.colorTags, id: \.self) { tag in
+        Button {
+          var changing = assignment
+          let changed = changing.toggle(tag)
+          Task {
+            for (url, tags) in changed {
+              try? await ItemEditor.setTags(tags, of: url)
+            }
+          }
+        } label: {
+          switch assignment.state(of: tag) {
+          case .on:
+            Label(tag, systemImage: "checkmark")
+          case .mixed:
+            Label(tag, systemImage: "minus")
+          case .off:
+            Text(verbatim: tag)
+          }
+        }
+      }
+    }
+  }
+
   /// Runs a file command of the tab's window.
   private func run(_ command: @escaping @MainActor (FileCommandModel) async -> Void) {
     guard let commands = tab.pane?.window?.fileCommands else {
@@ -146,6 +189,87 @@ internal struct FileItemContextMenu: View {
   /// The volume at `url` when it can be ejected, as in the Computer location.
   private func ejectableVolume(at url: URL) -> Volume? {
     SidebarSources.shared.volumes.first { $0.canEject && $0.url.comparablePath == url.comparablePath }
+  }
+}
+
+/// The context menu of an empty area of a file view: new items, Paste and the folder's Get Info, Group By, Sort By,
+/// view options, hidden files and Open in Terminal.
+internal struct FileBackgroundContextMenu: View {
+
+  // MARK: - Properties
+
+  internal let tab: TabModel
+  /// The folder the area shows: the tab's folder, or a deeper folder in column view.
+  internal let folder: URL?
+
+  @AppStorage(SettingsKeys.showsHiddenFiles.name) private var showsHiddenFiles = SettingsKeys.showsHiddenFiles.defaultValue
+  @Environment(\.openWindow) private var openWindow
+
+  // MARK: - Body
+
+  internal var body: some View {
+    @Bindable var tab = tab
+    let isTabFolder = folder == nil || folder?.comparablePath == tab.folderURL?.comparablePath
+    let target = folder ?? tab.folderURL
+    if isTabFolder, tab.folderURL != nil {
+      Button("New Folder") {
+        run { await $0.newFolder() }
+      }
+      Button("New Text File") {
+        run { await $0.newTextFile() }
+      }
+    }
+    if let target {
+      Button("Paste") {
+        let urls = PasteboardActions.fileURLs()
+        run { commands in
+          if isTabFolder {
+            await commands.paste(urls)
+          } else {
+            _ = await commands.transfer(urls, to: target, kind: .copy)
+          }
+        }
+      }
+      .disabled(PasteboardActions.fileURLs().isEmpty)
+      Button("Get Info") {
+        tab.pane?.window?.infoWindowRequest = [try? FileReference(url: target)].compactMap { $0 }
+      }
+    }
+    Divider()
+    Picker("Group By", selection: $tab.viewSettings.grouping) {
+      ForEach(GroupingKey.allCases, id: \.self) { key in
+        Text(key.title).tag(key)
+      }
+    }
+    Picker("Sort By", selection: $tab.viewSettings.sortOrder.key) {
+      ForEach(SortKey.allCases, id: \.self) { key in
+        Text(key.title).tag(key)
+      }
+    }
+    Button("Show View Options") {
+      openWindow(id: ViewOptionsView.windowID)
+    }
+    Button(showsHiddenFiles ? "Hide Hidden Files" : "Show Hidden Files") {
+      showsHiddenFiles.toggle()
+    }
+    if let target {
+      Divider()
+      Button("Open in Terminal") {
+        WorkspaceActions.openInTerminal(
+          [target], bundleIdentifier: SettingsStore().value(for: SettingsKeys.terminalBundleIdentifier))
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  private func run(_ command: @escaping @MainActor (FileCommandModel) async -> Void) {
+    guard let commands = tab.pane?.window?.fileCommands else {
+      return
+    }
+    Task {
+      await command(commands)
+    }
   }
 }
 

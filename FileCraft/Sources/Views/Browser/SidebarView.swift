@@ -104,6 +104,7 @@ internal struct SidebarView: View {
             .tag(SidebarItem.iCloudDrive)
             .contextMenu {
               openInNewTabButton(.iCloudDrive)
+              getInfoButton(Self.iCloudDrive)
             }
         }
       }
@@ -144,6 +145,7 @@ internal struct SidebarView: View {
           .tag(SidebarItem.favorite(favorite.id))
           .contextMenu {
             openInNewTabButton(.favorite(favorite.id))
+            getInfoButton(favorite.url)
             Button("Remove from Sidebar") {
               favorites.remove(favorite.id)
             }
@@ -175,6 +177,7 @@ internal struct SidebarView: View {
         .tag(SidebarItem.volume(volume.url))
         .contextMenu {
           openInNewTabButton(.volume(volume.url))
+          getInfoButton(volume.url)
           if volume.canEject {
             Button("Eject") {
               eject(volume)
@@ -195,6 +198,16 @@ internal struct SidebarView: View {
         .contextMenu {
           openInNewTabButton(.tag(tag))
         }
+      }
+    }
+  }
+
+  /// Get Info for the item at `url`; nothing when there is no URL.
+  @ViewBuilder
+  private func getInfoButton(_ url: URL?) -> some View {
+    if let url {
+      Button("Get Info") {
+        window.infoWindowRequest = [try? FileReference(url: url)].compactMap { $0 }
       }
     }
   }

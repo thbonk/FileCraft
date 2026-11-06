@@ -56,8 +56,13 @@ internal final class BrowserWindowModel {
   internal var isShowingGoToFolder = false
   /// Whether the Select by Pattern sheet is open.
   internal var isShowingSelectByPattern = false
+  /// Whether the File > Tags… sheet is open.
+  internal var isShowingTags = false
   /// The batch rename shown in a sheet, or nil.
   internal var batchRename: BatchRenameModel?
+  /// Increases when the window's view should open a new browser window for the location waiting in
+  /// `NewWindowQueue`.
+  internal private(set) var newWindowRequest = 0
   /// Increases when the search field should take keyboard focus, as after Edit > Find.
   internal private(set) var searchFocusRequest = 0
   /// The tabs closed most recently, newest first.
@@ -326,6 +331,14 @@ internal final class BrowserWindowModel {
     }
     destination.insertTab(tab, before: target)
     activate(destination)
+  }
+
+  // MARK: - New Windows
+
+  /// Opens a new browser window showing `location`.
+  internal func requestNewWindow(showing location: Location) {
+    NewWindowQueue.push(location)
+    newWindowRequest += 1
   }
 
   // MARK: - Batch Rename
