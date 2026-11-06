@@ -186,7 +186,7 @@ Simple preferences use `@AppStorage`, with keys and defaults defined in one `Set
 
 ### D14: Assets
 
-All interface icons are SF Symbols. File, folder and volume icons come from `NSWorkspace` and Quick Look. The final app icon is an Icon Composer `.icon` file provided by the project owner; no placeholder artwork is created, and the app shows the system's generic app icon until the file arrives. Standard SwiftUI containers pick up the current system design, so no custom glass effects or chrome are added. Path Finder resources are never copied, traced or referenced in the repository.
+All interface icons are SF Symbols. File, folder and volume icons come from `NSWorkspace` and Quick Look. The app icon is the owner's `AppIcon.appiconset` (PNGs from 16 to 1024 px, 2026-11-04); the owner decided not to wait for an Icon Composer `.icon` file (2026-11-06). `ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon` compiles it into `AppIcon.icns` and `Assets.car`, and `CFBundleIconName` names it, both confirmed in the built Release app. Standard SwiftUI containers pick up the current system design, so no custom glass effects or chrome are added. Path Finder resources are never copied, traced or referenced in the repository.
 
 ### D15: Testing
 
@@ -222,6 +222,18 @@ The item context menu does not offer the system Services, and FileCraft > Servic
 - SwiftUI's `AppDelegate` answers `validRequestor(forSendType:returnType:)` with nil without asking further, so a responder appended to the application's chain is never reached.
 
 SwiftUI file views also never become AppKit's first responder. Supporting Services would require patching private SwiftUI classes at runtime or rebuilding the file views in AppKit. Both were rejected.
+
+### D20: Accessibility implementation
+
+The app uses only standard macOS controls, materials and SF Symbols, so dark mode, the accent color, Increase Contrast and Reduce Transparency already follow the system without custom code (verified 2026-11-06 by switching appearance live). No explicit animation exists anywhere in the codebase (no `withAnimation`, `.animation()` or `.transition()`), so there is nothing for Reduce Motion to turn off.
+
+File item VoiceOver support is one shared modifier, `View.fileItemAccessibility(item:tab:name:sizeUnits:locale:isRenaming:)` in `FileViewCommands.swift`, applied by the icon, list and column views alike: it sets the name as the accessibility label, `ItemPresentation.accessibilityDescription(of:sizeFormatter:locale:language:)` (kind, size, modification date) as the value, and accessibility actions for Open, Quick Look, Rename, Get Info and Move to Trash. It is skipped while the item's name is being edited, so the rename field keeps its own text-editing accessibility. `ItemPresentation.accessibilityDescription` follows the `dateString` precedent: the inserted date and size follow the `locale` parameter, but the word "modified" is looked up through `LocalizedLookup` so it follows the app's language like other UI text, not a locale forced on it for formatting; this also keeps the sentence from being built by concatenating a translated fragment, which the guidelines forbid.
+
+Operation completion is announced through `OperationAnnouncements`, a pure struct mirroring `OperationsWindowTriggers`'s design: it returns one message per operation the first time it reaches `.completed`, `.failed` or `.cancelled`. `OperationQueueModel` posts each with `AccessibilityNotification.Announcement`, through an injectable `announce` closure so tests can capture messages without posting them. The three messages are whole, independently localized sentences, not an operation-kind verb concatenated with a suffix, for the same reason.
+
+Every error display (Settings, Inspector, Tags, Select by Pattern, Batch Rename, Go to Folder) pairs its red text with `exclamationmark.triangle.fill`, so the error does not depend on color alone, alongside tags (named) and the active pane (outline) from the capability's other requirements.
+
+Task 19.5 (Full Keyboard Access focus order) stood blocked behind a locked screen; the sidebar, panes and shelf follow natural tab order already, and no view disables focus, but whether the inspector or the shelf receives focus first when both are visible is unverified.
 
 ### Roadmap of the analyzed feature set
 
@@ -265,7 +277,7 @@ Resolved with the project owner on 2026-10-30:
 
 - Bundle identifier: `de.meandmymac.FileCraft` (D3, D11).
 - German review: the owner approves the glossary first and spot-checks the translations (D12).
-- App icon: provided by the owner as an Icon Composer file (D14).
+- App icon: the owner's `AppIcon.appiconset` PNGs; no Icon Composer file needed (D14, 2026-11-06).
 - Updates: Sparkle approved as a dependency exception (D16).
 - Folder handler: dropped. The default-file-viewer toggle only sets `NSFileViewer`, because macOS refuses changes to the `public.folder` handler (D13, 2026-11-05).
 - Minimum system version: macOS 27.0 (D3).

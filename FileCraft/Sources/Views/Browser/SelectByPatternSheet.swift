@@ -107,7 +107,7 @@ internal struct SelectByPatternSheet: View {
       Text("\(tab.countMatches(of: pattern)) items match")
         .foregroundStyle(.secondary)
     case .failure(.invalid):
-      Text("The regular expression is not valid.")
+      Label("The regular expression is not valid.", systemImage: "exclamationmark.triangle.fill")
         .foregroundStyle(.red)
     case .failure(.empty):
       Text("Wildcards: * matches any text, ? one character, [abc] one of the characters.")

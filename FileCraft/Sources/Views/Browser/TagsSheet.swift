@@ -62,9 +62,13 @@ internal struct TagsSheet: View {
           .disabled(newTag.trimmingCharacters(in: .whitespaces).isEmpty)
       }
       if let failure {
-        Text(verbatim: failure)
-          .font(.callout)
-          .foregroundStyle(.red)
+        Label {
+          Text(verbatim: failure)
+        } icon: {
+          Image(systemName: "exclamationmark.triangle.fill")
+        }
+        .font(.callout)
+        .foregroundStyle(.red)
       }
       HStack {
         Spacer()

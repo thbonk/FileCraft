@@ -1602,6 +1602,7 @@
       }
     },
     "Close" : {
+      "comment" : "File menu: closes the window in front, such as Settings.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1609,8 +1610,7 @@
             "value" : "Schließen"
           }
         }
-      },
-      "comment" : "File menu: closes the window in front, such as Settings."
+      }
     },
     "Close Other Tabs" : {
       "localizations" : {
@@ -2857,6 +2857,69 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ablage"
+          }
+        }
+      }
+    },
+    "File operation cancelled." : {
+      "comment" : "VoiceOver announcement when a file operation is cancelled.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dateivorgang abgebrochen."
+          }
+        }
+      }
+    },
+    "File operation finished with %lld errors." : {
+      "comment" : "VoiceOver announcement when a file operation finishes with failed items; the number counts them.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "File operation finished with %lld error."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "File operation finished with %lld errors."
+                }
+              }
+            }
+          }
+        },
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Dateivorgang mit %lld Fehler beendet."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Dateivorgang mit %lld Fehlern beendet."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "File operation finished." : {
+      "comment" : "VoiceOver announcement when a file operation finishes successfully.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dateivorgang beendet."
           }
         }
       }
@@ -4123,6 +4186,24 @@
           }
         }
       }
+    },
+    "modified %@" : {
+      "comment" : "Accessibility value of a file item; %@ is the date it was last changed, for example \"modified October 30, 2026\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geändert am %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "modified %@"
+          }
+        }
+      },
+      "extractionState" : "manual"
     },
     "Modified %@" : {
       "comment" : "Conflict dialog: modification date of an item.",

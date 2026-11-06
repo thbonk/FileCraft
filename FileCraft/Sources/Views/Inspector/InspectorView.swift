@@ -56,6 +56,7 @@ internal struct InspectorContent: View {
   /// The tags offered as suggestions in the Tags section.
   internal var knownTags: [String] = SidebarSources.shared.tags
 
+  @AppStorage(SettingsKeys.textSize.name) private var textSize = SettingsKeys.textSize.defaultValue
   @State private var model = InspectorModel()
 
   // MARK: - Body
@@ -105,6 +106,7 @@ internal struct InspectorContent: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
+    .font(textSize.font)
     .task(id: urls) {
       model.didRename = didRename
       await model.show(urls)

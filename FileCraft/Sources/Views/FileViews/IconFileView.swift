@@ -32,6 +32,7 @@ internal struct IconFileView: View {
   @AppStorage(SettingsKeys.alwaysShowsFileExtensions.name)
   private var alwaysShowsExtensions = SettingsKeys.alwaysShowsFileExtensions.defaultValue
   @AppStorage(SettingsKeys.returnKeyAction.name) private var returnKeyAction = SettingsKeys.returnKeyAction.defaultValue
+  @AppStorage(SettingsKeys.sizeUnits.name) private var sizeUnits = SettingsKeys.sizeUnits.defaultValue
   @Environment(\.locale) private var locale
   @State private var gridWidth: CGFloat = 0
   @State private var viewportHeight: CGFloat = 0
@@ -144,7 +145,9 @@ internal struct IconFileView: View {
       width: width,
       isSelected: tab.selection.contains(item.id),
       isRenaming: tab.renamingItemID == item.id,
-      tab: tab)
+      tab: tab,
+      sizeUnits: sizeUnits,
+      locale: locale)
     .id(item.id)
     .onGeometryChange(for: CGRect.self) { geometry in
       geometry.frame(in: .named(Self.coordinateSpaceName))
@@ -299,6 +302,8 @@ private struct IconCell: View {
   let isSelected: Bool
   let isRenaming: Bool
   let tab: TabModel
+  let sizeUnits: SizeUnits
+  let locale: Locale
 
   var body: some View {
     let isLabelBelow = settings.labelPosition == .bottom
@@ -336,7 +341,7 @@ private struct IconCell: View {
     .frame(width: width, alignment: isLabelBelow ? .center : .leading)
     .opacity(item.isHidden || FileClipboard.shared.isCut(item.url) ? 0.5 : 1)
     .contentShape(Rectangle())
-    .accessibilityElement(children: .combine)
+    .fileItemAccessibility(item: item, tab: tab, name: name, sizeUnits: sizeUnits, locale: locale, isRenaming: isRenaming)
     .accessibilityAddTraits(isSelected ? .isSelected : [])
   }
 }

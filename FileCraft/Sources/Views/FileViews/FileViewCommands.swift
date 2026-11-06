@@ -192,6 +192,50 @@ internal struct FileItemContextMenu: View {
   }
 }
 
+extension View {
+
+  /// VoiceOver support for one file item, shared by the icon, list and column views: the name as the label, its
+  /// kind, size and modification date as the value, and the item's most common commands as accessibility actions.
+  ///
+  /// While the item's name is being edited, `isRenaming` leaves the view untouched, so the rename field's own text
+  /// editing accessibility is not replaced by this static description.
+  @ViewBuilder
+  internal func fileItemAccessibility(
+    item: FileItem, tab: TabModel, name: String, sizeUnits: SizeUnits, locale: Locale, isRenaming: Bool = false
+  ) -> some View {
+    if isRenaming {
+      self
+    } else {
+      let description = ItemPresentation.accessibilityDescription(
+        of: item, sizeFormatter: ByteSizeFormatter(units: sizeUnits, locale: locale), locale: locale)
+      self
+        .accessibilityElement(children: .ignore)
+      .accessibilityLabel(Text(name))
+      .accessibilityValue(Text(description))
+      .accessibilityAction(named: Text("Open")) {
+        tab.open(item)
+      }
+      .accessibilityAction(named: Text("Quick Look")) {
+        tab.quickLook([item])
+      }
+      .accessibilityAction(named: Text("Rename")) {
+        tab.beginRename(item)
+      }
+      .accessibilityAction(named: Text("Get Info")) {
+        tab.pane?.window?.infoWindowRequest = [try? FileReference(url: item.url)].compactMap { $0 }
+      }
+      .accessibilityAction(named: Text("Move to Trash")) {
+        guard let commands = tab.pane?.window?.fileCommands else {
+          return
+        }
+        Task {
+          await commands.moveToTrash([item.url])
+        }
+      }
+    }
+  }
+}
+
 /// The context menu of an empty area of a file view: new items, Paste and the folder's Get Info, Group By, Sort By,
 /// view options, hidden files and Open in Terminal.
 internal struct FileBackgroundContextMenu: View {

@@ -48,10 +48,14 @@ internal struct GoToFolderSheet: View {
         emptySuggestions: recents?.goToFolderEntries ?? [],
         onSubmit: go)
       if let errorMessage {
-        Text(errorMessage)
-          .font(.callout)
-          .foregroundStyle(.red)
-          .fixedSize(horizontal: false, vertical: true)
+        Label {
+          Text(errorMessage)
+            .fixedSize(horizontal: false, vertical: true)
+        } icon: {
+          Image(systemName: "exclamationmark.triangle.fill")
+        }
+        .font(.callout)
+        .foregroundStyle(.red)
       }
       HStack {
         Spacer()

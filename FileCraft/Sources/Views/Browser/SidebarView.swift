@@ -56,6 +56,7 @@ internal struct SidebarView: View {
   @AppStorage(SettingsKeys.showsTags.name) private var showsTags = SettingsKeys.showsTags.defaultValue
   @AppStorage(SettingsKeys.showsVolumeUsage.name) private var showsVolumeUsage = SettingsKeys.showsVolumeUsage.defaultValue
   @AppStorage(SettingsKeys.sizeUnits.name) private var sizeUnits = SettingsKeys.sizeUnits.defaultValue
+  @AppStorage(SettingsKeys.textSize.name) private var textSize = SettingsKeys.textSize.defaultValue
   @AppStorage(ExpansionKey.favorites) private var isFavoritesExpanded = true
   @AppStorage(ExpansionKey.locations) private var isLocationsExpanded = true
   @AppStorage(ExpansionKey.iCloud) private var isICloudExpanded = true
@@ -112,6 +113,7 @@ internal struct SidebarView: View {
         tagsSection
       }
     }
+    .font(textSize.font)
     .alert(unavailableTitle, isPresented: isShowingUnavailableFavorite, presenting: unavailableFavorite) { favorite in
       Button("Remove from Sidebar", role: .destructive) {
         favorites.remove(favorite.id)

@@ -196,13 +196,13 @@
 
 ## 19. Appearance and accessibility
 
-- [ ] 19.1 Audit all bundle resources: SF Symbols, system icons, original assets and approved-dependency assets only
-- [ ] 19.2 Check dark mode, Increase Contrast, Reduce Transparency and Reduce Motion across all windows
-- [ ] 19.3 Apply the browser text size setting to file views, sidebar and inspector
-- [ ] 19.4 Add VoiceOver labels, file item descriptions, accessibility actions and operation announcements
+- [x] 19.1 Audit all bundle resources: SF Symbols, system icons, original assets and approved-dependency assets only
+- [x] 19.2 Check dark mode, Increase Contrast, Reduce Transparency and Reduce Motion across all windows
+- [x] 19.3 Apply the browser text size setting to file views, sidebar and inspector
+- [x] 19.4 Add VoiceOver labels, file item descriptions, accessibility actions and operation announcements
 - [ ] 19.5 Verify Full Keyboard Access focus order and visible focus indication
-- [ ] 19.6 Add non-color cues for tags, the active pane and errors
-- [ ] 19.7 Integrate the owner-provided Icon Composer `.icon` file as the app icon (waits for delivery; no placeholder artwork)
+- [x] 19.6 Add non-color cues for tags, the active pane and errors
+- [x] 19.7 Integrate the owner-provided Icon Composer `.icon` file as the app icon (waits for delivery; no placeholder artwork)
 
 ## 20. Verification
 

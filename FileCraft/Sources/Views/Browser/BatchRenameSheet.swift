@@ -263,7 +263,7 @@ private struct RenameRuleEditor: View {
       settings
         .disabled(rule.isEnabled == false)
       if isInvalid {
-        Text("The regular expression is not valid.")
+        Label("The regular expression is not valid.", systemImage: "exclamationmark.triangle.fill")
           .font(.callout)
           .foregroundStyle(.red)
       }

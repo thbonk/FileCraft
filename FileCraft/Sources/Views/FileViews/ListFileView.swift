@@ -118,7 +118,9 @@ internal struct ListFileView: View {
   @TableColumnBuilder<FileRow, KeyPathComparator<FileRow>>
   private var nameColumn: some TableColumnContent<FileRow, KeyPathComparator<FileRow>> {
     TableColumn("Name", value: \FileRow.sortName) { row in
-      NameCell(row: row, tab: tab, name: ItemPresentation.displayName(of: row.item, alwaysShowsExtensions: alwaysShowsExtensions))
+      NameCell(
+        row: row, tab: tab, name: ItemPresentation.displayName(of: row.item, alwaysShowsExtensions: alwaysShowsExtensions),
+        sizeUnits: sizeUnits, locale: locale)
         .fileDropTarget(tab.opensAsFolder(row.item) ? row.item.url : nil, tab: tab, springsOpen: true)
     }
     .width(min: 160, ideal: 280)
@@ -336,24 +338,35 @@ private struct NameCell: View {
   let row: FileRow
   let tab: TabModel
   let name: String
+  let sizeUnits: SizeUnits
+  let locale: Locale
 
   var body: some View {
     HStack(spacing: 4) {
       Color.clear
         .frame(width: CGFloat(row.depth) * 16, height: 1)
       disclosure
-      FileIcon(url: row.item.url)
-        .overlay(alignment: .bottomLeading) {
-          if row.item.isAliasFile || row.item.isSymbolicLink {
-            LinkBadge()
-          }
-        }
       if tab.renamingItemID == row.id {
+        FileIcon(url: row.item.url)
+          .overlay(alignment: .bottomLeading) {
+            if row.item.isAliasFile || row.item.isSymbolicLink {
+              LinkBadge()
+            }
+          }
         RenameField(item: row.item, tab: tab)
       } else {
-        Text(name)
-          .lineLimit(1)
-          .truncationMode(.middle)
+        Group {
+          FileIcon(url: row.item.url)
+            .overlay(alignment: .bottomLeading) {
+              if row.item.isAliasFile || row.item.isSymbolicLink {
+                LinkBadge()
+              }
+            }
+          Text(name)
+            .lineLimit(1)
+            .truncationMode(.middle)
+        }
+        .fileItemAccessibility(item: row.item, tab: tab, name: name, sizeUnits: sizeUnits, locale: locale)
       }
     }
     .opacity(row.item.isHidden || FileClipboard.shared.isCut(row.item.url) ? 0.5 : 1)

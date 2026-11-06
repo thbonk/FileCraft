@@ -20,6 +20,7 @@
 
 import Foundation
 import Observation
+import SwiftUI
 
 /// The file operations of the app for the UI: the Operations window with its questions and summaries, the toolbar
 /// progress and the quit confirmation. It mirrors the engine, which does the work.
@@ -64,6 +65,11 @@ internal final class OperationQueueModel {
   @ObservationIgnored private let engine: FileOperationEngine
   @ObservationIgnored private let settings: SettingsStore
   @ObservationIgnored private var triggers = OperationsWindowTriggers()
+  @ObservationIgnored private var announcements = OperationAnnouncements()
+  /// Posts a VoiceOver announcement; tests replace it to check which messages would be announced.
+  @ObservationIgnored internal var announce: (String) -> Void = { message in
+    AccessibilityNotification.Announcement(message).post()
+  }
   @ObservationIgnored private var observation: Task<Void, Never>?
   @ObservationIgnored private var quitReply: (@MainActor (Bool) -> Void)?
 
@@ -220,6 +226,9 @@ internal final class OperationQueueModel {
     pendingSummaries.append(contentsOf: outcome.summaries)
     if outcome.presentsWindow {
       presentWindow?()
+    }
+    for message in announcements.evaluate(snapshot) {
+      announce(message)
     }
   }
 }

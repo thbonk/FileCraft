@@ -122,6 +122,7 @@ private struct BrowserColumn: View {
   @AppStorage(SettingsKeys.alwaysShowsFileExtensions.name)
   private var alwaysShowsExtensions = SettingsKeys.alwaysShowsFileExtensions.defaultValue
   @AppStorage(SettingsKeys.returnKeyAction.name) private var returnKeyAction = SettingsKeys.returnKeyAction.defaultValue
+  @AppStorage(SettingsKeys.sizeUnits.name) private var sizeUnits = SettingsKeys.sizeUnits.defaultValue
   @Environment(\.locale) private var locale
   @State private var ownListing = DirectoryListing()
 
@@ -133,7 +134,9 @@ private struct BrowserColumn: View {
         name: ItemPresentation.displayName(of: item, alwaysShowsExtensions: alwaysShowsExtensions),
         opensAsFolder: tab.opensAsFolder(item),
         isRenaming: tab.renamingItemID == item.id,
-        tab: tab)
+        tab: tab,
+        sizeUnits: sizeUnits,
+        locale: locale)
       .draggable(containerItemID: item.id)
       .fileDropTarget(tab.opensAsFolder(item) ? item.url : nil, tab: tab, springsOpen: true)
     }
@@ -220,6 +223,8 @@ private struct ColumnRow: View {
   let opensAsFolder: Bool
   let isRenaming: Bool
   let tab: TabModel
+  let sizeUnits: SizeUnits
+  let locale: Locale
 
   var body: some View {
     HStack(spacing: 6) {
@@ -244,6 +249,7 @@ private struct ColumnRow: View {
       }
     }
     .opacity(item.isHidden || FileClipboard.shared.isCut(item.url) ? 0.5 : 1)
+    .fileItemAccessibility(item: item, tab: tab, name: name, sizeUnits: sizeUnits, locale: locale, isRenaming: isRenaming)
   }
 }
 

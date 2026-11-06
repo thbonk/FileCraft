@@ -102,4 +102,32 @@ internal struct PresentationTests {
     #expect(LoadFailure(error: missing).kind == .notFound)
     #expect(LoadFailure(error: URLError(.badURL)).kind == .other)
   }
+
+  // MARK: - Accessibility
+
+  @Test
+  internal func `The accessibility description lists kind, size and modification date`() {
+    let item = FileItem(
+      url: URL(filePath: "/tmp/report.pdf"), kind: "PDF document", size: 128_000,
+      modificationDate: Date(timeIntervalSince1970: 1_793_361_600))
+    let formatter = ByteSizeFormatter(units: .decimal, locale: Locale(identifier: "en_US"))
+
+    let description = ItemPresentation.accessibilityDescription(
+      of: item, sizeFormatter: formatter, locale: Locale(identifier: "en_US"), language: Locale.Language(identifier: "en"))
+
+    #expect(description.contains("PDF document"))
+    #expect(description.contains("128 kB"))
+    #expect(description.contains("modified"))
+    #expect(description.contains("2026"))
+  }
+
+  @Test
+  internal func `Missing size or date are left out`() {
+    let folder = FileItem(url: URL(filePath: "/tmp/Folder", directoryHint: .isDirectory), isDirectory: true, kind: "Folder")
+    let formatter = ByteSizeFormatter(units: .decimal, locale: Locale(identifier: "en_US"))
+
+    let description = ItemPresentation.accessibilityDescription(of: folder, sizeFormatter: formatter, locale: Locale(identifier: "en_US"))
+
+    #expect(description == "Folder")
+  }
 }

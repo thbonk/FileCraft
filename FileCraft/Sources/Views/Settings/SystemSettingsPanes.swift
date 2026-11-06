@@ -40,8 +40,12 @@ internal struct DefaultFileViewerToggle: View {
       }
       if let fileViewerError {
         VStack(alignment: .leading, spacing: 2) {
-          Text(verbatim: fileViewerError.localizedDescription)
-            .foregroundStyle(.red)
+          Label {
+            Text(verbatim: fileViewerError.localizedDescription)
+          } icon: {
+            Image(systemName: "exclamationmark.triangle.fill")
+          }
+          .foregroundStyle(.red)
           Text(verbatim: fileViewerError.details)
             .font(.caption)
             .foregroundStyle(.secondary)

@@ -69,4 +69,28 @@ nonisolated internal enum ItemPresentation {
     return date.formatted(
       Date.FormatStyle(date: .abbreviated, time: .shortened, locale: locale, calendar: calendar, timeZone: calendar.timeZone))
   }
+
+  // MARK: - Accessibility
+
+  /// The kind, size and modification date of `item` as one sentence, for example "PDF document, 128 KB, modified
+  /// October 30, 2026 at 10:42". VoiceOver reads this as the value of the item's name.
+  ///
+  /// - Parameter language: The language of "modified", or nil for the app's current language.
+  internal static func accessibilityDescription(
+    of item: FileItem,
+    sizeFormatter: ByteSizeFormatter,
+    locale: Locale,
+    language: Locale.Language? = nil
+  ) -> String {
+    var parts = [item.kind]
+    if let size = item.size {
+      parts.append(sizeFormatter.string(for: size))
+    }
+    if let modificationDate = item.modificationDate {
+      let date = modificationDate.formatted(
+        Date.FormatStyle(date: .long, time: .shortened, locale: locale, timeZone: .current))
+      parts.append(String(format: LocalizedLookup.string("modified %@", language: language), date))
+    }
+    return parts.formatted(.list(type: .and).locale(locale))
+  }
 }

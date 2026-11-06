@@ -55,10 +55,14 @@ internal struct GeneralSection: View {
                 }
               }
             if case .invalidName(let validationError) = model.editError {
-              NameValidationMessage.text(for: validationError)
-                .font(.callout)
-                .foregroundStyle(.red)
-                .fixedSize(horizontal: false, vertical: true)
+              Label {
+                NameValidationMessage.text(for: validationError)
+                  .fixedSize(horizontal: false, vertical: true)
+              } icon: {
+                Image(systemName: "exclamationmark.triangle.fill")
+              }
+              .font(.callout)
+              .foregroundStyle(.red)
             }
           }
         }
@@ -130,7 +134,7 @@ internal struct GeneralSection: View {
           }
           .buttonStyle(.link)
         case .broken:
-          Text("Not found")
+          Label("Not found", systemImage: "exclamationmark.triangle.fill")
             .foregroundStyle(.red)
         }
       }
