@@ -18,8 +18,6 @@
  * limitations under the License.
  */
 
-#if DEBUG
-
 import Foundation
 
 extension TabModel {
@@ -37,5 +35,3 @@ extension BrowserWindowModel {
     BrowserWindowModel(primaryPane: PaneModel(tab: .preview(in: language)))
   }
 }
-
-#endif

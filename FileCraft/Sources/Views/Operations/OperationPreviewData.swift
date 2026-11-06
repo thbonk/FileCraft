@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 
-#if DEBUG
 import Foundation
 
 /// Static operations for the previews of the Operations window.
@@ -100,4 +99,3 @@ internal enum OperationPreviewData {
     return progress
   }
 }
-#endif

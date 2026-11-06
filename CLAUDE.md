@@ -23,6 +23,9 @@ Where that file disagrees with the actual project, the project wins:
 # Build
 xcodebuild -project FileCraft.xcodeproj -scheme FileCraft -destination 'platform=macOS' -quiet build
 
+# Release build, as Xcode Cloud archives it
+xcodebuild -project FileCraft.xcodeproj -scheme FileCraft -configuration Release -destination 'generic/platform=macOS' -quiet build
+
 # Run all tests
 xcodebuild test -project FileCraft.xcodeproj -scheme FileCraft -destination 'platform=macOS'
 

@@ -18,12 +18,13 @@
  * limitations under the License.
  */
 
-#if DEBUG
-
 import Foundation
 import UniformTypeIdentifiers
 
 /// Static sample data for `#Preview` blocks; previews never touch the real file system.
+///
+/// The preview support is compiled in every configuration, not only in Debug: `#Preview` blocks are type-checked in
+/// Release builds too, so Release builds and Xcode Cloud archives fail without it.
 nonisolated internal enum PreviewFixtures {
 
   // MARK: - Types
@@ -136,5 +137,3 @@ nonisolated internal enum PreviewFixtures {
     referenceDate.addingTimeInterval(-Double(daysAgo) * 86_400)
   }
 }
-
-#endif
