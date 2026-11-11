@@ -73,6 +73,7 @@ Known limitation: switching the view mode of a 10,000-item folder takes about 0.
 | B8 | View Options panel shows "No Window" while a browser window is key and main, also after a real click | Fixed: a stock SwiftUI app showed that a `UtilityWindow` receives no `focusedSceneValue` on macOS 27; browser windows now report themselves to `ActiveBrowserWindow` (`ActiveBrowserWindowTests`); verified live: the panel shows and follows the active tab's options |
 | B9 | Path bar editing: the suggestion list opens upward over the tab bar and toolbar, is clipped by the window, and while typing covers the field's text | Fixed: the alignment guide meant to move the list below the field was ignored; the list now hangs below the field by its measured height; verified live over icon and list view |
 | B10 | Open With lists "Pages" twice (Pages and Pages Creator Studio) with no way to tell them apart | Fixed: equal names get their version, as in Finder (`OpenWithProviderTests`); verified live: "Pages (14.5)", "Pages (15.4)" |
+| B11 | Running the test suite writes the owner's real defaults: `general.lastFolderPath` pointed to a `FileCraftTests-…` temporary folder afterwards (tabs created in tests use `SettingsStore()` on the standard defaults) | Open: tests should use a separate defaults suite |
 
 ### Note on driving the app
 
