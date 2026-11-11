@@ -28,16 +28,30 @@ internal struct FolderOpeningTests {
   internal func `Folders open in the same tab by default setting`() throws {
     let directory = try TemporaryDirectory()
     let (window, tab, folder) = try fixture(.sameTab, in: directory)
-    // Navigating records the last folder in the user's settings; the test puts the previous value back.
-    let lastFolder = UserDefaults.standard.object(forKey: SettingsKeys.lastFolderPath.name)
-    defer {
-      UserDefaults.standard.set(lastFolder, forKey: SettingsKeys.lastFolderPath.name)
-    }
 
     tab.open(folder)
 
     #expect(tab.folderURL?.lastPathComponent == "Docs")
     #expect(window.primaryPane.tabs.count == 1)
+  }
+
+  @Test
+  internal func `Opening a folder records the last folder without touching the user's settings`() throws {
+    let directory = try TemporaryDirectory()
+    let (_, tab, folder) = try fixture(.sameTab, in: directory)
+    let key = SettingsKeys.lastFolderPath.name
+    let usersLastFolder = UserDefaults.standard.string(forKey: key)
+    defer {
+      // Puts the user's value back if the test host wrote the user's settings.
+      if UserDefaults.standard.string(forKey: key) != usersLastFolder {
+        UserDefaults.standard.set(usersLastFolder, forKey: key)
+      }
+    }
+
+    tab.open(folder)
+
+    #expect(URL(filePath: SettingsStore().value(for: SettingsKeys.lastFolderPath)).lastPathComponent == "Docs")
+    #expect(UserDefaults.standard.string(forKey: key) == usersLastFolder)
   }
 
   @Test

@@ -128,7 +128,7 @@ internal struct ListFileViewPerformanceTests {
     var host: NSHostingView<AnyView>?
 
     let elapsed = clock.measure {
-      let view = NSHostingView(rootView: AnyView(ListFileView(tab: tab).frame(width: 900, height: 600)))
+      let view = NSHostingView(rootView: AnyView(ListFileView(tab: tab).frame(width: 900, height: 600).defaultAppStorage(AppEnvironment.userDefaults)))
       view.frame = NSRect(x: 0, y: 0, width: 900, height: 600)
       view.layoutSubtreeIfNeeded()
       host = view

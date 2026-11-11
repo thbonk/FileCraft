@@ -57,6 +57,24 @@ internal final class SettingsStoreTests {
   }
 
   @Test
+  internal func `Settings written in the test host stay out of the user's defaults`() {
+    let key = SettingsKeys.lastFolderPath
+    let usersValue = UserDefaults.standard.object(forKey: key.name)
+    let path = "/FileCraftTests/\(UUID().uuidString)/"
+    defer {
+      // Puts the user's value back if the store wrote the user's defaults.
+      if UserDefaults.standard.string(forKey: key.name) == path {
+        UserDefaults.standard.set(usersValue, forKey: key.name)
+      }
+    }
+
+    SettingsStore().set(path, for: key)
+
+    #expect(SettingsStore().value(for: key) == path)
+    #expect(UserDefaults.standard.string(forKey: key.name) != path)
+  }
+
+  @Test
   internal func `Unset keys return the defaults from the settings spec`() {
     #expect(store.value(for: SettingsKeys.newWindowLocation) == .home)
     #expect(store.value(for: SettingsKeys.folderOpeningBehavior) == .sameTab)

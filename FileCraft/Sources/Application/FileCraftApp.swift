@@ -39,10 +39,11 @@ import SwiftUI
     // Started before the first window, so that its sidebar appears with volumes, tags and favorites.
     SidebarSources.shared.start()
     OperationQueueModel.shared.start()
-    // Another application may have taken over the file viewer, or a reset left FileCraft in it.
-    DefaultFileViewer().correctDrift(usesFileCraft: SettingsStore().value(for: SettingsKeys.usesFileCraftAsFileViewer))
-    // Test runs launch FileCraft as their host and must not quit the user's Finder.
+    // Test runs launch FileCraft as their host and must not change the user's file viewer or quit Finder; their
+    // settings come from the test host's own defaults suite, not from the user's.
     if AppEnvironment.isTestHost == false {
+      // Another application may have taken over the file viewer, or a reset left FileCraft in it.
+      DefaultFileViewer().correctDrift(usesFileCraft: SettingsStore().value(for: SettingsKeys.usesFileCraftAsFileViewer))
       Task {
         let settings = SettingsStore()
         await FinderReplacement().applyAtLaunch(
@@ -68,10 +69,15 @@ import SwiftUI
 
   // MARK: - Body
 
+  // Each scene reads `@AppStorage` from `AppEnvironment.userDefaults`, which `SettingsStore` also uses.
   var body: some Scene {
     WindowGroup(id: "browser") {
       BrowserWindowView()
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
+    // AppKit saves a browser window's toolbar, split view and frame into the user's real defaults, so the test
+    // host launches without one; tests create the models and views they need.
+    .defaultLaunchBehavior(AppEnvironment.isTestHost ? .suppressed : .automatic)
     .handlesExternalEvents(matching: ["*"])
     .commands {
       TabCommands()
@@ -85,18 +91,22 @@ import SwiftUI
     Settings {
       SettingsView()
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     Window("Welcome to FileCraft", id: WelcomeView.windowID) {
       WelcomeView()
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     .windowResizability(.contentSize)
     .commandsRemoved()
     Window("Keyboard Shortcuts", id: KeyboardShortcutsView.windowID) {
       KeyboardShortcutsView()
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     .commandsRemoved()
     WindowGroup("Info", id: InfoWindowView.windowID, for: FileReference.self) { $reference in
       InfoWindowView(reference: reference)
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     .windowResizability(.contentSize)
     .commandsRemoved()
 
@@ -105,6 +115,7 @@ import SwiftUI
     UtilityWindow("View Options", id: ViewOptionsView.windowID) {
       ViewOptionsView()
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     .commandsRemoved()
     .windowResizability(.contentSize)
 
@@ -112,6 +123,7 @@ import SwiftUI
     Window("Operations", id: OperationsView.windowID) {
       OperationsView(model: .shared)
     }
+    .defaultAppStorage(AppEnvironment.userDefaults)
     .commandsRemoved()
     .defaultSize(width: 520, height: 320)
     .restorationBehavior(.disabled)

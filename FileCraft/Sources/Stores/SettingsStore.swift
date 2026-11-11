@@ -29,7 +29,7 @@ nonisolated internal struct SettingsStore {
 
   // MARK: - Initialization
 
-  internal init(defaults: UserDefaults = .standard) {
+  internal init(defaults: UserDefaults = AppEnvironment.userDefaults) {
     self.defaults = defaults
   }
 

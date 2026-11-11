@@ -21,7 +21,7 @@
 import Foundation
 
 /// Facts about how FileCraft was started.
-internal enum AppEnvironment {
+nonisolated internal enum AppEnvironment {
 
   /// Whether FileCraft runs as the host of the unit tests, which must not quit Finder or open the welcome window.
   internal static let isTestHost: Bool = {
@@ -30,5 +30,25 @@ internal enum AppEnvironment {
     #else
       false
     #endif
+  }()
+
+  /// The name of the test host's defaults suite.
+  internal static let testHostDefaultsSuiteName = "de.meandmymac.FileCraft.TestHost"
+
+  /// The defaults that hold FileCraft's settings: the standard defaults, or in the test host a suite of its own, so
+  /// that test runs leave the user's settings alone.
+  internal static var userDefaults: UserDefaults {
+    guard isTestHost else {
+      return .standard
+    }
+    _ = emptiesTestHostDefaults
+    // The suite name is neither the bundle identifier nor the global domain, so the suite always exists.
+    return UserDefaults(suiteName: testHostDefaultsSuiteName) ?? .standard
+  }
+
+  /// Empties the test host's suite once per launch, so that each test run sees the defaults of the settings spec.
+  /// `UserDefaults` is not `Sendable`, so the suite itself is not kept in a static property.
+  private static let emptiesTestHostDefaults: Void = {
+    UserDefaults(suiteName: testHostDefaultsSuiteName)?.removePersistentDomain(forName: testHostDefaultsSuiteName)
   }()
 }

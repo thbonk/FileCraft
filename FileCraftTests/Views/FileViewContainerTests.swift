@@ -33,7 +33,7 @@ internal struct FileViewContainerTests {
     var settings = ViewSettings()
     settings.viewMode = .list
     let tab = TabModel(location: .tag("Empty"), viewSettings: settings, listing: DirectoryListing(staticItems: []))
-    let view = NSHostingView(rootView: FileViewContainer(tab: tab).frame(width: 600, height: 400))
+    let view = NSHostingView(rootView: FileViewContainer(tab: tab).frame(width: 600, height: 400).defaultAppStorage(AppEnvironment.userDefaults))
     view.frame = NSRect(x: 0, y: 0, width: 600, height: 400)
 
     view.layoutSubtreeIfNeeded()
@@ -66,7 +66,7 @@ internal struct FileViewContainerTests {
     }
     let tab = TabModel(location: .tag("Locked"), viewSettings: ViewSettings(), listing: listing)
 
-    let size = NSHostingController(rootView: FileViewContainer(tab: tab)).sizeThatFits(in: CGSize(width: 600, height: 400))
+    let size = NSHostingController(rootView: FileViewContainer(tab: tab).defaultAppStorage(AppEnvironment.userDefaults)).sizeThatFits(in: CGSize(width: 600, height: 400))
 
     #expect(size.height == 400)
     withExtendedLifetime(directory) {}

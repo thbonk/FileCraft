@@ -50,7 +50,8 @@ log show --last 5m --predicate 'subsystem == "de.meandmymac.FileCraft" AND categ
 ```
 
 - Tests use Swift Testing in the `FileCraftTests` target, which is hosted in the app: `Bundle.main` and the process environment are FileCraft's own. Code that must behave differently in the test host checks `AppEnvironment.isTestHost`; file-system fixtures use `FileCraftTests/Support/TemporaryDirectory`.
-- `TabModel(location:)` defaults to `ViewSettings(settings: SettingsStore())`, which reads the real user defaults. Tests whose outcome depends on view settings pass `ViewSettings()`.
+- In the test host, `SettingsStore()` and the scenes' `@AppStorage` use `AppEnvironment.userDefaults`: the suite `de.meandmymac.FileCraft.TestHost`, emptied at each launch, never the user's defaults. Views hosted in tests get `.defaultAppStorage(AppEnvironment.userDefaults)`. The suite is shared by tests running in parallel, so tests whose outcome depends on view settings still pass `ViewSettings()`.
+- The test host launches without a browser window (`defaultLaunchBehavior(.suppressed)`), because AppKit saves a window's toolbar, split view and frame into the user's real defaults; tests create the models and views they need. Xcode starts it with `-ApplePersistenceIgnoreState YES`, so saved windows are neither restored nor overwritten. `TestHostTests` guards both.
 - Guard tests: `LocalizationCoverageTests` fails on missing or stale German strings, changed placeholders and count strings without plural variants; `AssetAuditTests` pins the allowed bundle resources, so new assets need it updated; `MainMenuTests` checks the menu structure.
 - The shared scheme `FileCraft` (`FileCraft.xcodeproj/xcshareddata/xcschemes/`) builds the app and runs `FileCraftTests` in its Test action.
 - The log line `IDERunDestination: Supported platforms for the buildables in the current scheme is empty.` is harmless.
