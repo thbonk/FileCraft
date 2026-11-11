@@ -291,6 +291,8 @@ internal struct FileBackgroundContextMenu: View {
       }
     }
     Button("Show View Options") {
+      // The panel shows the active pane's options; the menu may belong to the other pane.
+      tab.didReceiveFocus()
       openWindow(id: ViewOptionsView.windowID)
     }
     Button(showsHiddenFiles ? "Hide Hidden Files" : "Show Hidden Files") {
@@ -311,6 +313,8 @@ internal struct FileBackgroundContextMenu: View {
     guard let commands = tab.pane?.window?.fileCommands else {
       return
     }
+    // File commands act on the active pane; the menu may belong to the other one.
+    tab.didReceiveFocus()
     Task {
       await command(commands)
     }

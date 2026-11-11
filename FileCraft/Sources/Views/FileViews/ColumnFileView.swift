@@ -152,6 +152,9 @@ private struct BrowserColumn: View {
     } primaryAction: { identifiers in
       tab.open(items.filter { identifiers.contains($0.id) })
     }
+    .emptyAreaContextMenu {
+      FileBackgroundContextMenu(tab: tab, folder: folder)
+    }
     .onKeyPress(phases: .down) { press in
       handle(press, items: items)
     }

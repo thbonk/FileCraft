@@ -51,6 +51,9 @@ internal struct ListFileView: View {
       } primaryAction: { identifiers in
         tab.open(rows.filter { identifiers.contains($0.id) }.map(\.item))
       }
+      .emptyAreaContextMenu {
+        FileBackgroundContextMenu(tab: tab, folder: nil)
+      }
       .onKeyPress(phases: .down) { press in
         handle(press, rows: rows)
       }
