@@ -36,4 +36,18 @@ internal struct VolumeMonitorTests {
     #expect(startup.name.isEmpty == false)
     #expect((startup.totalCapacity ?? 0) > 0)
   }
+
+  /// Values measured on macOS 27: the startup volume reports both, an APFS disk image 0 for important usage.
+  @Test(arguments: [
+    (Int64?(63_388_769_200), Int?(38_475_902_976), Int64?(63_388_769_200)),
+    (Int64?(0), Int?(208_187_392), Int64?(208_187_392)),
+    (nil, Int?(5_000), Int64?(5_000)),
+    (Int64?(0), nil, Int64?(0)),
+    (nil, nil, nil),
+  ])
+  internal func `Available capacity falls back to the plain value when important usage is unknown`(
+    importantUsage: Int64?, plain: Int?, expected: Int64?
+  ) {
+    #expect(Volume.availableCapacity(importantUsage: importantUsage, plain: plain) == expected)
+  }
 }

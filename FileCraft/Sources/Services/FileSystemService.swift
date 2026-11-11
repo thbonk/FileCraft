@@ -88,11 +88,11 @@ nonisolated internal struct FileSystemService: Sendable {
     urls.compactMap { try? Self.makeItem(at: $0) }
   }
 
-  /// Returns the space available for important data on the volume containing `url`.
+  /// Returns the space available on the volume containing `url`; see `Volume.availableCapacity(importantUsage:plain:)`.
   @concurrent
   internal func availableCapacity(of url: URL) async -> Int64? {
-    try? url.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-      .volumeAvailableCapacityForImportantUsage
+    let values = try? url.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey, .volumeAvailableCapacityKey])
+    return Volume.availableCapacity(importantUsage: values?.volumeAvailableCapacityForImportantUsage, plain: values?.volumeAvailableCapacity)
   }
 
   // MARK: - Items

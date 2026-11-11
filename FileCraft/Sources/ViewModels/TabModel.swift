@@ -38,6 +38,32 @@ internal final class TabModel: Identifiable {
     case needsExtensionConfirmation(oldExtension: String, newExtension: String)
   }
 
+  /// Everything the sorted and grouped items depend on. The day matters for the date groups, such as Today. Other
+  /// view settings, such as the view mode, leave the order alone.
+  private struct ArrangementKey: Equatable {
+    let itemsRevision: Int
+    let lastOpenedDatesRevision: Int
+    let childrenRevision: Int
+    let filterText: String
+    let sortOrder: ItemSortOrder
+    let grouping: GroupingKey
+    let treatsPackagesAsFolders: Bool
+    let expandedFolders: Set<FileItem.ID>
+    let day: Date
+  }
+
+  /// The sorted and grouped items for one `ArrangementKey`, each computed when first read. Sorting 10,000 items
+  /// takes long enough that the views, menu commands and toolbar must not repeat it on every read.
+  private final class Arrangement {
+    var visibleItems: [FileItem]?
+    var outlineRows: [FileRow]?
+    var outlineSections: [OutlineSection]?
+    var itemSections: [ItemSection]?
+    /// The position of each row in `outlineRows`, so that the selected items are found without a scan.
+    var rowIndexes: [FileItem.ID: Int]?
+    var selectedItems: (selection: Set<FileItem.ID>, items: [FileItem])?
+  }
+
   // MARK: - Properties
 
   internal let id = UUID()
@@ -55,7 +81,13 @@ internal final class TabModel: Identifiable {
   /// The folders expanded inline in list view.
   internal private(set) var expandedFolders: Set<FileItem.ID> = []
   /// The loaded children of expanded folders.
-  internal private(set) var children: [FileItem.ID: [FileItem]] = [:]
+  internal private(set) var children: [FileItem.ID: [FileItem]] = [:] {
+    didSet {
+      childrenRevision &+= 1
+    }
+  }
+  /// Increases with every change of `children`; part of the key of the cached arrangement.
+  private var childrenRevision = 0
   /// The item whose name is being edited.
   internal private(set) var renamingItemID: FileItem.ID?
   /// Whether the path bar shows a text field instead of breadcrumbs, as after Edit > Edit Path.
@@ -69,7 +101,13 @@ internal final class TabModel: Identifiable {
   /// A failure to report, such as a missing terminal application.
   internal var failureMessage: LocalizedStringResource?
   /// The dates items were last opened, loaded from Spotlight when the list view needs them.
-  internal private(set) var lastOpenedDates: [FileItem.ID: Date] = [:]
+  internal private(set) var lastOpenedDates: [FileItem.ID: Date] = [:] {
+    didSet {
+      lastOpenedDatesRevision &+= 1
+    }
+  }
+  /// Increases with every change of `lastOpenedDates`; part of the key of the cached arrangement.
+  private var lastOpenedDatesRevision = 0
   internal var columnCustomization = TableColumnCustomization<FileRow>()
   /// The folders opened in column view after the tab's folder, in order.
   internal private(set) var columnChain: [FileItem] = []
@@ -96,6 +134,8 @@ internal final class TabModel: Identifiable {
   @ObservationIgnored private var recursivelyExpandedFolders: Set<FileItem.ID> = []
   /// The refresh generation each folder's children were loaded in.
   @ObservationIgnored private var childrenGenerations: [FileItem.ID: Int] = [:]
+  /// The sorted and grouped items of the listing, kept until one of their inputs changes; see `arrangement`.
+  @ObservationIgnored private var arrangementCache: (key: ArrangementKey, arrangement: Arrangement)?
   /// The selected items of the active column in column view.
   @ObservationIgnored private var columnSelectedItems: [FileItem] = []
   @ObservationIgnored private var typeSelectBuffer = TypeSelectBuffer()
@@ -136,27 +176,44 @@ internal final class TabModel: Identifiable {
 
   /// The items of the tab's folder after the quick filter, in display order.
   internal var visibleItems: [FileItem] {
-    sorting.sorted(filteredItems)
+    let arrangement = arrangement
+    if let items = arrangement.visibleItems {
+      return items
+    }
+    let items = sorting.sorted(filteredItems)
+    arrangement.visibleItems = items
+    return items
   }
 
   /// The list view rows in display order: the visible items, the loaded children of expanded folders, and,
   /// when grouped, one section after the other.
   internal var outlineRows: [FileRow] {
-    guard viewSettings.grouping != .none else {
-      return OutlineRows.rows(
-        for: filteredItems,
+    let arrangement = arrangement
+    if let rows = arrangement.outlineRows {
+      return rows
+    }
+    // Starting from the sorted visible items makes the sorts below take linear time: the input is one sorted run.
+    let rows =
+      viewSettings.grouping == .none
+      ? OutlineRows.rows(
+        for: visibleItems,
         children: children,
         expanded: expandedFolders,
         sorting: sorting,
         isExpandable: opensAsFolder)
-    }
-    return outlineSections.flatMap(\.rows)
+      : outlineSections.flatMap(\.rows)
+    arrangement.outlineRows = rows
+    return rows
   }
 
   /// The list view rows grouped by the tab's grouping key.
   internal var outlineSections: [OutlineSection] {
+    let arrangement = arrangement
+    if let sections = arrangement.outlineSections {
+      return sections
+    }
     let sorting = sorting
-    return sorting.sections(of: filteredItems, groupedBy: viewSettings.grouping).map { section in
+    let sections = sorting.sections(of: visibleItems, groupedBy: viewSettings.grouping).map { section in
       OutlineSection(
         group: section.group,
         rows: OutlineRows.rows(
@@ -166,23 +223,43 @@ internal final class TabModel: Identifiable {
           sorting: sorting,
           isExpandable: opensAsFolder))
     }
+    arrangement.outlineSections = sections
+    return sections
   }
 
   /// The visible items grouped by the tab's grouping key, for icon view.
   internal var itemSections: [ItemSection] {
-    sorting.sections(of: filteredItems, groupedBy: viewSettings.grouping)
+    let arrangement = arrangement
+    if let sections = arrangement.itemSections {
+      return sections
+    }
+    let sections = sorting.sections(of: visibleItems, groupedBy: viewSettings.grouping)
+    arrangement.itemSections = sections
+    return sections
   }
 
   /// The selected items in display order, including selected children of expanded folders and, in column
   /// view, the selection of the active column.
   internal var selectedItems: [FileItem] {
+    let selection = selection
     guard selection.isEmpty == false else {
       return []
     }
     if viewSettings.viewMode == .columns, columnSelectedItems.isEmpty == false {
       return columnSelectedItems
     }
-    return outlineRows.filter { selection.contains($0.id) }.map(\.item)
+    let arrangement = arrangement
+    if let selected = arrangement.selectedItems, selected.selection == selection {
+      return selected.items
+    }
+    let rows = outlineRows
+    let rowIndexes =
+      arrangement.rowIndexes
+      ?? Dictionary(rows.enumerated().map { ($0.element.id, $0.offset) }, uniquingKeysWith: { first, _ in first })
+    arrangement.rowIndexes = rowIndexes
+    let items = selection.compactMap { rowIndexes[$0] }.sorted().map { rows[$0].item }
+    arrangement.selectedItems = (selection, items)
+    return items
   }
 
   internal var snapshot: TabSnapshot {
@@ -191,6 +268,27 @@ internal final class TabModel: Identifiable {
 
   private var sorting: ItemSorting {
     ItemSorting(order: viewSettings.sortOrder)
+  }
+
+  /// The cached arrangement for the current inputs, or a new, empty one once an input changed. Reading the
+  /// inputs here also lets observers of the derived items notice their changes.
+  private var arrangement: Arrangement {
+    let key = ArrangementKey(
+      itemsRevision: listing.itemsRevision,
+      lastOpenedDatesRevision: lastOpenedDatesRevision,
+      childrenRevision: childrenRevision,
+      filterText: filterText,
+      sortOrder: viewSettings.sortOrder,
+      grouping: viewSettings.grouping,
+      treatsPackagesAsFolders: viewSettings.treatsPackagesAsFolders,
+      expandedFolders: expandedFolders,
+      day: Calendar.current.startOfDay(for: .now))
+    if let cache = arrangementCache, cache.key == key {
+      return cache.arrangement
+    }
+    let arrangement = Arrangement()
+    arrangementCache = (key, arrangement)
+    return arrangement
   }
 
   private var filteredItems: [FileItem] {

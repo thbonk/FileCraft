@@ -55,6 +55,85 @@ internal struct TabModelTests {
     #expect(rows.first?.isExpandable == true)
   }
 
+  // MARK: - Arrangement
+
+  @Test
+  internal func `Visible items and rows follow a changed filter`() {
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: [file("/tmp/apple"), file("/tmp/banana")]))
+    #expect(tab.visibleItems.map(\.name) == ["apple", "banana"])
+    #expect(tab.outlineRows.map(\.item.name) == ["apple", "banana"])
+
+    tab.filterText = "ban"
+
+    #expect(tab.visibleItems.map(\.name) == ["banana"])
+    #expect(tab.outlineRows.map(\.item.name) == ["banana"])
+  }
+
+  @Test
+  internal func `Rows and sections follow a changed sort order`() {
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: [file("/tmp/apple"), file("/tmp/banana")]))
+    #expect(tab.outlineRows.map(\.item.name) == ["apple", "banana"])
+    #expect(tab.itemSections.flatMap(\.items).map(\.name) == ["apple", "banana"])
+
+    tab.viewSettings.sortOrder.isAscending = false
+
+    #expect(tab.outlineRows.map(\.item.name) == ["banana", "apple"])
+    #expect(tab.itemSections.flatMap(\.items).map(\.name) == ["banana", "apple"])
+    #expect(tab.visibleItems.map(\.name) == ["banana", "apple"])
+  }
+
+  @Test
+  internal func `Sections follow a changed grouping`() {
+    let items = [file("/tmp/a.txt"), FileItem(url: URL(filePath: "/tmp/b.pdf"), kind: "PDF document", size: 1)]
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: items))
+    #expect(tab.itemSections.count == 1)
+
+    tab.viewSettings.grouping = .kind
+
+    #expect(tab.itemSections.count == 2)
+    #expect(tab.outlineSections.count == 2)
+  }
+
+  @Test
+  internal func `Rows follow a changed listing`() {
+    let listing = DirectoryListing(staticItems: [file("/tmp/apple")])
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: listing)
+    #expect(tab.outlineRows.map(\.item.name) == ["apple"])
+
+    listing.showPrivilegedItems([file("/tmp/apple"), file("/tmp/cherry")])
+
+    #expect(tab.outlineRows.map(\.item.name) == ["apple", "cherry"])
+    #expect(tab.visibleItems.map(\.name) == ["apple", "cherry"])
+  }
+
+  @Test
+  internal func `Selected items follow a changed selection`() {
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: [file("/tmp/apple"), file("/tmp/banana")]))
+    tab.selection = ["/tmp/apple"]
+    #expect(tab.selectedItems.map(\.name) == ["apple"])
+
+    tab.selection = ["/tmp/banana", "/tmp/apple"]
+
+    #expect(tab.selectedItems.map(\.name) == ["apple", "banana"])
+  }
+
+  @Test
+  internal func `Rows follow a folder expanded after they were read`() async throws {
+    let directory = try TemporaryDirectory()
+    try directory.createFolder("Docs")
+    try directory.createFile("Docs/inner.txt", contents: "x")
+    let items = try await FileSystemService().contentsOfDirectory(at: directory.url, includingHiddenItems: false)
+    let tab = TabModel(location: .tag("Test"), viewSettings: ViewSettings(), listing: DirectoryListing(staticItems: items))
+    let docs = try #require(items.first { $0.name == "Docs" })
+    #expect(tab.outlineRows.map(\.item.name) == ["Docs"])
+
+    tab.setExpanded(true, for: docs, recursively: false)
+    #expect(tab.outlineRows.map(\.item.name) == ["Docs"])
+    await tab.loadExpandedChildren()
+
+    #expect(tab.outlineRows.map(\.item.name) == ["Docs", "inner.txt"])
+  }
+
   // MARK: - Selection
 
   @Test

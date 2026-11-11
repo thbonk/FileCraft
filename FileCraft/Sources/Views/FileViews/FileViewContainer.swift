@@ -96,13 +96,18 @@ internal struct FileViewContainer: View {
       FolderFailureView(failure: failure) {
         Task { await tab.authenticateToView() }
       }
-    case .loaded where tab.listing.items.isEmpty:
-      ContentUnavailableView("Folder Is Empty", systemImage: "folder")
     default:
+      // An empty folder keeps its file view, which takes keyboard focus and offers Paste, drops and the background
+      // menu; the message lies on top without taking clicks.
       fileView
         .overlay {
-          if tab.listing.state == .loading && tab.listing.items.isEmpty {
-            DelayedProgressView()
+          if tab.listing.items.isEmpty {
+            if tab.listing.state == .loading {
+              DelayedProgressView()
+            } else if tab.listing.state == .loaded {
+              ContentUnavailableView("Folder Is Empty", systemImage: "folder")
+                .allowsHitTesting(false)
+            }
           }
         }
     }

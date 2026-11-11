@@ -73,7 +73,13 @@ internal final class DirectoryListing {
   // MARK: - Properties
 
   /// The folder's items in no particular order.
-  internal private(set) var items: [FileItem] = []
+  internal private(set) var items: [FileItem] = [] {
+    didSet {
+      itemsRevision &+= 1
+    }
+  }
+  /// Increases with every change of `items`, so that values derived from them know when to compute again.
+  internal private(set) var itemsRevision = 0
   internal private(set) var state: State = .idle
   /// The space available on the folder's volume.
   internal private(set) var availableCapacity: Int64?

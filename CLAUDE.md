@@ -36,12 +36,25 @@ xcodebuild test -project FileCraft.xcodeproj -scheme FileCraft -destination 'pla
 # Run one test; raw-identifier test names keep their backticks
 xcodebuild test -project FileCraft.xcodeproj -scheme FileCraft -destination 'platform=macOS' \
   -only-testing:'FileCraftTests/AppConfigurationTests/`App runs outside the App Sandbox`()'
+
+# Sync the String Catalogs with the code: adds new keys, marks unused ones stale
+xcodebuild -exportLocalizations -project FileCraft.xcodeproj -localizationPath <scratch folder> -exportLanguage de
+
+# Path of the built app; on the owner's Mac products go to the gitignored Build/Products/<Configuration>,
+# so a copy in DerivedData is stale
+APP="$(xcodebuild -project FileCraft.xcodeproj -scheme FileCraft -showBuildSettings 2>/dev/null | sed -n 's/^ *BUILT_PRODUCTS_DIR = //p' | head -1)/FileCraft.app"
+
+# Debug only, ask first (adds a Login Items entry): register and ping the helper, then read its log
+"$APP/Contents/MacOS/FileCraft" -FCHelperSelfTest
+log show --last 5m --predicate 'subsystem == "de.meandmymac.FileCraft" AND category == "HelperSelfTest"'
 ```
 
-- Tests use Swift Testing in the `FileCraftTests` target, which is hosted in the app: `Bundle.main` and the process environment are FileCraft's own.
+- Tests use Swift Testing in the `FileCraftTests` target, which is hosted in the app: `Bundle.main` and the process environment are FileCraft's own. Code that must behave differently in the test host checks `AppEnvironment.isTestHost`; file-system fixtures use `FileCraftTests/Support/TemporaryDirectory`.
+- `TabModel(location:)` defaults to `ViewSettings(settings: SettingsStore())`, which reads the real user defaults. Tests whose outcome depends on view settings pass `ViewSettings()`.
+- Guard tests: `LocalizationCoverageTests` fails on missing or stale German strings, changed placeholders and count strings without plural variants; `AssetAuditTests` pins the allowed bundle resources, so new assets need it updated; `MainMenuTests` checks the menu structure.
 - The shared scheme `FileCraft` (`FileCraft.xcodeproj/xcshareddata/xcschemes/`) builds the app and runs `FileCraftTests` in its Test action.
 - The log line `IDERunDestination: Supported platforms for the buildables in the current scheme is empty.` is harmless.
-- No linter, formatter or CI is configured.
+- No linter or formatter is configured. CI is an Xcode Cloud workflow configured in App Store Connect, not in the repository; it archives the Release configuration.
 
 ## Project configuration that shapes code
 
@@ -49,14 +62,18 @@ These build settings in `FileCraft.xcodeproj/project.pbxproj` dictate how code m
 
 - **Synchronized folders.** `FileCraft/`, `FileCraftTests/`, `FileCraftHelper/`, `Shared/` and `docs/` are file-system-synchronized groups. New files under `FileCraft/` join the app target, under `FileCraftTests/` the test target, under `FileCraftHelper/` the privileged helper target, and under `Shared/` both the app and the helper, so never edit `project.pbxproj` to add sources. Code in `Shared/` must be explicitly `nonisolated`, because the helper target has no default MainActor isolation. Non-source files placed in `docs/` get copied into the app bundle unless they get a target-membership exception, as `docs/dev/DEVELOPMENT_GUIDELINES.md` and `docs/dev/LOCALIZATION.md` have.
 - **Privileged helper.** The `FileCraftHelper` command-line target is embedded at `Contents/MacOS/FileCraftHelper`; its launchd property list `LaunchDaemons/de.meandmymac.FileCraft.Helper.plist` is copied to `Contents/Library/LaunchDaemons` (design decision D11). Registering it (`-FCHelperSelfTest` in Debug builds) adds a background item to the user's Login Items, so do not register it without asking.
+- **Helper protocol.** The app's `XPCSession` (`Services/PrivilegedHelperClient.swift`) talks to the helper's `XPCListener` on the Mach service `de.meandmymac.FileCraft.Helper`, and each side requires the other's code-signing identifier. Request and response types and `HelperIdentity` live in `Shared/HelperProtocol.swift`; bump `HelperIdentity.protocolVersion` when the format changes, because both sides refuse other versions. The helper returns error codes only and the app maps them to localized strings. Tests replace the transport with a mock `HelperTransport`. The helper logs under the subsystem `de.meandmymac.FileCraft.Helper`.
+- **Previews compile in Release.** `#Preview` blocks are type-checked in every configuration, so the fixtures in `FileCraft/Sources/PreviewSupport/` must not be wrapped in `#if DEBUG`; otherwise Release builds and Xcode Cloud archives fail.
 - **MainActor by default.** `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` makes every declaration `@MainActor` unless marked `nonisolated`, including models and services. With `SWIFT_APPROACHABLE_CONCURRENCY = YES`, `nonisolated async` functions still run on the caller's actor. File-system work such as enumeration, copying or hashing only leaves the main thread when marked `@concurrent`.
 - **Member import visibility** (`SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY`). Each file must directly import every module whose extension members it uses; transitive imports don't count.
-- **No App Sandbox.** `ENABLE_APP_SANDBOX = NO` with `ENABLE_HARDENED_RUNTIME = YES`, for Developer ID distribution (design decision D2 of `add-ui-specification`). Entitlements come from build settings; there is no `.entitlements` file. Privileged file operations go through the planned `SMAppService` helper daemon, never `SMJobBless`. Changing the sandbox or entitlements is a product decision, so ask first.
+- **No App Sandbox.** `ENABLE_APP_SANDBOX = NO` with `ENABLE_HARDENED_RUNTIME = YES`, for Developer ID distribution (design decision D2 of `add-ui-specification`). Entitlements come from build settings; there is no `.entitlements` file. Privileged file operations go through the `SMAppService` helper daemon, never `SMJobBless`. Changing the sandbox or entitlements is a product decision, so ask first.
 - **macOS only.** `SDKROOT` and `SUPPORTED_PLATFORMS` are `macosx`, the minimum system version is macOS 27.0 (no `#available` fallbacks), and the bundle identifier is `de.meandmymac.FileCraft`. `AppConfigurationTests` checks the bundle identifier and that the app runs unsandboxed.
 
 ## Source layout
 
-Swift sources live in `FileCraft/Sources/`, one folder per layer: `Application/` holds the app entry point and `Views/` the SwiftUI views. New layers (view models, models, services) go in sibling folders. String Catalogs (`Localizable.xcstrings`, `InfoPlist.xcstrings`) live in `FileCraft/Resources/`; German strings follow the owner-approved glossary and rules in `docs/dev/LOCALIZATION.md`. Tests live in `FileCraftTests/`.
+Swift sources live in `FileCraft/Sources/`, one folder per layer: `Application/` (entry point, app delegate, launch restoration), `Models/` (value types and pure logic), `Services/` (file system, operation engine, helper client, Spotlight, volumes), `Stores/` (persisted settings and JSON stores; `SettingsKey` names the defaults keys), `ViewModels/` (`@Observable` models), `Views/` (one folder per feature) and `PreviewSupport/` (static preview fixtures). Tests in `FileCraftTests/` mirror these layers. The helper's own sources are in `FileCraftHelper/`, code it shares with the app in `Shared/`, and its launchd property list in `LaunchDaemons/`.
+
+String Catalogs (`Localizable.xcstrings`, `InfoPlist.xcstrings`) live in `FileCraft/Resources/`. Write user-visible text in English in code, run the `-exportLocalizations` command above, add the German values, then run `LocalizationCoverageTests`. German strings follow the owner-approved glossary and rules in `docs/dev/LOCALIZATION.md`.
 
 ## Spec-driven workflow (OpenSpec)
 

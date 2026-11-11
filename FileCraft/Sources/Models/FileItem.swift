@@ -55,9 +55,8 @@ nonisolated internal struct FileItem: Identifiable, Hashable, Sendable {
   internal let ownerID: UInt32?
   internal let groupID: UInt32?
 
-  internal var id: String {
-    url.path(percentEncoded: false)
-  }
+  /// The item's path. Stored, because sets, dictionaries and filters of large folders look it up very often.
+  internal let id: String
 
   internal var pathExtension: String {
     url.pathExtension
@@ -90,6 +89,7 @@ nonisolated internal struct FileItem: Identifiable, Hashable, Sendable {
   ) {
     let resolvedName = name ?? url.lastPathComponent
     self.url = url
+    self.id = url.path(percentEncoded: false)
     self.name = resolvedName
     self.localizedName = localizedName ?? resolvedName
     self.isDirectory = isDirectory

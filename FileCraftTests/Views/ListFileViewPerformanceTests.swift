@@ -56,6 +56,72 @@ internal struct ListFileViewPerformanceTests {
     #expect(elapsed < .milliseconds(400))
   }
 
+  /// Every selection change re-evaluates the menu commands, which read the selected items about twenty times.
+  @Test
+  internal func `Reading the selected items for every menu command stays fast`() {
+    tab.selection = Set(tab.visibleItems.prefix(2).map(\.id))
+    _ = tab.selectedItems
+    let clock = ContinuousClock()
+
+    let elapsed = clock.measure {
+      for _ in 0..<20 {
+        _ = tab.selectedItems
+      }
+    }
+
+    Attachment.record("20 reads of selectedItems for 10,000 items: \(elapsed)", named: "selected-items.txt")
+    #expect(elapsed < .milliseconds(50))
+  }
+
+  /// Each arrow key changes the selection, which the views, menu commands and status bar read at once.
+  @Test
+  internal func `Moving the selection through twenty rows stays fast`() {
+    tab.viewSettings.viewMode = .list
+    let rows = Array(tab.outlineRows.prefix(20))
+    let clock = ContinuousClock()
+
+    let elapsed = clock.measure {
+      for row in rows {
+        tab.selection = [row.id]
+        _ = tab.selectedItems
+      }
+    }
+
+    Attachment.record("20 selection changes in 10,000 items: \(elapsed)", named: "selection-changes.txt")
+    #expect(elapsed < .milliseconds(30))
+  }
+
+  /// The view mode does not change the order, so switching it must not sort again.
+  @Test
+  internal func `Switching the view mode keeps the sorted items`() {
+    _ = tab.outlineRows
+    _ = tab.itemSections
+    let clock = ContinuousClock()
+
+    let elapsed = clock.measure {
+      tab.viewSettings.viewMode = tab.viewSettings.viewMode == .icons ? .list : .icons
+      _ = tab.outlineRows
+      _ = tab.itemSections
+    }
+
+    Attachment.record("view mode switch with 10,000 items: \(elapsed)", named: "view-mode-switch.txt")
+    #expect(elapsed < .milliseconds(20))
+  }
+
+  @Test
+  internal func `Sorting 10,000 items by name stays fast`() {
+    let items = tab.listing.items
+    let sorting = ItemSorting(order: ItemSortOrder())
+    let clock = ContinuousClock()
+
+    let elapsed = clock.measure {
+      _ = sorting.sorted(items)
+    }
+
+    Attachment.record("sorting 10,000 items by name: \(elapsed)", named: "sort-by-name.txt")
+    #expect(elapsed < .milliseconds(150))
+  }
+
   @Test
   internal func `List view lays out 10,000 rows within half a second`() {
     let clock = ContinuousClock()

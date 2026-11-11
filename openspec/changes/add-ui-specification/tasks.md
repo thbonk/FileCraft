@@ -180,7 +180,7 @@
 
 - [ ] 17.1 Add Sparkle 2 through Swift Package Manager with a pinned version and record the approved exception in `docs/dev/DEVELOPMENT_GUIDELINES.md`
 - [ ] 17.2 Create the EdDSA key pair with Sparkle's `generate_keys`, keep the private key in the keychain, and set `SUPublicEDKey` and the HTTPS `SUFeedURL` (design open question 1)
-- [ ] 17.3 Implement the `@Observable` `UpdaterModel` around `SPUStandardUpdaterController` with the Check for Updates… command and the two General settings toggles
+- [ ] 17.3 Implement the `@Observable` `UpdaterModel` around `SPUStandardUpdaterController` with the Check for Updates… command and the two General settings toggles, and document the update and release workflow in `CLAUDE.md`
 - [ ] 17.4 Verify that installing an update while operations run shows the quit confirmation
 - [ ] 17.5 Test the update flow with a local signed test appcast: an older build updates to the current one, and a tampered archive is rejected
 
@@ -206,8 +206,8 @@
 
 ## 20. Verification
 
-- [ ] 20.1 Build with `xcodebuild` and run the full Swift Testing suite
-- [ ] 20.2 Profile with Instruments (hangs and hitches) on a 10,000-item folder and during large copies
+- [x] 20.1 Build with `xcodebuild` and run the full Swift Testing suite
+- [x] 20.2 Profile with Instruments (hangs and hitches) on a 10,000-item folder and during large copies
 - [ ] 20.3 Walk through every spec scenario in English and German and record the results
 - [ ] 20.4 Notarize a Developer ID build, publish its signed appcast, and verify Gatekeeper, the update flow, helper approval and Full Disk Access on a clean user account
-- [ ] 20.5 Update `CLAUDE.md` with the new targets, test commands, helper, update and localization workflows
+- [x] 20.5 Update `CLAUDE.md` with the new targets, test commands, helper, update and localization workflows (the update workflow follows with task 17.3)

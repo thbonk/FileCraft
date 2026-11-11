@@ -37,6 +37,7 @@ nonisolated internal struct VolumeMonitor: Sendable {
     .volumeLocalizedNameKey,
     .volumeTotalCapacityKey,
     .volumeAvailableCapacityForImportantUsageKey,
+    .volumeAvailableCapacityKey,
     .volumeIsEjectableKey,
     .volumeIsRemovableKey,
     .volumeIsInternalKey,
@@ -103,7 +104,8 @@ nonisolated internal struct VolumeMonitor: Sendable {
       url: url,
       name: values.volumeLocalizedName ?? url.lastPathComponent,
       totalCapacity: values.volumeTotalCapacity.map(Int64.init),
-      availableCapacity: values.volumeAvailableCapacityForImportantUsage,
+      availableCapacity: Volume.availableCapacity(
+        importantUsage: values.volumeAvailableCapacityForImportantUsage, plain: values.volumeAvailableCapacity),
       isEjectable: values.volumeIsEjectable ?? false,
       isRemovable: values.volumeIsRemovable ?? false,
       isInternal: values.volumeIsInternal ?? true,

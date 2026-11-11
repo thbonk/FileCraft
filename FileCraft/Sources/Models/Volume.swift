@@ -39,6 +39,15 @@ nonisolated internal struct Volume: Identifiable, Hashable, Sendable {
     url.path(percentEncoded: false)
   }
 
+  /// The space to show as available: the space for important data, which includes purgeable space, or the plain
+  /// available space when the former is unknown or 0, as APFS disk images report it.
+  internal static func availableCapacity(importantUsage: Int64?, plain: Int?) -> Int64? {
+    if let importantUsage, importantUsage > 0 {
+      return importantUsage
+    }
+    return plain.map(Int64.init) ?? importantUsage
+  }
+
   /// Whether the sidebar offers an eject button for the volume.
   internal var canEject: Bool {
     isRootFileSystem == false && (isEjectable || isRemovable || isLocal == false || isInternal == false)
