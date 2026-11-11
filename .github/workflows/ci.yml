@@ -1,0 +1,65 @@
+# Builds FileCraft and runs all tests on every push to a pull request, and on every push to main, which is where a
+# merged pull request lands.
+
+name: CI
+
+on:
+  # Opening, reopening and every push to a pull request.
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  # A newer push to a pull request replaces its run in progress; every run on main finishes.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build-and-test:
+    name: Build and test
+    # GitHub's Xcode 27 image: macOS 27 on Apple Silicon. FileCraft needs macOS 27 to build and to run its tests,
+    # which are hosted in the app.
+    runs-on: xcode-27
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Show the toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+
+      # The runner has no signing certificate. With signing off, the linker signs the products ad hoc, which is enough
+      # to launch the app as the test host.
+      - name: Build (Release)
+        run: >-
+          xcodebuild build
+          -project FileCraft.xcodeproj
+          -scheme FileCraft
+          -configuration Release
+          -destination 'generic/platform=macOS'
+          CODE_SIGNING_ALLOWED=NO
+          -quiet
+
+      - name: Test
+        run: >-
+          xcodebuild test
+          -project FileCraft.xcodeproj
+          -scheme FileCraft
+          -destination 'platform=macOS'
+          -resultBundlePath TestResults.xcresult
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: TestResults
+          path: TestResults.xcresult
+          if-no-files-found: ignore
+          retention-days: 7
