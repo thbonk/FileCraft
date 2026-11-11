@@ -174,6 +174,10 @@ internal struct MainMenuTests {
       guard let first = entry.shortcuts.first, Self.isCheckable(first) else {
         continue
       }
+      // Go > iCloud Drive is in the menu only while iCloud Drive is turned on, which it is not on CI machines.
+      if entry.title.key == "iCloud Drive", StandardLocation.isICloudDriveAvailable() == false {
+        continue
+      }
       let expected = Self.menuShortcut(first)
       let matches = items.filter { Self.shortcut(of: $0) == expected }
       if entry.isSystem {

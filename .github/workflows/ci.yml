@@ -47,6 +47,9 @@ jobs:
           -quiet
 
       - name: Test
+        env:
+          # xcodebuild passes TEST_RUNNER_ variables to the test host without the prefix, as CI=true.
+          TEST_RUNNER_CI: "true"
         run: >-
           xcodebuild test
           -project FileCraft.xcodeproj
