@@ -20,8 +20,9 @@
 
 import SwiftUI
 
-/// The View Options panel (⌘J). It shows the options of the key browser window's active tab that matter for
-/// the tab's view mode; the utility window receives the focused values of the main window.
+/// The View Options panel (⌘J). It shows the options of the active browser window's active tab that matter for
+/// the tab's view mode. The panel follows `ActiveBrowserWindow`, because on macOS 27 a utility window does not
+/// receive the focused values of the main window.
 internal struct ViewOptionsView: View {
 
   // MARK: - Properties
@@ -29,13 +30,13 @@ internal struct ViewOptionsView: View {
   /// The identifier of the panel's scene, used to open it.
   nonisolated internal static let windowID = "viewOptions"
 
-  @FocusedValue(\.browserWindow) private var window
+  internal var activeWindow = ActiveBrowserWindow.shared
 
   // MARK: - Body
 
   internal var body: some View {
     Group {
-      if let tab = window?.activeTab {
+      if let tab = activeWindow.window?.activeTab {
         ViewOptionsForm(tab: tab)
       } else {
         ContentUnavailableView("No Window", systemImage: "macwindow")
@@ -169,5 +170,5 @@ internal struct ViewOptionsForm: View {
 }
 
 #Preview("No Window") {
-  ViewOptionsView()
+  ViewOptionsView(activeWindow: ActiveBrowserWindow())
 }

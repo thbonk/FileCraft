@@ -41,6 +41,37 @@ internal struct FileViewContainerTests {
     #expect(Self.descendants(of: view).contains { $0 is NSTableView })
   }
 
+  /// The message for a folder that cannot be read takes the file view's whole space, so the pane keeps its layout.
+  @Test
+  internal func `A folder that cannot be read fills the file view's space`() async throws {
+    let directory = try TemporaryDirectory()
+    let locked = directory.url.appending(path: "Locked", directoryHint: .isDirectory)
+    try FileManager.default.createDirectory(at: locked, withIntermediateDirectories: false)
+    try FileManager.default.setAttributes([.posixPermissions: 0o000], ofItemAtPath: locked.path(percentEncoded: false))
+    let listing = DirectoryListing()
+    let observation = Task {
+      await listing.observe(locked, includingHiddenItems: false)
+    }
+    for _ in 0..<100 {
+      if case .failed = listing.state {
+        break
+      }
+      try await Task.sleep(for: .milliseconds(20))
+    }
+    observation.cancel()
+    try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: locked.path(percentEncoded: false))
+    guard case .failed = listing.state else {
+      Issue.record("The listing did not fail: \(listing.state)")
+      return
+    }
+    let tab = TabModel(location: .tag("Locked"), viewSettings: ViewSettings(), listing: listing)
+
+    let size = NSHostingController(rootView: FileViewContainer(tab: tab)).sizeThatFits(in: CGSize(width: 600, height: 400))
+
+    #expect(size.height == 400)
+    withExtendedLifetime(directory) {}
+  }
+
   // MARK: - Private
 
   private static func descendants(of view: NSView) -> [NSView] {

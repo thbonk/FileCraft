@@ -169,6 +169,9 @@ internal struct BrowserWindowView: View {
         await favorites.refresh()
       }
     }
+    .onDisappear {
+      ActiveBrowserWindow.shared.close(model)
+    }
     .task {
       guard persistsState else {
         return

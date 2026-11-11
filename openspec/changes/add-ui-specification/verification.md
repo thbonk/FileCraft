@@ -59,16 +59,20 @@ FileCraft's own code is at most 5 % of those samples.
 
 Known limitation: switching the view mode of a 10,000-item folder takes about 0.4 s.
 
-### Other findings during 20.2
+### Findings
 
 | # | Finding | Status |
 |---|---|---|
 | B2 | List view seemed never to take keyboard focus on click | Not a bug: caused by synthesized clicks (see note below); a real click focuses the table |
 | B3 | An empty folder replaced the file view with a message: the window content collapsed to its middle, Paste and drops had no target | Fixed: the file view stays and the message lies on top (`FileViewContainerTests`); verified live: layout, ⌘V into an empty volume |
 | B4 | "Zero kB available" on APFS disk images, whose important-usage capacity is 0 | Fixed: falls back to the plain available capacity (`VolumeMonitorTests`); verified live: "208.2 MB available" |
-| B5 | List view: right-clicking below the rows shows no background menu (empty or not); the item menu works | Open, for 20.3 |
-| B6 | Column view: the preview column of a small Markdown file shows metadata but no preview image | Open, for 20.3 |
-| B7 | Typing a name with a space for type-select opens Quick Look at the space | Open, for 20.3: compare with the spec's type-select rules |
+| B3b | A folder that cannot be read shows its message the same collapsed way as B3 did | Fixed: the message fills the file view (`FileViewContainerTests`); verified live on "/private/var/root" |
+| B5 | List and column view: right-clicking below the rows shows no background menu (empty or not); the item menu works, icon view's background menu works | Open: on macOS 27 SwiftUI `List` and `Table` never call `contextMenu(forSelectionType:)` with an empty selection for clicks outside the rows, and an outer `.contextMenu` does not receive them either; needs an owner decision (AppKit event monitor and menu, or a spec change) |
+| B6 | Column view seemed to show no preview for a small Markdown file | Not a bug: the preview is there, dark text on dark background was unreadable in the screenshot |
+| B7 | Typing a name with a space for type-select opens Quick Look at the space | Not a bug: the spec says Space opens Quick Look and makes no exception during type-select |
+| B8 | View Options panel shows "No Window" while a browser window is key and main, also after a real click | Fixed: a stock SwiftUI app showed that a `UtilityWindow` receives no `focusedSceneValue` on macOS 27; browser windows now report themselves to `ActiveBrowserWindow` (`ActiveBrowserWindowTests`); verified live: the panel shows and follows the active tab's options |
+| B9 | Path bar editing: the suggestion list opens upward over the tab bar and toolbar, is clipped by the window, and while typing covers the field's text | Fixed: the alignment guide meant to move the list below the field was ignored; the list now hangs below the field by its measured height; verified live over icon and list view |
+| B10 | Open With lists "Pages" twice (Pages and Pages Creator Studio) with no way to tell them apart | Fixed: equal names get their version, as in Finder (`OpenWithProviderTests`); verified live: "Pages (14.5)", "Pages (15.4)" |
 
 ### Note on driving the app
 
@@ -102,13 +106,13 @@ because the language changes text, not behavior; the German-specific scenarios a
 | VoiceOver reads a file | PresentationTests "The accessibility description lists kind, size and modification date"; VoiceOver itself | Test + Owner |
 | Move focus through the window | Full Keyboard Access (task 19.5) | Owner |
 | Toggle the inspector with Reduce Motion | System `.inspector` presentation (`BrowserWindowView.swift:84`), no custom animations anywhere in the app | Code + Owner |
-| Tag names for color-blind users | `TagDots` names the tags as tooltip (`.help`, `TagDots.swift:46`); the hover itself | Code + Live (pending) |
+| Tag names for color-blind users | `TagDots` names the tags as tooltip (`.help`, `TagDots.swift:46`); the hover itself; 2026-11-11: hovering the dot showed "Red" | Code + Live ✓ |
 
 ### batch-rename
 
 | Scenario | Evidence | Result |
 |---|---|---|
-| Open the sheet | ⇧⌘R with 40 items selected | Live (pending) |
+| Open the sheet | ⇧⌘R with 40 items selected; 2026-11-11: ⇧⌘R opened "Batch Rename 13 Items"; disabled without a selection | Live ✓ |
 | Prefix and sequence | RenameEngineTests "A prefix and a sequence number as suffix" | Test |
 | Regular expression with capture groups | RenameEngineTests "A regular expression with capture groups" | Test |
 | Uppercase extension only | RenameEngineTests "Uppercase applied to the extension only" | Test |
@@ -116,21 +120,21 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Number by date | BatchRenameModelTests "Sequence numbers follow the chosen order" | Test |
 | Swap names | FileCommandTests "A batch rename with exchanged names is undone in one step" | Test |
 | Failure reverts the batch | BatchRenamerTests "A failure reverts the renames already made"; FileCommandTests "A failed batch rename reports the item and renames nothing" | Test |
-| Reuse a preset | RenamePresetsStoreTests (storage); applying a preset in the sheet | Test + Live (pending) |
+| Reuse a preset | RenamePresetsStoreTests (storage); applying a preset in the sheet; 2026-11-11: saved "Lower", reopened the sheet, applying it restored the rule and preview | Test + Live ✓ |
 
 ### browser-window
 
 | Scenario | Evidence | Result |
 |---|---|---|
 | Default layout on first launch | Layout of a new window; a true first launch needs a clean account | Live (pending) + Owner |
-| Hide the status bar | View > Hide Status Bar with two panes | Live (pending) |
+| Hide the status bar | View > Hide Status Bar with two panes; 2026-11-11: View > Hide Status Bar hid it in both panes | Live ✓ |
 | Selection summary | PathModelsTests "Status summary counts the selection and adds file sizes" | Test |
 | Nothing selected | Status bar showed "10,000 items" and the free space during 20.2 | Live ✓ |
 | Default toolbar | Toolbar items of an uncustomized toolbar | Live (pending) |
 | Customization persists | Add Show Hidden Files, relaunch | Live (pending) |
 | Eject unavailable | Eject disabled on the startup volume | Live (pending) |
 | New window | BrowserWindowModelTests "New tabs open at the current location or at home, as Settings say"; LocationResolverTests "New windows fall back to home when the chosen folder is missing" | Test + Live (pending) |
-| Window menu without window-tab commands | MainMenuTests "The Window menu lists Operations once, after the tab commands" | Test + Live (pending) |
+| Window menu without window-tab commands | MainMenuTests "The Window menu lists Operations once, after the tab commands"; automatic window tabbing is off (`FileCraftApp.swift:35`); "Show Tab Bar" in the View menu is FileCraft's own pane command | Test + Code |
 | Sidebar state survives hiding | Collapse Tags, hide and show the sidebar | Live (pending) |
 | Inspector width persists | Widen the inspector, relaunch (task 3.9) | Live (pending) |
 | Restore after relaunch | BrowserWindowModelTests "Snapshot survives encoding and restoration"; tabs were restored at every relaunch during 20.2 | Test + Live (pending: two windows, dual pane) |
@@ -170,15 +174,15 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Scenario | Evidence | Result |
 |---|---|---|
 | Switch to column view | TabModelTests "Switching to column view keeps the selection" | Test |
-| Show the Permissions column | PresentationTests "Permissions read like ls"; the column header menu | Test + Live (pending) |
-| Expand inline | TabModelTests "Expanding a folder loads its children"; the → key | Test + Live (pending) |
+| Show the Permissions column | PresentationTests "Permissions read like ls"; the column header menu; 2026-11-11: header menu, column shows "rwxr-xr-x" | Test + Live ✓ |
+| Expand inline | TabModelTests "Expanding a folder loads its children"; the → key; 2026-11-11: → showed "Sub" indented, location unchanged | Test + Live ✓ |
 | Numeric-aware name sorting | ItemSortingTests "Names with numbers sort numerically" | Test |
 | Folders first | ItemSortingTests "Folders stay first when sorting by date modified" | Test |
-| Group by kind | ItemSortingTests "Grouping by kind creates alphabetical sections"; the localized headers | Test + Live (pending) |
-| Change icon size | View options slider | Live (pending) |
-| Preview column | PDF preview and metadata (see B6) | Live (pending) |
+| Group by kind | ItemSortingTests "Grouping by kind creates alphabetical sections"; the localized headers; 2026-11-11: headers Alias, Folder, Markdown, PDF document … | Test + Live ✓ |
+| Change icon size | View options slider; View Options shows "No Window"; 2026-11-11 after the B8 fix: the slider grew the icons to 168 pt and the grid reflowed | Live ✓ |
+| Preview column | PDF preview and metadata (see B6); 2026-11-11: PDF page preview, kind, size and date | Live ✓ |
 | Localized folder names | Root of the startup volume in German | Live DE (pending) |
-| Reveal hidden files | ⇧⌘. | Live (pending) |
+| Reveal hidden files | ⇧⌘.; 2026-11-11: ⇧⌘. showed ".zshrc-sample" dimmed | Live ✓ |
 | Leave before calculation ends | FolderSizeServiceTests "Cancelled calculation throws CancellationError" | Test |
 | Scroll a folder of photos | ThumbnailServiceTests "Thumbnail is created once and then served from the cache"; 980 images scrolled in icon view during 20.2 | Test + Live ✓ |
 | Selection survives an external change | SelectionAndTypingTests "Pruning drops items that disappeared"; TabModelTests "Listing changes deselect items that are gone" | Test |
@@ -189,24 +193,24 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Spring-loaded folder | Hover during a drag | Live (pending) |
 | File created by another app | DirectoryWatcherTests "New file is reported within one second"; a file created from the shell appeared at once during 20.2 | Test + Live ✓ |
 | Open a large folder | ListFileViewPerformanceTests; 20.2 | Test + Live ✓ |
-| Protected folder without access | PresentationTests "Load failures are classified"; the error view | Test + Live (pending) |
+| Protected folder without access | PresentationTests "Load failures are classified"; the error view; 2026-11-11: "No Access to This Folder" with both buttons; layout collapsed (B3b) | Test + Live ✓ |
 | Apply options as defaults | SettingsStoreTests "Use as Defaults applies to new tabs in the same view mode only" | Test |
 
 ### inspector
 
 | Scenario | Evidence | Result |
 |---|---|---|
-| Inspector follows the selection | | Live (pending) |
-| Confirmation for many items | BrowserWindowModelTests "Get Info asks for one window per selected item, or for the folder"; the alert above 10 items | Test + Live (pending) |
-| Sections for a folder | | Live (pending) |
-| Preview a video | Needs a video file | Live (pending) |
+| Inspector follows the selection | Live ✓ |
+| Confirmation for many items | BrowserWindowModelTests "Get Info asks for one window per selected item, or for the folder"; the alert above 10 items; 2026-11-11: ⌘I on 13 items asked "Open 13 info windows?" | Test + Live ✓ |
+| Sections for a folder | Live ✓ |
+| Preview a video | Needs a video file; 2026-11-11: plays with pause, time and scrubber | Live ✓ |
 | Folder item count | InspectorModelTests "A folder shows its recursive item count and size" | Test |
 | Rename from the inspector | InspectorModelTests "Renaming from the inspector can be undone" | Test |
-| Add an existing tag | Tag suggestions | Live (pending) |
+| Add an existing tag | Tag suggestions; 2026-11-11: "Re" suggested "Red", accepted, stored in the file | Live ✓ |
 | Make a script executable | InspectorModelTests "Turning on execute for the owner changes the mode and can be undone" | Test |
 | Change requires administrator rights | PrivilegedHelperTests "Only permission and Locked edits go through the helper" (mock); the real helper | Test + Owner |
 | Change the default app for a type | Change All… changes the owner's Launch Services defaults | Owner |
-| Hide a file | InspectorModelTests "A mixed toggle sets an attribute of several items as one undoable edit"; the Hidden toggle | Test + Live (pending) |
+| Hide a file | InspectorModelTests "A mixed toggle sets an attribute of several items as one undoable edit"; the Hidden toggle; 2026-11-11: Hidden on "gamma.txt" removed it from the list | Test + Live ✓ |
 | Tag several items | InspectorModelTests "A tag added to several items shows as theirs and undoes in one step" | Test |
 | Undo a tag change | InspectorModelTests "Removing a tag in the inspector can be undone" | Test |
 
@@ -234,7 +238,7 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Shortcut triggers command | MainMenuTests; ⇧⌘G opened Go to Folder during 20.2 | Test + Live ✓ |
 | German keyboard layout | MainMenuTests "Shortcuts adapt to the keyboard layout"; this Mac uses the German layout | Test |
 | Context menu on several items | | Live (pending) |
-| Paste via context menu | Right-clicking below the rows in list view shows no menu | Fail (B5) |
+| Paste via context menu | Right-clicking below the rows in list view shows no menu; icon view: background menu with Paste works; list and column view: no menu | Fail (B5) |
 | Remove a favorite | With a temporary favorite | Live (pending) |
 | Look up a shortcut | ShortcutCatalogTests "Searching for Trash finds the three trash commands" | Test + Live (pending) |
 | Open a recent folder from the Dock | DockMenuTests (2 tests) | Test + Live (pending) |
@@ -244,21 +248,21 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Scenario | Evidence | Result |
 |---|---|---|
 | Go back | NavigationHistoryTests "Going back returns to the previous location and enables Forward"; Back used during 20.2 | Test + Live ✓ |
-| History menu | NavigationHistoryTests "History menu jumps directly to an earlier location"; press and hold | Test + Live (pending) |
+| History menu | NavigationHistoryTests "History menu jumps directly to an earlier location"; press and hold; 2026-11-11: press and hold Forward listed the entry | Test + Live ✓ |
 | Return to parent | TabModelTests "Enclosing Folder shows the parent with the folder just left selected" | Test |
 | Jump to Downloads | StandardLocationTests; MainMenuTests "The Go menu has history, Recent Folders and the standard locations" | Test |
 | Complete a path | PathCompletionTests "Typing "~/Doc" completes to "~/Documents/"" | Test |
-| Path to a file | PathModelsTests "Typed paths are interpreted like Go to Folder"; the reveal | Test + Live (pending) |
-| Invalid path | | Live (pending) |
-| Jump to an ancestor | | Live (pending) |
-| Narrow window | | Live (pending) |
-| Type a path into the path bar | | Live (pending) |
+| Path to a file | PathModelsTests "Typed paths are interpreted like Go to Folder"; the reveal; 2026-11-11: opened "Sub" with "inner.txt" selected | Test + Live ✓ |
+| Invalid path | Live ✓ |
+| Jump to an ancestor | Live ✓ |
+| Narrow window | Live ✓ |
+| Type a path into the path bar | Live ✓ |
 | Copy two paths | PathFormatterTests "Copy Path puts the paths on the pasteboard" | Test |
 | Copy as shell-escaped path | PathFormatterTests "Shell escaping produces one shell word" | Test |
 | Revisit a folder | TabModelTests "Visited folders become recent folders, most recent first"; RecentsStoreTests | Test |
-| Open with another app | | Live (pending) |
+| Open with another app | Live ✓ |
 | Resolve a symbolic link | OriginalResolverTests; TabModelTests "Show Original reveals the target of a link in its folder" | Test |
-| Open a terminal here | FolderOpeningTests "Terminal applications include Terminal and skip apps that are not installed" | Test + Live (pending) |
+| Open a terminal here | FolderOpeningTests "Terminal applications include Terminal and skip apps that are not installed"; the configured terminal is the owner's iTerm2 | Test + Owner |
 | Folder dropped on the Dock icon | BrowserWindowModelTests "An open request for a folder opens it in a new tab"; `open -a FileCraft <folder>` opened a new tab during 20.2 | Test + Live ✓ |
 
 ### onboarding
@@ -365,7 +369,7 @@ because the language changes text, not behavior; the German-specific scenarios a
 | Second tab shows the tab bar | | Live (pending) |
 | Turn on dual pane for the first time | BrowserWindowModelTests "Showing dual pane for the first time opens the active location" | Test |
 | Hidden pane keeps its tabs | BrowserWindowModelTests "Hidden second pane keeps its tabs" | Test |
-| Switch with Tab | BrowserWindowModelTests "Cross-pane commands use the other pane and Tab moves focus there" | Test + Live (pending) |
+| Switch with Tab | BrowserWindowModelTests "Cross-pane commands use the other pane and Tab moves focus there"; 2026-11-11: Tab made the right pane active; the inspector showed its selection | Test + Live ✓ |
 | Copy with F5 | Same test; the F5 key | Test + Live (pending) |
 | Mirror the location | BrowserWindowModelTests "Cross-pane commands use the other pane and Tab moves focus there" (calls Show Same Folder in Other Pane) | Test |
-| New folder with F7 | | Live (pending) |
+| New folder with F7 | Live ✓ |

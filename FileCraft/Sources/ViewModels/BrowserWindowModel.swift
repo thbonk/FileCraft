@@ -44,8 +44,17 @@ internal final class BrowserWindowModel {
   internal static let closedTabLimit = 10
   /// The number of Get Info windows that open without asking first.
   internal static let infoWindowLimit = 10
-  /// The browser window that was active last, which Get Info windows show items in.
-  internal static weak var mostRecentlyActive: BrowserWindowModel?
+  /// The browser window that was active last, which Get Info windows show items in; see `ActiveBrowserWindow`.
+  internal static var mostRecentlyActive: BrowserWindowModel? {
+    get {
+      ActiveBrowserWindow.shared.window
+    }
+    set {
+      if let newValue {
+        ActiveBrowserWindow.shared.activate(newValue)
+      }
+    }
+  }
 
   internal private(set) var primaryPane: PaneModel
   internal private(set) var secondaryPane: PaneModel?

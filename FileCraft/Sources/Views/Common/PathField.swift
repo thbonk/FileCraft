@@ -48,6 +48,8 @@ internal struct PathField: View {
 
   @State private var completions: [String] = []
   @State private var highlightedIndex: Int?
+  /// The field's height, which places the floating suggestions below it.
+  @State private var fieldHeight: CGFloat = 22
 
   private static let rowHeight: CGFloat = 22
   private static let visibleRows = 8
@@ -69,14 +71,21 @@ internal struct PathField: View {
         }
       }
     case .overlay:
+      // The list hangs below the field by the field's measured height: an alignment guide that moves the list's
+      // bottom above its top is ignored here, which made the list grow upward over the field.
       field
-        .overlay(alignment: .bottomLeading) {
+        .onGeometryChange(for: CGFloat.self) { proxy in
+          proxy.size.height
+        } action: { height in
+          fieldHeight = height
+        }
+        .overlay(alignment: .topLeading) {
           if suggestions.isEmpty == false, isFocused.wrappedValue {
             suggestionList
               .frame(maxWidth: 520)
               .background(.regularMaterial, in: .rect(cornerRadius: 6))
               .shadow(radius: 6, y: 2)
-              .alignmentGuide(.bottom) { dimensions in dimensions[.top] - 3 }
+              .offset(y: fieldHeight + 3)
           }
         }
     }

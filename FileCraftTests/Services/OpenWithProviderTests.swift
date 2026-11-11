@@ -41,6 +41,28 @@ internal struct OpenWithProviderTests {
   }
 
   @Test
+  internal func `Applications with the same name are told apart by their version`() {
+    let pages = choice("/Applications/Pages.app", name: "Pages")
+    let studio = choice("/Applications/Pages Creator Studio.app", name: "Pages")
+    let textEdit = choice("/System/Applications/TextEdit.app", name: "TextEdit")
+    let versions = [pages.url: "14.4", studio.url: "15.0"]
+
+    let names = OpenWithProvider.disambiguatingNames([textEdit, pages, studio]) { versions[$0] }.map(\.name)
+
+    #expect(names == ["TextEdit", "Pages (14.4)", "Pages (15.0)"])
+  }
+
+  @Test
+  internal func `Applications with the same name and version are told apart by their file name`() {
+    let pages = choice("/Applications/Pages.app", name: "Pages")
+    let studio = choice("/Applications/Pages Creator Studio.app", name: "Pages")
+
+    let names = OpenWithProvider.disambiguatingNames([pages, studio]) { _ in "14.4" }.map(\.name)
+
+    #expect(names == ["Pages", "Pages (Pages Creator Studio)"])
+  }
+
+  @Test
   internal func `Several items offer only applications that open each of them`() throws {
     let directory = try TemporaryDirectory()
     let text = try directory.createFile("notes.txt", contents: "x")
@@ -52,5 +74,11 @@ internal struct OpenWithProviderTests {
 
     #expect(common.isSubset(of: forText))
     #expect(common.isSubset(of: forHTML))
+  }
+
+  // MARK: - Private
+
+  private func choice(_ path: String, name: String) -> ApplicationChoice {
+    ApplicationChoice(url: URL(filePath: path, directoryHint: .isDirectory), name: name, isDefault: false)
   }
 }

@@ -96,6 +96,8 @@ internal struct FileViewContainer: View {
       FolderFailureView(failure: failure) {
         Task { await tab.authenticateToView() }
       }
+      // Without this the message takes only its ideal height and the pane's bars gather around it.
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     default:
       // An empty folder keeps its file view, which takes keyboard focus and offers Paste, drops and the background
       // menu; the message lies on top without taking clicks.

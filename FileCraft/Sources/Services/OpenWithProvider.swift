@@ -62,11 +62,43 @@ nonisolated internal enum OpenWithProvider {
       let name = FileManager.default.displayName(atPath: url.path(percentEncoded: false))
       return ApplicationChoice(url: url, name: (name as NSString).deletingPathExtension, isDefault: url == defaultApplication)
     }
-    return choices.sorted { lhs, rhs in
+    let named = disambiguatingNames(choices) { url in
+      Bundle(url: url)?.infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    return named.sorted { lhs, rhs in
       if lhs.isDefault != rhs.isDefault {
         return lhs.isDefault
       }
       return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+    }
+  }
+
+  /// Tells apart applications that show the same name, as Finder does: by their version, "Pages (14.4)", or, when
+  /// the versions do not differ, by the file name of those whose file name is not the shared name.
+  ///
+  /// - Parameter version: The version of the application at a URL, if it has one.
+  internal static func disambiguatingNames(_ choices: [ApplicationChoice], version: (URL) -> String?) -> [ApplicationChoice] {
+    let sharedNames = Set(Dictionary(grouping: choices, by: \.name).filter { $0.value.count > 1 }.keys)
+    guard sharedNames.isEmpty == false else {
+      return choices
+    }
+    let versions = Dictionary(uniqueKeysWithValues: choices.filter { sharedNames.contains($0.name) }.map { ($0.url, version($0.url)) })
+    return choices.map { choice in
+      guard sharedNames.contains(choice.name) else {
+        return choice
+      }
+      let namesakes = choices.filter { $0.name == choice.name }
+      let namesakeVersions = namesakes.compactMap { versions[$0.url] ?? nil }
+      if namesakeVersions.count == namesakes.count, Set(namesakeVersions).count == namesakes.count,
+        let ownVersion = versions[choice.url] ?? nil
+      {
+        return ApplicationChoice(url: choice.url, name: "\(choice.name) (\(ownVersion))", isDefault: choice.isDefault)
+      }
+      let fileName = choice.url.deletingPathExtension().lastPathComponent
+      guard fileName != choice.name else {
+        return choice
+      }
+      return ApplicationChoice(url: choice.url, name: "\(choice.name) (\(fileName))", isDefault: choice.isDefault)
     }
   }
 
