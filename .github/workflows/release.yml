@@ -3,9 +3,9 @@
 # it as a GitHub release, optionally as a pre-release.
 #
 # The appcast lives on the branch "appcast", which holds only appcast.xml; Sparkle reads it from
-# https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml. Every release also carries the appcast as
-# of that release as an asset. Pre-releases are on Sparkle's channel "beta", which only updaters that allow that
-# channel see; final releases are on the default channel.
+# https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml; the branch's history keeps every earlier
+# appcast. Pre-releases are on Sparkle's channel "beta", which only updaters that allow that channel see; final
+# releases are on the default channel.
 #
 # The version is <yyyy.mm.mr>: the year, the two-digit month, and the month's release counter, which starts at 0 in
 # each new month. The build number is this workflow's run number plus the variable BUILD_NUMBER_OFFSET of the
@@ -282,7 +282,7 @@ jobs:
           if [ "$PRERELEASE" = true ]; then
             options+=(--prerelease)
           fi
-          gh release create "v${VERSION}" "$ARCHIVE" "$APPCAST" "${options[@]}"
+          gh release create "v${VERSION}" "$ARCHIVE" "${options[@]}"
 
       # After the release, so that the appcast never points to a download that does not exist yet. The branch holds
       # only appcast.xml; each release adds one commit on top of the previous one.
