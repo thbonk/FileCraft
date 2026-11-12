@@ -77,6 +77,14 @@ Swift sources live in `FileCraft/Sources/`, one folder per layer: `Application/`
 
 String Catalogs (`Localizable.xcstrings`, `InfoPlist.xcstrings`) live in `FileCraft/Resources/`. Write user-visible text in English in code, run the `-exportLocalizations` command above, add the German values, then run `LocalizationCoverageTests`. German strings follow the owner-approved glossary and rules in `docs/dev/LOCALIZATION.md`.
 
+## Releases
+
+`.github/workflows/release.yml` runs by hand (Actions > Release > Run workflow) and publishes version `<yyyy.mm.mr>`: year, two-digit month, and a counter that starts at 0 each month, one above the highest `rel-*` branch or `v*` tag of the month. It creates the branch `rel-<version>` from `main`, commits `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` for all targets, archives with Developer ID, notarizes and staples the app, then pushes the branch and creates the release `v<version>` with `FileCraft-<version>.zip`.
+
+- The build number is the workflow's run number plus the variable `BUILD_NUMBER_OFFSET` of the GitHub environment `release`. GitHub raises the run number on every run, also runs that fail later, and never resets it. Re-runs keep their run number, so the workflow refuses them; start a new run. Renaming `release.yml` restarts the run numbers, so raise the offset then.
+- The signing and notarization secrets live in the `release` environment; the workflow's header lists them.
+- The branch is pushed only after notarization succeeded, so a failed run leaves no branch or release behind, only a used build number.
+
 ## Spec-driven workflow (OpenSpec)
 
 Feature work is planned with OpenSpec (`openspec` CLI, schema `spec-driven`, project context and rules in `openspec/config.yaml`):
