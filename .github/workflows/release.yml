@@ -1,5 +1,11 @@
 # Releases FileCraft: creates the branch rel-<yyyy.mm.mr> from main, sets the version and the next build number,
-# builds and signs the app with Developer ID, notarizes and staples it, and publishes it as a GitHub release.
+# builds and signs the app with Developer ID, notarizes and staples it, adds it to the Sparkle appcast, and publishes
+# it as a GitHub release, optionally as a pre-release.
+#
+# The appcast lives on the branch "appcast", which holds only appcast.xml; Sparkle reads it from
+# https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml. Every release also carries the appcast as
+# of that release as an asset. Pre-releases are on Sparkle's channel "beta", which only updaters that allow that
+# channel see; final releases are on the default channel.
 #
 # The version is <yyyy.mm.mr>: the year, the two-digit month, and the month's release counter, which starts at 0 in
 # each new month. The build number is this workflow's run number plus the variable BUILD_NUMBER_OFFSET of the
@@ -13,11 +19,18 @@
 # - DEVELOPER_ID_CERTIFICATE_PASSWORD: the password of that .p12 file
 # - NOTARY_API_KEY_P8: an App Store Connect API key (.p8) for notarization, base64-encoded
 # - NOTARY_API_KEY_ID and NOTARY_API_ISSUER_ID: that key's ID and its issuer ID
+# - SPARKLE_ED_PRIVATE_KEY: Sparkle's private EdDSA key, as exported by generate_keys -x. Appcast entries are signed
+#   once the app's Info.plist has SUPublicEDKey; from then on, a release without this secret fails.
 
 name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      prerelease:
+        description: Pre-release (GitHub pre-release, Sparkle channel "beta")
+        type: boolean
+        default: false
 
 permissions:
   # Pushes the release branch and creates the tag and the release.
@@ -30,6 +43,11 @@ concurrency:
 
 env:
   TEAM_ID: GQE994U6EG
+  PRERELEASE: ${{ inputs.prerelease }}
+  # Sparkle's tools for the appcast, pinned to a release and its SHA-256 checksum.
+  SPARKLE_VERSION: 2.10.1
+  SPARKLE_SHA256: 1a856d2a9edb8e628de88121d7be04cf0e2167f8641650b78fca00b14244cf27
+  APPCAST_BRANCH: appcast
 
 jobs:
   release:
@@ -182,6 +200,77 @@ jobs:
           ditto -c -k --keepParent "$APP" "$archive"
           echo "ARCHIVE=${archive}" >> "$GITHUB_ENV"
 
+      - name: Install Sparkle's tools
+        run: |
+          curl --fail --silent --show-error --location \
+            --output "$RUNNER_TEMP/Sparkle.tar.xz" \
+            "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-${SPARKLE_VERSION}.tar.xz"
+          echo "${SPARKLE_SHA256}  $RUNNER_TEMP/Sparkle.tar.xz" | shasum -a 256 --check
+          mkdir "$RUNNER_TEMP/Sparkle"
+          tar -xJf "$RUNNER_TEMP/Sparkle.tar.xz" -C "$RUNNER_TEMP/Sparkle"
+          echo "SPARKLE_BIN=$RUNNER_TEMP/Sparkle/bin" >> "$GITHUB_ENV"
+
+      - name: Update the appcast
+        env:
+          SPARKLE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}
+        run: |
+          feed="$RUNNER_TEMP/appcast"
+          mkdir -p "$feed/archives"
+          cp "$ARCHIVE" "$feed/archives/"
+          # Start from the current appcast; generate_appcast keeps its entries and adds the new archive.
+          if git ls-remote --exit-code --heads origin "$APPCAST_BRANCH" > /dev/null; then
+            git fetch origin "+refs/heads/${APPCAST_BRANCH}:refs/remotes/origin/${APPCAST_BRANCH}"
+            git show "refs/remotes/origin/${APPCAST_BRANCH}:appcast.xml" > "$feed/appcast.xml"
+          else
+            echo "The branch ${APPCAST_BRANCH} does not exist yet; this release starts the appcast."
+          fi
+          arguments=(
+            --download-url-prefix "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/"
+            --link "https://github.com/${GITHUB_REPOSITORY}"
+            --full-release-notes-url "https://github.com/${GITHUB_REPOSITORY}/releases"
+            --maximum-deltas 0
+            -o "$feed/appcast.xml"
+          )
+          if [ "$PRERELEASE" = true ]; then
+            arguments+=(--channel beta)
+          fi
+          if [ -n "$SPARKLE_KEY" ]; then
+            echo "$SPARKLE_KEY" | "$SPARKLE_BIN/generate_appcast" --ed-key-file - "${arguments[@]}" "$feed/archives"
+          else
+            "$SPARKLE_BIN/generate_appcast" "${arguments[@]}" "$feed/archives"
+          fi
+          # generate_appcast signs only for apps that name a public key, and only warns when it cannot.
+          if /usr/libexec/PlistBuddy -c 'Print :SUPublicEDKey' "$APP/Contents/Info.plist" > /dev/null 2>&1; then
+            requires_signature=true
+          else
+            requires_signature=false
+            echo "::notice::The app has no SUPublicEDKey yet, so its appcast entry is not signed."
+          fi
+          python3 -I - "$feed/appcast.xml" "$BUILD_NUMBER" "$requires_signature" "$PRERELEASE" <<'PYTHON'
+          import sys
+          import xml.etree.ElementTree as ElementTree
+
+          path, build, requires_signature, prerelease = sys.argv[1:]
+          sparkle = "{http://www.andymatuschak.org/xml-namespaces/sparkle}"
+          for item in ElementTree.parse(path).getroot().iter("item"):
+              enclosure = item.find("enclosure")
+              version = item.findtext(sparkle + "version") or (enclosure.get(sparkle + "version") if enclosure is not None else None)
+              if version != build:
+                  continue
+              if enclosure is None:
+                  sys.exit(f"The appcast entry for build {build} has no download.")
+              if requires_signature == "true" and not enclosure.get(sparkle + "edSignature"):
+                  sys.exit(f"The appcast entry for build {build} is not signed; check SPARKLE_ED_PRIVATE_KEY.")
+              channel = item.findtext(sparkle + "channel")
+              if (channel == "beta") != (prerelease == "true"):
+                  sys.exit(f"The appcast entry for build {build} is on channel {channel!r}.")
+              print(f"Appcast entry for build {build}: {enclosure.get('url')}, channel {channel or 'default'}")
+              break
+          else:
+              sys.exit(f"The appcast has no entry for build {build}.")
+          PYTHON
+          echo "APPCAST=$feed/appcast.xml" >> "$GITHUB_ENV"
+
       - name: Push the release branch
         run: git push origin "$RELEASE_BRANCH"
 
@@ -189,10 +278,24 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "v${VERSION}" "$ARCHIVE" \
-            --target "$RELEASE_BRANCH" \
-            --title "FileCraft ${VERSION}" \
-            --generate-notes
+          options=(--target "$RELEASE_BRANCH" --title "FileCraft ${VERSION}" --generate-notes)
+          if [ "$PRERELEASE" = true ]; then
+            options+=(--prerelease)
+          fi
+          gh release create "v${VERSION}" "$ARCHIVE" "$APPCAST" "${options[@]}"
+
+      # After the release, so that the appcast never points to a download that does not exist yet. The branch holds
+      # only appcast.xml; each release adds one commit on top of the previous one.
+      - name: Publish the appcast
+        run: |
+          blob=$(git hash-object -w "$APPCAST")
+          tree=$(printf '100644 blob %s\tappcast.xml\n' "$blob" | git mktree)
+          parent=()
+          if git rev-parse --quiet --verify "refs/remotes/origin/${APPCAST_BRANCH}" > /dev/null; then
+            parent=(-p "refs/remotes/origin/${APPCAST_BRANCH}")
+          fi
+          commit=$(git commit-tree "$tree" "${parent[@]}" -m "Update the appcast for ${VERSION} (${BUILD_NUMBER})")
+          git push origin "${commit}:refs/heads/${APPCAST_BRANCH}"
 
       - name: Remove the signing keychain and key
         if: always()

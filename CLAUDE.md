@@ -79,10 +79,11 @@ String Catalogs (`Localizable.xcstrings`, `InfoPlist.xcstrings`) live in `FileCr
 
 ## Releases
 
-`.github/workflows/release.yml` runs by hand (Actions > Release > Run workflow) and publishes version `<yyyy.mm.mr>`: year, two-digit month, and a counter that starts at 0 each month, one above the highest `rel-*` branch or `v*` tag of the month. It creates the branch `rel-<version>` from `main`, commits `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` for all targets, archives with Developer ID, notarizes and staples the app, then pushes the branch and creates the release `v<version>` with `FileCraft-<version>.zip`.
+`.github/workflows/release.yml` runs by hand (Actions > Release > Run workflow) and publishes version `<yyyy.mm.mr>`: year, two-digit month, and a counter that starts at 0 each month, one above the highest `rel-*` branch or `v*` tag of the month. It creates the branch `rel-<version>` from `main`, commits `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` for all targets, archives with Developer ID, notarizes and staples the app, adds it to the Sparkle appcast, then pushes the branch and creates the release `v<version>` with `FileCraft-<version>.zip` and `appcast.xml`. The run's "Pre-release" switch makes it a GitHub pre-release on Sparkle's `beta` channel.
 
 - The build number is the workflow's run number plus the variable `BUILD_NUMBER_OFFSET` of the GitHub environment `release`. GitHub raises the run number on every run, also runs that fail later, and never resets it. Re-runs keep their run number, so the workflow refuses them; start a new run. Renaming `release.yml` restarts the run numbers, so raise the offset then.
-- The signing and notarization secrets live in the `release` environment; the workflow's header lists them.
+- The appcast lives on the branch `appcast`, which holds only `appcast.xml` and gains one commit per release; Sparkle's feed URL is `https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml`. The workflow runs Sparkle's `generate_appcast` (version and SHA-256 pinned in the workflow) on the previous appcast plus the new archive. Never edit the branch by hand.
+- The signing, notarization and Sparkle secrets live in the `release` environment; the workflow's header lists them. Appcast entries are EdDSA-signed once the app's `Info.plist` has `SUPublicEDKey` (task 17.2); from then on a release without `SPARKLE_ED_PRIVATE_KEY` fails.
 - The branch is pushed only after notarization succeeded, so a failed run leaves no branch or release behind, only a used build number.
 
 ## Spec-driven workflow (OpenSpec)
