@@ -271,7 +271,7 @@ FileCraft has no users or data yet, so no data migration is needed. Project chan
 
 ## Open Questions
 
-1. Which HTTPS URL hosts the Sparkle appcast (`SUFeedURL`), and who runs the release step that signs and publishes it? Partly answered by the owner on 2026-11-06: the appcast is hosted with GitHub Pages and the update archives as GitHub release assets; Claude creates the EdDSA key pair with `generate_keys` on the owner's Mac when task group 17 is carried out. The exact repository URL is still open. Group 17 is deferred until after groups 18 and 19.
+1. Which HTTPS URL hosts the Sparkle appcast (`SUFeedURL`), and who runs the release step that signs and publishes it? Answered by the owner on 2026-11-12, replacing the GitHub Pages answer of 2026-11-06: the appcast lives on the branch `appcast` of `thbonk/FileCraft`, so `SUFeedURL` is `https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml`. The GitHub Actions workflow Release (`.github/workflows/release.yml`) generates and signs it with `generate_appcast` and publishes the update archives as GitHub release assets; pre-releases go to Sparkle's channel `beta`. Claude creates the EdDSA key pair with `generate_keys` on the owner's Mac when task group 17 is carried out; the private key then becomes the `release` environment's secret `SPARKLE_ED_PRIVATE_KEY`. Group 17 is deferred.
 
 Resolved with the project owner on 2026-10-30:
 

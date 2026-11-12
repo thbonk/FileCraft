@@ -1,0 +1,306 @@
+# Releases FileCraft: creates the branch rel-<yyyy.mm.mr> from main, sets the version and the next build number,
+# builds and signs the app with Developer ID, notarizes and staples it, adds it to the Sparkle appcast, and publishes
+# it as a GitHub release, optionally as a pre-release.
+#
+# The appcast lives on the branch "appcast", which holds only appcast.xml; Sparkle reads it from
+# https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml. Every release also carries the appcast as
+# of that release as an asset. Pre-releases are on Sparkle's channel "beta", which only updaters that allow that
+# channel see; final releases are on the default channel.
+#
+# The version is <yyyy.mm.mr>: the year, the two-digit month, and the month's release counter, which starts at 0 in
+# each new month. The build number is this workflow's run number plus the variable BUILD_NUMBER_OFFSET of the
+# environment "release" (0 when it is not set): GitHub raises the run number with every run, also runs that fail
+# later, and never resets it. Re-runs keep their run number, so the workflow refuses them; start a new run instead.
+# Renaming this file starts a new workflow whose run numbers begin at 1 again, so raise the offset when doing that.
+#
+# The environment "release" needs these secrets:
+# - DEVELOPER_ID_CERTIFICATE_P12: the "Developer ID Application" certificate with its private key, exported as .p12
+#   and base64-encoded
+# - DEVELOPER_ID_CERTIFICATE_PASSWORD: the password of that .p12 file
+# - NOTARY_API_KEY_P8: an App Store Connect API key (.p8) for notarization, base64-encoded
+# - NOTARY_API_KEY_ID and NOTARY_API_ISSUER_ID: that key's ID and its issuer ID
+# - SPARKLE_ED_PRIVATE_KEY: Sparkle's private EdDSA key, as exported by generate_keys -x. Appcast entries are signed
+#   once the app's Info.plist has SUPublicEDKey; from then on, a release without this secret fails.
+
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: Pre-release (GitHub pre-release, Sparkle channel "beta")
+        type: boolean
+        default: false
+
+permissions:
+  # Pushes the release branch and creates the tag and the release.
+  contents: write
+
+# Releases run one after another, so that two runs never take the same version or build number.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  TEAM_ID: GQE994U6EG
+  PRERELEASE: ${{ inputs.prerelease }}
+  # Sparkle's tools for the appcast, pinned to a release and its SHA-256 checksum.
+  SPARKLE_VERSION: 2.10.1
+  SPARKLE_SHA256: 1a856d2a9edb8e628de88121d7be04cf0e2167f8641650b78fca00b14244cf27
+  APPCAST_BRANCH: appcast
+
+jobs:
+  release:
+    name: Build, notarize and publish
+    runs-on: xcode-27
+    environment: release
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Show the toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+
+      - name: Choose the version
+        run: |
+          year=$(date -u +%Y)
+          month=$(date -u +%m)
+          # The highest release counter of this month among the release branches and tags.
+          last=$(git ls-remote --heads --tags origin \
+            | sed -n -E "s#^.*refs/(heads/rel-|tags/v)${year}\.${month}\.([0-9]+)\$#\2#p" \
+            | sort -n | tail -1)
+          counter=$(( ${last:--1} + 1 ))
+          version="${year}.${month}.${counter}"
+          echo "Version: ${version}"
+          echo "VERSION=${version}" >> "$GITHUB_ENV"
+          echo "RELEASE_BRANCH=rel-${version}" >> "$GITHUB_ENV"
+
+      - name: Choose the build number
+        env:
+          OFFSET: ${{ vars.BUILD_NUMBER_OFFSET }}
+        run: |
+          # A re-run keeps its run number, so it would build a second app with the same build number.
+          if [ "$GITHUB_RUN_ATTEMPT" != 1 ]; then
+            echo "::error::Re-runs would reuse build number $(( ${OFFSET:-0} + GITHUB_RUN_NUMBER )); start a new run of the Release workflow instead."
+            exit 1
+          fi
+          offset=${OFFSET:-0}
+          if ! [[ "$offset" =~ ^[0-9]+$ ]]; then
+            echo "::error::BUILD_NUMBER_OFFSET is not a number: ${offset}"
+            exit 1
+          fi
+          build=$(( offset + GITHUB_RUN_NUMBER ))
+          echo "Build number: ${build} (offset ${offset} + run ${GITHUB_RUN_NUMBER})"
+          echo "BUILD_NUMBER=${build}" >> "$GITHUB_ENV"
+
+      - name: Create the release branch and set the version
+        run: |
+          git switch -c "$RELEASE_BRANCH"
+          sed -i '' -E \
+            -e "s/(MARKETING_VERSION = )[^;]*;/\1${VERSION};/" \
+            -e "s/(CURRENT_PROJECT_VERSION = )[^;]*;/\1${BUILD_NUMBER};/" \
+            FileCraft.xcodeproj/project.pbxproj
+          settings=$(xcodebuild -project FileCraft.xcodeproj -scheme FileCraft -configuration Release -showBuildSettings 2>/dev/null)
+          grep -q "^ *MARKETING_VERSION = ${VERSION}\$" <<< "$settings"
+          grep -q "^ *CURRENT_PROJECT_VERSION = ${BUILD_NUMBER}\$" <<< "$settings"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --all --message "Set the version to ${VERSION} (${BUILD_NUMBER})"
+
+      - name: Install the signing certificate
+        env:
+          CERTIFICATE: ${{ secrets.DEVELOPER_ID_CERTIFICATE_P12 }}
+          CERTIFICATE_PASSWORD: ${{ secrets.DEVELOPER_ID_CERTIFICATE_PASSWORD }}
+        run: |
+          keychain="$RUNNER_TEMP/signing.keychain-db"
+          keychain_password=$(openssl rand -base64 24)
+          echo "$CERTIFICATE" | base64 --decode > "$RUNNER_TEMP/certificate.p12"
+          security create-keychain -p "$keychain_password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$keychain_password" "$keychain"
+          security import "$RUNNER_TEMP/certificate.p12" -k "$keychain" -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$keychain_password" "$keychain" > /dev/null
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/certificate.p12"
+          security find-identity -v -p codesigning "$keychain" | grep -q "Developer ID Application"
+          echo "KEYCHAIN=${keychain}" >> "$GITHUB_ENV"
+
+      - name: Build and sign
+        run: |
+          xcodebuild archive \
+            -project FileCraft.xcodeproj \
+            -scheme FileCraft \
+            -configuration Release \
+            -destination 'generic/platform=macOS' \
+            -archivePath "$RUNNER_TEMP/FileCraft.xcarchive" \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Developer ID Application" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            PROVISIONING_PROFILE_SPECIFIER= \
+            OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN" \
+            -quiet
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>developer-id</string>
+            <key>signingStyle</key>
+            <string>manual</string>
+            <key>signingCertificate</key>
+            <string>Developer ID Application</string>
+            <key>teamID</key>
+            <string>${TEAM_ID}</string>
+          </dict>
+          </plist>
+          PLIST
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/FileCraft.xcarchive" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+          app="$RUNNER_TEMP/export/FileCraft.app"
+          codesign --verify --deep --strict --verbose=2 "$app"
+          echo "APP=${app}" >> "$GITHUB_ENV"
+
+      - name: Notarize and staple
+        env:
+          API_KEY: ${{ secrets.NOTARY_API_KEY_P8 }}
+          API_KEY_ID: ${{ secrets.NOTARY_API_KEY_ID }}
+          API_ISSUER_ID: ${{ secrets.NOTARY_API_ISSUER_ID }}
+        run: |
+          key="$RUNNER_TEMP/AuthKey.p8"
+          echo "$API_KEY" | base64 --decode > "$key"
+          credentials=(--key "$key" --key-id "$API_KEY_ID" --issuer "$API_ISSUER_ID")
+          ditto -c -k --keepParent "$APP" "$RUNNER_TEMP/FileCraft-notarization.zip"
+          xcrun notarytool submit "$RUNNER_TEMP/FileCraft-notarization.zip" "${credentials[@]}" \
+            --wait --timeout 1h --output-format json > "$RUNNER_TEMP/notarization.json" || true
+          cat "$RUNNER_TEMP/notarization.json"
+          status=$(jq -r '.status // empty' "$RUNNER_TEMP/notarization.json")
+          submission=$(jq -r '.id // empty' "$RUNNER_TEMP/notarization.json")
+          if [ "$status" != "Accepted" ]; then
+            [ -n "$submission" ] && xcrun notarytool log "$submission" "${credentials[@]}"
+            echo "::error::Notarization ended with status '${status}'"
+            exit 1
+          fi
+          xcrun stapler staple "$APP"
+          xcrun stapler validate "$APP"
+          spctl --assess --type execute --verbose=2 "$APP"
+
+      - name: Package
+        run: |
+          archive="$RUNNER_TEMP/FileCraft-${VERSION}.zip"
+          ditto -c -k --keepParent "$APP" "$archive"
+          echo "ARCHIVE=${archive}" >> "$GITHUB_ENV"
+
+      - name: Install Sparkle's tools
+        run: |
+          curl --fail --silent --show-error --location \
+            --output "$RUNNER_TEMP/Sparkle.tar.xz" \
+            "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-${SPARKLE_VERSION}.tar.xz"
+          echo "${SPARKLE_SHA256}  $RUNNER_TEMP/Sparkle.tar.xz" | shasum -a 256 --check
+          mkdir "$RUNNER_TEMP/Sparkle"
+          tar -xJf "$RUNNER_TEMP/Sparkle.tar.xz" -C "$RUNNER_TEMP/Sparkle"
+          echo "SPARKLE_BIN=$RUNNER_TEMP/Sparkle/bin" >> "$GITHUB_ENV"
+
+      - name: Update the appcast
+        env:
+          SPARKLE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}
+        run: |
+          feed="$RUNNER_TEMP/appcast"
+          mkdir -p "$feed/archives"
+          cp "$ARCHIVE" "$feed/archives/"
+          # Start from the current appcast; generate_appcast keeps its entries and adds the new archive.
+          if git ls-remote --exit-code --heads origin "$APPCAST_BRANCH" > /dev/null; then
+            git fetch origin "+refs/heads/${APPCAST_BRANCH}:refs/remotes/origin/${APPCAST_BRANCH}"
+            git show "refs/remotes/origin/${APPCAST_BRANCH}:appcast.xml" > "$feed/appcast.xml"
+          else
+            echo "The branch ${APPCAST_BRANCH} does not exist yet; this release starts the appcast."
+          fi
+          arguments=(
+            --download-url-prefix "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/"
+            --link "https://github.com/${GITHUB_REPOSITORY}"
+            --full-release-notes-url "https://github.com/${GITHUB_REPOSITORY}/releases"
+            --maximum-deltas 0
+            -o "$feed/appcast.xml"
+          )
+          if [ "$PRERELEASE" = true ]; then
+            arguments+=(--channel beta)
+          fi
+          if [ -n "$SPARKLE_KEY" ]; then
+            echo "$SPARKLE_KEY" | "$SPARKLE_BIN/generate_appcast" --ed-key-file - "${arguments[@]}" "$feed/archives"
+          else
+            "$SPARKLE_BIN/generate_appcast" "${arguments[@]}" "$feed/archives"
+          fi
+          # generate_appcast signs only for apps that name a public key, and only warns when it cannot.
+          if /usr/libexec/PlistBuddy -c 'Print :SUPublicEDKey' "$APP/Contents/Info.plist" > /dev/null 2>&1; then
+            requires_signature=true
+          else
+            requires_signature=false
+            echo "::notice::The app has no SUPublicEDKey yet, so its appcast entry is not signed."
+          fi
+          python3 -I - "$feed/appcast.xml" "$BUILD_NUMBER" "$requires_signature" "$PRERELEASE" <<'PYTHON'
+          import sys
+          import xml.etree.ElementTree as ElementTree
+
+          path, build, requires_signature, prerelease = sys.argv[1:]
+          sparkle = "{http://www.andymatuschak.org/xml-namespaces/sparkle}"
+          for item in ElementTree.parse(path).getroot().iter("item"):
+              enclosure = item.find("enclosure")
+              version = item.findtext(sparkle + "version") or (enclosure.get(sparkle + "version") if enclosure is not None else None)
+              if version != build:
+                  continue
+              if enclosure is None:
+                  sys.exit(f"The appcast entry for build {build} has no download.")
+              if requires_signature == "true" and not enclosure.get(sparkle + "edSignature"):
+                  sys.exit(f"The appcast entry for build {build} is not signed; check SPARKLE_ED_PRIVATE_KEY.")
+              channel = item.findtext(sparkle + "channel")
+              if (channel == "beta") != (prerelease == "true"):
+                  sys.exit(f"The appcast entry for build {build} is on channel {channel!r}.")
+              print(f"Appcast entry for build {build}: {enclosure.get('url')}, channel {channel or 'default'}")
+              break
+          else:
+              sys.exit(f"The appcast has no entry for build {build}.")
+          PYTHON
+          echo "APPCAST=$feed/appcast.xml" >> "$GITHUB_ENV"
+
+      - name: Push the release branch
+        run: git push origin "$RELEASE_BRANCH"
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          options=(--target "$RELEASE_BRANCH" --title "FileCraft ${VERSION}" --generate-notes)
+          if [ "$PRERELEASE" = true ]; then
+            options+=(--prerelease)
+          fi
+          gh release create "v${VERSION}" "$ARCHIVE" "$APPCAST" "${options[@]}"
+
+      # After the release, so that the appcast never points to a download that does not exist yet. The branch holds
+      # only appcast.xml; each release adds one commit on top of the previous one.
+      - name: Publish the appcast
+        run: |
+          blob=$(git hash-object -w "$APPCAST")
+          tree=$(printf '100644 blob %s\tappcast.xml\n' "$blob" | git mktree)
+          parent=()
+          if git rev-parse --quiet --verify "refs/remotes/origin/${APPCAST_BRANCH}" > /dev/null; then
+            parent=(-p "refs/remotes/origin/${APPCAST_BRANCH}")
+          fi
+          commit=$(git commit-tree "$tree" "${parent[@]}" -m "Update the appcast for ${VERSION} (${BUILD_NUMBER})")
+          git push origin "${commit}:refs/heads/${APPCAST_BRANCH}"
+
+      - name: Remove the signing keychain and key
+        if: always()
+        run: |
+          if [ -n "${KEYCHAIN:-}" ]; then
+            security delete-keychain "$KEYCHAIN" || true
+          fi
+          rm -f "$RUNNER_TEMP/AuthKey.p8" "$RUNNER_TEMP/certificate.p12"
