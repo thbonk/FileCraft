@@ -178,9 +178,9 @@
 
 ## 17. Software updates (Sparkle)
 
-- [ ] 17.1 Add Sparkle 2 through Swift Package Manager with a pinned version and record the approved exception in `docs/dev/DEVELOPMENT_GUIDELINES.md`
-- [ ] 17.2 Create the EdDSA key pair with Sparkle's `generate_keys`, keep the private key in the keychain, and set `SUPublicEDKey` and the HTTPS `SUFeedURL` (design open question 1)
-- [ ] 17.3 Implement the `@Observable` `UpdaterModel` around `SPUStandardUpdaterController` with the Check for Updates… command and the two General settings toggles, and document the update and release workflow in `CLAUDE.md`
+- [x] 17.1 Add Sparkle 2 through Swift Package Manager with a pinned version and record the approved exception in `docs/dev/DEVELOPMENT_GUIDELINES.md`
+- [x] 17.2 Create the EdDSA key pair with Sparkle's `generate_keys`, keep the private key in the keychain, and set `SUPublicEDKey` and the HTTPS `SUFeedURL` (design open question 1)
+- [x] 17.3 Implement the `@Observable` `UpdaterModel` around `SPUStandardUpdaterController` with the Check for Updates… command and the General settings toggles for checking, installing and including pre-releases, and document the update and release workflow in `CLAUDE.md`
 - [ ] 17.4 Verify that installing an update while operations run shows the quit confirmation
 - [ ] 17.5 Test the update flow with a local signed test appcast: an older build updates to the current one, and a tampered archive is rejected
 

@@ -39,6 +39,8 @@ import SwiftUI
     // Started before the first window, so that its sidebar appears with volumes, tags and favorites.
     SidebarSources.shared.start()
     OperationQueueModel.shared.start()
+    // Starts Sparkle, which checks for updates once a day while automatic checks are on.
+    _ = UpdaterModel.shared
     // Test runs launch FileCraft as their host and must not change the user's file viewer or quit Finder; their
     // settings come from the test host's own defaults suite, not from the user's.
     if AppEnvironment.isTestHost == false {
@@ -80,6 +82,7 @@ import SwiftUI
     .defaultLaunchBehavior(AppEnvironment.isTestHost ? .suppressed : .automatic)
     .handlesExternalEvents(matching: ["*"])
     .commands {
+      UpdateCommands(updater: .shared)
       TabCommands()
       BrowserCommands(favorites: .shared)
       GoCommands(recents: .shared)

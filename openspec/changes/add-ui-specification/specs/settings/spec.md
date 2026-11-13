@@ -8,14 +8,14 @@ FileCraft > Settings… (⌘,) SHALL open a single settings window with the pane
 - **THEN** all open panes show file extensions without a relaunch
 
 ### Requirement: General settings
-The General pane SHALL offer: location for new windows (Home, Desktop, Documents, last location or a chosen folder; default Home), where folders open on double-click (same tab, new tab or new window; default same tab), restoring windows on relaunch (default on), checking for updates automatically (default on), installing updates automatically (default off), and showing the welcome window again.
+The General pane SHALL offer: location for new windows (Home, Desktop, Documents, last location or a chosen folder; default Home), where folders open on double-click (same tab, new tab or new window; default same tab), restoring windows on relaunch (default on), checking for updates automatically (default on), installing updates automatically (default off), including pre-releases in updates (default off), and showing the welcome window again.
 
 #### Scenario: New windows open in Documents
 - **WHEN** the user sets new windows to open in Documents and presses ⌘N
 - **THEN** the new window shows the Documents folder
 
 ### Requirement: Software updates
-FileCraft SHALL update itself through the Sparkle framework from an appcast served over HTTPS, and SHALL install only updates whose EdDSA signature matches the public key embedded in the app. FileCraft > Check for Updates… SHALL check immediately; with automatic checks on, FileCraft SHALL check at most once a day. When an update is available, FileCraft SHALL show its version and release notes and offer Install Update, Skip This Version and Remind Me Later. The update windows SHALL appear in English or German like the rest of FileCraft.
+FileCraft SHALL update itself through the Sparkle framework from an appcast served over HTTPS, and SHALL install only updates whose EdDSA signature matches the public key embedded in the app. FileCraft > Check for Updates… SHALL check immediately; with automatic checks on, FileCraft SHALL check at most once a day. When an update is available, FileCraft SHALL show its version and release notes and offer Install Update, Skip This Version and Remind Me Later. FileCraft SHALL offer pre-releases, which the appcast lists on the channel `beta`, only while including pre-releases is on; final releases are offered either way. The update windows SHALL appear in English or German like the rest of FileCraft.
 
 #### Scenario: Manual check finds an update
 - **WHEN** the appcast lists a newer version and the user chooses FileCraft > Check for Updates…
@@ -28,6 +28,10 @@ FileCraft SHALL update itself through the Sparkle framework from an appcast serv
 #### Scenario: Automatic installation off
 - **WHEN** automatic checks are on, automatic installation is off and an update is found
 - **THEN** FileCraft asks the user before installing the update
+
+#### Scenario: Pre-releases only on request
+- **WHEN** the appcast lists a pre-release newer than the installed version and including pre-releases is off
+- **THEN** FileCraft does not offer the pre-release, and offers it once the user turns including pre-releases on
 
 #### Scenario: Update while operations run
 - **WHEN** the user chooses Install Update while a copy is running

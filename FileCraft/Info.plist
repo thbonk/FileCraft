@@ -42,5 +42,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>vp5wdxCEw8m4c5KcjrRIr9R21YqdISp1Ga1pCqgI7u4=</string>
 </dict>
 </plist>
