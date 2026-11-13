@@ -22,10 +22,11 @@ import SwiftUI
 
 // MARK: - General
 
-/// The General pane: where new windows open, where folders open and window restoration.
-///
-/// The update settings join this pane with Sparkle (task group 17).
+/// The General pane: where new windows open, where folders open, window restoration and software updates.
 internal struct GeneralSettingsPane: View {
+
+  /// The update settings, which Sparkle keeps.
+  @Bindable internal var updates: UpdaterModel = .shared
 
   @AppStorage(SettingsKeys.newWindowLocation.name) private var newWindowLocation = SettingsKeys.newWindowLocation.defaultValue
   @AppStorage(SettingsKeys.newWindowFolderPath.name) private var newWindowFolderPath = SettingsKeys.newWindowFolderPath.defaultValue
@@ -54,6 +55,12 @@ internal struct GeneralSettingsPane: View {
       }
       Section {
         Toggle("Restore windows when FileCraft opens", isOn: $restoresWindows)
+      }
+      Section {
+        Toggle("Check for updates automatically", isOn: $updates.checksAutomatically)
+        Toggle("Install updates automatically", isOn: $updates.installsAutomatically)
+          .disabled(updates.checksAutomatically == false)
+        Toggle("Include pre-releases", isOn: $updates.includesPreReleases)
       }
       Section {
         LabeledContent("Welcome window:") {
@@ -190,7 +197,7 @@ internal struct TabsAndPanesSettingsPane: View {
 }
 
 #Preview("General") {
-  GeneralSettingsPane()
+  GeneralSettingsPane(updates: .preview())
     .frame(width: 600)
 }
 

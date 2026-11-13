@@ -41,6 +41,17 @@ internal struct MainMenuTests {
   }
 
   @Test
+  internal func `Check for Updates follows About in the application menu`() throws {
+    let applicationMenu = try #require(NSApp.mainMenu?.items.first?.submenu)
+    let items = applicationMenu.items
+    let titles = items.map(\.title)
+
+    #expect(items.count > 1, "\(titles)")
+    #expect(items.first?.action.map(NSStringFromSelector)?.contains("About") == true, "\(titles)")
+    #expect(items.count > 1 && items[1].title == String(localized: "Check for Updates…"), "\(titles)")
+  }
+
+  @Test
   internal func `The Go menu has history, Recent Folders and the standard locations`() throws {
     let items = Self.items(in: try #require(NSApp.mainMenu))
     func title(of key: String, _ modifiers: NSEvent.ModifierFlags) -> String? {

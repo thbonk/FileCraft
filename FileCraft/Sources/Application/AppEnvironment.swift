@@ -32,6 +32,15 @@ nonisolated internal enum AppEnvironment {
     #endif
   }()
 
+  /// Whether this is a Debug build, which checks for updates only when asked.
+  internal static let isDebugBuild: Bool = {
+    #if DEBUG
+      true
+    #else
+      false
+    #endif
+  }()
+
   /// The name of the test host's defaults suite.
   internal static let testHostDefaultsSuiteName = "de.meandmymac.FileCraft.TestHost"
 

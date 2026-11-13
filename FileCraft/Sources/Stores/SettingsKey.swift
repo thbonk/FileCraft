@@ -121,7 +121,8 @@ nonisolated internal struct AnySettingsKey: Sendable {
 
 /// All persisted preferences with the defaults defined by the `settings` capability.
 ///
-/// Sparkle stores the two update preferences of the General pane under its own keys.
+/// Sparkle reads and writes its two update preferences under its own keys; they are listed here so that Restore
+/// Defaults and Reset All Settings cover them too.
 nonisolated internal enum SettingsKeys {
 
   // MARK: - General
@@ -133,6 +134,12 @@ nonisolated internal enum SettingsKeys {
   internal static let hasCompletedWelcome = SettingsKey("general.hasCompletedWelcome", default: false, pane: .general, isState: true)
   /// The folder shown last, used when new windows open at the last location.
   internal static let lastFolderPath = SettingsKey("general.lastFolderPath", default: "", pane: .general, isState: true)
+  /// Sparkle's key for checking for updates automatically; the app's Info.plist sets the same default.
+  internal static let checksForUpdates = SettingsKey("SUEnableAutomaticChecks", default: true, pane: .general)
+  /// Sparkle's key for installing updates automatically.
+  internal static let installsUpdates = SettingsKey("SUAutomaticallyUpdate", default: false, pane: .general)
+  /// Whether updates include pre-releases, which the appcast lists on Sparkle's channel "beta".
+  internal static let includesPreReleases = SettingsKey("general.includesPreReleases", default: false, pane: .general)
 
   // MARK: - Browser
 
@@ -202,6 +209,9 @@ nonisolated internal enum SettingsKeys {
     AnySettingsKey(restoresWindows),
     AnySettingsKey(hasCompletedWelcome),
     AnySettingsKey(lastFolderPath),
+    AnySettingsKey(checksForUpdates),
+    AnySettingsKey(installsUpdates),
+    AnySettingsKey(includesPreReleases),
     AnySettingsKey(defaultViewMode),
     AnySettingsKey(showsHiddenFiles),
     AnySettingsKey(alwaysShowsFileExtensions),

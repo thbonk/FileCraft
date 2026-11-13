@@ -4,6 +4,7 @@
 - **Primary Tech Stack:** Swift 6, SwiftUI, Swift Testing
 - **Architecture:** MVVM
 - **Dependency Manager:** Swift Package Manager (SPM) - No Third-Party-Dependencies without acknowledgement!
+- **Approved exception:** Sparkle 2 for software updates (design decision D16 of `add-ui-specification`), added to the app target only and pinned to an exact version. Review Sparkle's release notes before raising the version, and raise the pin in `release.yml` to the same version.
 
 ## File Header
 All source files shall have the following file header.

@@ -35,3 +35,23 @@ extension BrowserWindowModel {
     BrowserWindowModel(primaryPane: PaneModel(tab: .preview(in: language)))
   }
 }
+
+extension UpdaterModel {
+  /// A model with a stand-in updater that never checks for updates, keeping its settings in a preview suite.
+  internal static func preview() -> UpdaterModel {
+    UpdaterModel(
+      updater: PreviewUpdater(),
+      settings: SettingsStore(defaults: UserDefaults(suiteName: "FileCraftPreview") ?? .standard),
+      isBusy: { false },
+      confirmQuit: { _ in })
+  }
+}
+
+/// Stands in for Sparkle's updater in previews.
+private final class PreviewUpdater: SoftwareUpdater {
+  var canCheckForUpdates = true
+  var automaticallyChecksForUpdates = true
+  var automaticallyDownloadsUpdates = false
+
+  func checkForUpdates() {}
+}

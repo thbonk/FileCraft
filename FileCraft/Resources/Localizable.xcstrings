@@ -1548,6 +1548,28 @@
         }
       }
     },
+    "Check for updates automatically" : {
+      "comment" : "General settings: lets Sparkle check for updates once a day.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch nach Updates suchen"
+          }
+        }
+      }
+    },
+    "Check for Updates…" : {
+      "comment" : "FileCraft menu: checks the appcast for a newer version now.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach Updates suchen…"
+          }
+        }
+      }
+    },
     "Choose…" : {
       "comment" : "Destination sheet: chooses any folder.",
       "localizations" : {
@@ -2875,24 +2897,6 @@
     "File operation finished with %lld errors." : {
       "comment" : "VoiceOver announcement when a file operation finishes with failed items; the number counts them.",
       "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "File operation finished with %lld error."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "File operation finished with %lld errors."
-                }
-              }
-            }
-          }
-        },
         "de" : {
           "variations" : {
             "plural" : {
@@ -2906,6 +2910,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "Dateivorgang mit %lld Fehlern beendet."
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "File operation finished with %lld error."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "File operation finished with %lld errors."
                 }
               }
             }
@@ -3699,6 +3721,17 @@
         }
       }
     },
+    "Include pre-releases" : {
+      "comment" : "General settings: also offers pre-releases from the appcast's beta channel.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorabversionen einbeziehen"
+          }
+        }
+      }
+    },
     "Info" : {
       "comment" : "Title of a Get Info window.",
       "localizations" : {
@@ -3749,6 +3782,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hilfsprogramm installieren"
+          }
+        }
+      }
+    },
+    "Install updates automatically" : {
+      "comment" : "General settings: downloads and installs found updates without asking.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updates automatisch installieren"
           }
         }
       }
@@ -4189,6 +4233,7 @@
     },
     "modified %@" : {
       "comment" : "Accessibility value of a file item; %@ is the date it was last changed, for example \"modified October 30, 2026\".",
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4202,8 +4247,7 @@
             "value" : "modified %@"
           }
         }
-      },
-      "extractionState" : "manual"
+      }
     },
     "Modified %@" : {
       "comment" : "Conflict dialog: modification date of an item.",
