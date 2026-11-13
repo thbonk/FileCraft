@@ -31,6 +31,11 @@ import SwiftUI
   // MARK: - Initialization
 
   init() {
+    // A FileCraft that started earlier keeps running; this process then only passes its requests on.
+    InstanceHandover.beginIfNeeded()
+    guard InstanceHandover.isActive == false else {
+      return
+    }
     // Tabs live inside each pane, so system window tabs would compete with them.
     NSWindow.allowsAutomaticWindowTabbing = false
     SettingsStore().registerDefaults()
@@ -79,7 +84,7 @@ import SwiftUI
     .defaultAppStorage(AppEnvironment.userDefaults)
     // AppKit saves a browser window's toolbar, split view and frame into the user's real defaults, so the test
     // host launches without one; tests create the models and views they need.
-    .defaultLaunchBehavior(AppEnvironment.isTestHost ? .suppressed : .automatic)
+    .defaultLaunchBehavior(AppEnvironment.isTestHost || InstanceHandover.isActive ? .suppressed : .automatic)
     .handlesExternalEvents(matching: ["*"])
     .commands {
       UpdateCommands(updater: .shared)

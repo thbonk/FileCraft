@@ -35,6 +35,17 @@ internal final class AppDelegate: NSObject, NSApplicationDelegate {
   /// The recent folders, most recent first; tests replace it.
   internal var recentFolders: () -> [FileReference] = { RecentsStore.shared.folders }
 
+  // MARK: - Launching
+
+  /// A process that hands over to an earlier FileCraft receives the requests that launched it.
+  internal func applicationWillFinishLaunching(_ notification: Notification) {
+    InstanceHandover.receiveRequests()
+  }
+
+  internal func applicationDidFinishLaunching(_ notification: Notification) {
+    InstanceHandover.finish()
+  }
+
   // MARK: - Dock Menu
 
   /// New Window and the most recent folders.
@@ -97,6 +108,10 @@ internal final class AppDelegate: NSObject, NSApplicationDelegate {
 
   /// An authorization for the privileged helper never outlives FileCraft.
   internal func applicationWillTerminate(_ notification: Notification) {
+    // A process that handed over never started anything; Finder belongs to the earlier FileCraft.
+    guard InstanceHandover.isActive == false else {
+      return
+    }
     HelperAuthorization.shared.reset()
     FinderReplacement().applyAtQuit(quitsFinder: SettingsStore().value(for: SettingsKeys.quitsFinderOnLaunch))
   }
