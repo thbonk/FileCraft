@@ -255,10 +255,20 @@ nonisolated private final class OperationRun {
     }
   }
 
-  /// Copies or moves `source` to `target`, which does not exist.
+  /// Copies or moves `source` to `target`, which does not exist. A moved or copied application may then run in place,
+  /// as after a move in Finder, instead of from a temporary copy (App Translocation).
   ///
   /// - Returns: false when the item was skipped after a failure.
   private func transfer(_ source: URL, to target: URL) throws -> Bool {
+    let isTransferred = try transferItem(source, to: target)
+    if isTransferred, Quarantine.isApplicationBundle(target) {
+      // An application the helper placed belongs to root, so this may fail; the application is in place either way.
+      _ = try? Quarantine.allowRunningInPlace(at: target)
+    }
+    return isTransferred
+  }
+
+  private func transferItem(_ source: URL, to target: URL) throws -> Bool {
     switch request.kind {
     case .delete, .compress, .expand:
       // These go through `deleteTree(_:)`, `compressAll(totals:)` and `expandArchive(_:)` instead.
