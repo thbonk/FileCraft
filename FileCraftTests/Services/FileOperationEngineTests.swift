@@ -297,6 +297,62 @@ internal struct FileOperationEngineTests {
     #expect(FileVerifier.contentsMatch(first.path(percentEncoded: false), third.path(percentEncoded: false)) == false)
   }
 
+  // MARK: - Downloaded Applications
+
+  /// Finder records in a downloaded app's quarantine that it may run in place when the user moves it, so that macOS
+  /// stops running it from a temporary copy (App Translocation); FileCraft does the same.
+  @Test(arguments: [FileOperationKind.move, .copy])
+  internal func `Moving or copying a downloaded app lets it run in place`(kind: FileOperationKind) async throws {
+    let directory = try TemporaryDirectory()
+    _ = try directory.createFolder("Downloads/Tool.app/Contents")
+    let app = directory.url.appending(path: "Downloads/Tool.app")
+    try QuarantineTests.setQuarantine("0083;6533c2a1;Safari;6E4C2B1A", on: app)
+    let applications = try directory.createFolder("Applications")
+
+    _ = try await run(FileOperationRequest(kind: kind, sources: [app], destination: applications))
+
+    #expect(QuarantineTests.quarantine(of: applications.appending(path: "Tool.app")) == "0183;6533c2a1;Safari;6E4C2B1A")
+  }
+
+  /// Finder lifts translocation only for an app moved on its own. Moved together with other items, the app might
+  /// otherwise run in place next to files that came with it, which translocation keeps it from loading.
+  @Test
+  internal func `An app moved together with other items stays translocated`() async throws {
+    let directory = try TemporaryDirectory()
+    _ = try directory.createFolder("Downloads/Tool.app/Contents")
+    let app = directory.url.appending(path: "Downloads/Tool.app")
+    let plugIn = try directory.createFile("Downloads/PlugIn.dylib")
+    try QuarantineTests.setQuarantine("0083;6533c2a1;Safari;6E4C2B1A", on: app)
+    let applications = try directory.createFolder("Applications")
+
+    _ = try await run(FileOperationRequest(kind: .move, sources: [app, plugIn], destination: applications))
+
+    #expect(QuarantineTests.quarantine(of: applications.appending(path: "Tool.app")) == "0083;6533c2a1;Safari;6E4C2B1A")
+  }
+
+  @Test
+  internal func `Moving a folder that is not an app keeps its quarantine`() async throws {
+    let directory = try TemporaryDirectory()
+    let folder = try directory.createFolder("Downloads/Photos")
+    try QuarantineTests.setQuarantine("0083;6533c2a1;Safari;6E4C2B1A", on: folder)
+    let target = try directory.createFolder("Pictures")
+
+    _ = try await run(FileOperationRequest(kind: .move, sources: [folder], destination: target))
+
+    #expect(QuarantineTests.quarantine(of: target.appending(path: "Photos")) == "0083;6533c2a1;Safari;6E4C2B1A")
+  }
+
+  @Test
+  internal func `Moving an app without quarantine gives it none`() async throws {
+    let directory = try TemporaryDirectory()
+    _ = try directory.createFolder("Builds/Tool.app/Contents")
+    let target = try directory.createFolder("Applications")
+
+    _ = try await run(FileOperationRequest(kind: .move, sources: [directory.url.appending(path: "Builds/Tool.app")], destination: target))
+
+    #expect(QuarantineTests.quarantine(of: target.appending(path: "Tool.app")) == nil)
+  }
+
   // MARK: - Helpers
 
   private func run(_ request: FileOperationRequest) async throws -> FileOperationProgress {

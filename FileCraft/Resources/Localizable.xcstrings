@@ -3020,6 +3020,28 @@
         }
       }
     },
+    "FileCraft Can’t Update Itself" : {
+      "comment" : "Translocation alert title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft kann sich nicht aktualisieren"
+          }
+        }
+      }
+    },
+    "FileCraft Couldn’t Be Fixed" : {
+      "comment" : "Translocation alert after the repair failed; the message is the system's error.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FileCraft konnte nicht repariert werden"
+          }
+        }
+      }
+    },
     "FileCraft is not authorized to make this change." : {
       "comment" : "Privileged helper refused a request without a valid authorization.",
       "localizations" : {
@@ -3188,6 +3210,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erstes Vorkommen"
+          }
+        }
+      }
+    },
+    "Fix and Relaunch" : {
+      "comment" : "Translocation alert: lets FileCraft run in place and relaunches it.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beheben und neu starten"
           }
         }
       }
@@ -4135,6 +4168,28 @@
         }
       }
     },
+    "macOS runs FileCraft from a temporary copy, because FileCraft was moved without Finder after it was downloaded. FileCraft can fix this and relaunch from “%@”." : {
+      "comment" : "Translocation alert; the value is the path of FileCraft's own location.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS führt FileCraft aus einer temporären Kopie aus, weil FileCraft nach dem Laden nicht mit dem Finder bewegt wurde. FileCraft kann das beheben und von »%@« aus neu starten."
+          }
+        }
+      }
+    },
+    "macOS runs FileCraft from a temporary copy, because FileCraft was moved without Finder after it was downloaded. To fix this, quit FileCraft, drag it out of the Applications folder and back in Finder, and open it again." : {
+      "comment" : "Translocation alert when FileCraft's own location is unknown.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS führt FileCraft aus einer temporären Kopie aus, weil FileCraft nach dem Laden nicht mit dem Finder bewegt wurde. Beenden Sie FileCraft, ziehen Sie es im Finder aus dem Ordner »Programme« heraus und wieder hinein, und öffnen Sie es erneut."
+          }
+        }
+      }
+    },
     "Make Alias" : {
       "comment" : "File menu command and undo action name.",
       "localizations" : {
@@ -4862,6 +4917,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nicht installiert"
+          }
+        }
+      }
+    },
+    "Not Now" : {
+      "comment" : "Translocation alert: keeps FileCraft running from the temporary copy.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht jetzt"
           }
         }
       }

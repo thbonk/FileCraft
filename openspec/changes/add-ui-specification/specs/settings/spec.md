@@ -21,6 +21,10 @@ FileCraft SHALL update itself through the Sparkle framework from an appcast serv
 - **WHEN** the appcast lists a newer version and the user chooses FileCraft > Check for Updates…
 - **THEN** FileCraft shows the new version and its release notes with Install Update, Skip This Version and Remind Me Later
 
+#### Scenario: FileCraft runs from a temporary copy
+- **WHEN** macOS runs a downloaded FileCraft from a temporary copy (App Translocation), because it was moved without Finder
+- **THEN** FileCraft explains in its first window that it cannot update itself and offers Fix and Relaunch, which lets FileCraft run in place at its own location and relaunches it from there; when that location is unknown, it explains how to move FileCraft in Finder
+
 #### Scenario: Tampered update rejected
 - **WHEN** a downloaded update's signature does not match the embedded public key
 - **THEN** FileCraft does not install the update and reports that it could not be verified

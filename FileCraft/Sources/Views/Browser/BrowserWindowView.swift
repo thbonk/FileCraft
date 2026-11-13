@@ -103,6 +103,8 @@ internal struct BrowserWindowView: View {
     }
     .focusedSceneValue(\.browserWindow, model)
     .modifier(FileCommandAlerts(commands: model.fileCommands))
+    // A FileCraft that macOS runs from a temporary copy cannot update itself (issue #5).
+    .modifier(TranslocationRepairAlert())
     .background {
       tabSwitchingShortcuts
     }

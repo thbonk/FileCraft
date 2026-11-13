@@ -138,6 +138,11 @@ nonisolated private final class OperationRun {
   private var skipsFailures = false
   /// Whether the current source was merged into an existing folder.
   private var placedByMerging = false
+  /// The only source of the request when it is an application, which may then run in place. Finder lifts App
+  /// Translocation only for an app moved on its own: moved together with other items, or merged into a folder, the app
+  /// would run next to files that came with it, which translocation keeps it from loading. Determined before a move
+  /// takes the source away.
+  private let applicationToRunInPlace: URL?
 
   // MARK: - Initialization
 
@@ -155,6 +160,11 @@ nonisolated private final class OperationRun {
     self.discardExisting = discardExisting
     self.ask = ask
     self.runPrivileged = runPrivileged
+    if request.sources.count == 1, let source = request.sources.first, Quarantine.isApplicationBundle(source) {
+      applicationToRunInPlace = source
+    } else {
+      applicationToRunInPlace = nil
+    }
   }
 
   // MARK: - Running
@@ -255,10 +265,20 @@ nonisolated private final class OperationRun {
     }
   }
 
-  /// Copies or moves `source` to `target`, which does not exist.
+  /// Copies or moves `source` to `target`, which does not exist. An application moved or copied on its own may then run
+  /// in place, as after a move in Finder, instead of from a temporary copy (App Translocation).
   ///
   /// - Returns: false when the item was skipped after a failure.
   private func transfer(_ source: URL, to target: URL) throws -> Bool {
+    let isTransferred = try transferItem(source, to: target)
+    if isTransferred, source == applicationToRunInPlace, Quarantine.isApplicationBundle(target) {
+      // An application the helper placed belongs to root, so this may fail; the application is in place either way.
+      _ = try? Quarantine.allowRunningInPlace(at: target)
+    }
+    return isTransferred
+  }
+
+  private func transferItem(_ source: URL, to target: URL) throws -> Bool {
     switch request.kind {
     case .delete, .compress, .expand:
       // These go through `deleteTree(_:)`, `compressAll(totals:)` and `expandArchive(_:)` instead.
