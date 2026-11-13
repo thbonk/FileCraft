@@ -20,7 +20,9 @@
 # - NOTARY_API_KEY_P8: an App Store Connect API key (.p8) for notarization, base64-encoded
 # - NOTARY_API_KEY_ID and NOTARY_API_ISSUER_ID: that key's ID and its issuer ID
 # - SPARKLE_ED_PRIVATE_KEY: Sparkle's private EdDSA key, as exported by generate_keys -x. Appcast entries are signed
-#   once the app's Info.plist has SUPublicEDKey; from then on, a release without this secret fails.
+#   once the app's Info.plist has SUPublicEDKey; from then on, a release without this secret fails. Export it into a
+#   file, never to /dev/stdout, which generate_keys refuses with an error message that a pipe would store instead:
+#     d=$(mktemp -d) && generate_keys -x "$d/key" && gh secret set SPARKLE_ED_PRIVATE_KEY --env release < "$d/key"; rm -rf "$d"
 
 name: Release
 
@@ -67,6 +69,28 @@ jobs:
         run: |
           sw_vers
           xcodebuild -version
+
+      # Before building, so that a wrong secret fails in seconds rather than after building and notarizing.
+      - name: Check the Sparkle key
+        env:
+          SPARKLE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}
+        run: |
+          if ! /usr/libexec/PlistBuddy -c 'Print :SUPublicEDKey' FileCraft/Info.plist > /dev/null 2>&1; then
+            echo "The app has no SUPublicEDKey yet, so its appcast entries are not signed."
+            exit 0
+          fi
+          if [ -z "$SPARKLE_KEY" ]; then
+            echo "::error::The secret SPARKLE_ED_PRIVATE_KEY is missing; the workflow's header shows how to export it."
+            exit 1
+          fi
+          # A Sparkle private key is base64 of 32 bytes, or of 96 bytes in the older format.
+          # Text that is not base64 makes base64 fail; that counts as zero bytes, not as a failed step.
+          bytes=$(printf '%s' "$SPARKLE_KEY" | tr -d '[:space:]' | { base64 -D 2> /dev/null || true; } | wc -c | tr -d ' ')
+          if [ "$bytes" != 32 ] && [ "$bytes" != 96 ]; then
+            echo "::error::The secret SPARKLE_ED_PRIVATE_KEY (${#SPARKLE_KEY} characters) is not a Sparkle private key, which is base64 of 32 or 96 bytes. It may hold the error message of a failed export; export the key again as the workflow's header shows."
+            exit 1
+          fi
+          echo "The Sparkle key has the expected format."
 
       - name: Choose the version
         run: |

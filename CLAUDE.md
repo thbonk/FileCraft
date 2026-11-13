@@ -85,7 +85,7 @@ String Catalogs (`Localizable.xcstrings`, `InfoPlist.xcstrings`) live in `FileCr
 
 - The build number is the workflow's run number plus the variable `BUILD_NUMBER_OFFSET` of the GitHub environment `release`. GitHub raises the run number on every run, also runs that fail later, and never resets it. Re-runs keep their run number, so the workflow refuses them; start a new run. Renaming `release.yml` restarts the run numbers, so raise the offset then.
 - The appcast lives on the branch `appcast`, which holds only `appcast.xml` and gains one commit per release; Sparkle's feed URL is `https://raw.githubusercontent.com/thbonk/FileCraft/appcast/appcast.xml`. The workflow runs Sparkle's `generate_appcast` (version and SHA-256 pinned in the workflow) on the previous appcast plus the new archive. Never edit the branch by hand.
-- The signing, notarization and Sparkle secrets live in the `release` environment; the workflow's header lists them. The app's `Info.plist` has `SUPublicEDKey`, so every release EdDSA-signs its appcast entry and fails without `SPARKLE_ED_PRIVATE_KEY`.
+- The signing, notarization and Sparkle secrets live in the `release` environment; the workflow's header lists them. The app's `Info.plist` has `SUPublicEDKey`, so every release EdDSA-signs its appcast entry and fails without `SPARKLE_ED_PRIVATE_KEY`. Export that key into a file for `gh secret set`, never with `generate_keys -x /dev/stdout`: generate_keys refuses an existing path and prints an error that a pipe would store as the secret. The workflow's first step checks the key's format.
 - The branch is pushed only after notarization succeeded, so a failed run leaves no branch or release behind, only a used build number.
 
 ## Spec-driven workflow (OpenSpec)
