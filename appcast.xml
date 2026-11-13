@@ -3,6 +3,17 @@
     <channel>
         <title>FileCraft</title>
         <item>
+            <title>2026.11.2</title>
+            <pubDate>Fri, 13 Nov 2026 17:15:01 +0000</pubDate>
+            <link>https://github.com/thbonk/FileCraft</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/thbonk/FileCraft/releases</sparkle:fullReleaseNotesLink>
+            <sparkle:channel>beta</sparkle:channel>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:shortVersionString>2026.11.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>27.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/thbonk/FileCraft/releases/download/v2026.11.2/FileCraft-2026.11.2.zip" length="4053907" type="application/octet-stream" sparkle:edSignature="3J02D4hbir9FlQCVYkmpxPzc33N5DKQQGp8Akf3BuSosXpYrl6Abal0gbFtOMbYGpo7/+8onRbmSr8tSSzyBAQ=="/>
+        </item>
+        <item>
             <title>2026.11.1</title>
             <pubDate>Fri, 13 Nov 2026 06:24:33 +0000</pubDate>
             <link>https://github.com/thbonk/FileCraft</link>
