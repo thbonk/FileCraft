@@ -53,7 +53,7 @@ internal struct ListFileViewPerformanceTests {
     }
 
     Attachment.record("outlineRows for 10,000 items: \(elapsed)", named: "sort-and-flatten.txt")
-    #expect(elapsed < .milliseconds(400))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(400)))
   }
 
   /// Every selection change re-evaluates the menu commands, which read the selected items about twenty times.
@@ -70,7 +70,7 @@ internal struct ListFileViewPerformanceTests {
     }
 
     Attachment.record("20 reads of selectedItems for 10,000 items: \(elapsed)", named: "selected-items.txt")
-    #expect(elapsed < .milliseconds(50))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(50)))
   }
 
   /// Each arrow key changes the selection, which the views, menu commands and status bar read at once.
@@ -88,7 +88,7 @@ internal struct ListFileViewPerformanceTests {
     }
 
     Attachment.record("20 selection changes in 10,000 items: \(elapsed)", named: "selection-changes.txt")
-    #expect(elapsed < .milliseconds(30))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(30)))
   }
 
   /// The view mode does not change the order, so switching it must not sort again.
@@ -105,7 +105,7 @@ internal struct ListFileViewPerformanceTests {
     }
 
     Attachment.record("view mode switch with 10,000 items: \(elapsed)", named: "view-mode-switch.txt")
-    #expect(elapsed < .milliseconds(20))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(20)))
   }
 
   @Test
@@ -119,7 +119,7 @@ internal struct ListFileViewPerformanceTests {
     }
 
     Attachment.record("sorting 10,000 items by name: \(elapsed)", named: "sort-by-name.txt")
-    #expect(elapsed < .milliseconds(150))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(150)))
   }
 
   @Test
@@ -136,6 +136,6 @@ internal struct ListFileViewPerformanceTests {
 
     Attachment.record("first layout of 10,000 rows: \(elapsed)", named: "first-layout.txt")
     #expect(host != nil)
-    #expect(elapsed < .milliseconds(500))
+    #expect(elapsed < TestEnvironment.timeLimit(.milliseconds(500)))
   }
 }

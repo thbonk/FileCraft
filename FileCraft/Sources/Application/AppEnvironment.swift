@@ -32,6 +32,17 @@ nonisolated internal enum AppEnvironment {
     #endif
   }()
 
+  /// Whether a debugger is attached, as when Xcode runs FileCraft.
+  internal static let isBeingDebugged: Bool = {
+    var info = kinfo_proc()
+    var size = MemoryLayout<kinfo_proc>.stride
+    var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
+    guard sysctl(&name, u_int(name.count), &info, &size, nil, 0) == 0 else {
+      return false
+    }
+    return info.kp_proc.p_flag & P_TRACED != 0
+  }()
+
   /// Whether this is a Debug build, which checks for updates only when asked.
   internal static let isDebugBuild: Bool = {
     #if DEBUG

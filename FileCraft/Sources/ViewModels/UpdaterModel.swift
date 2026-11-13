@@ -124,10 +124,11 @@ internal final class UpdaterModel {
     refresh()
   }
 
-  /// Starts Sparkle, except in the test host; running operations hold back an update's relaunch.
+  /// Starts Sparkle, except in the test host and in a process that hands over to an earlier FileCraft; running
+  /// operations hold back an update's relaunch.
   private convenience init() {
     let delegate = UpdaterDelegate()
-    let controller = AppEnvironment.isTestHost
+    let controller = AppEnvironment.isTestHost || InstanceHandover.isActive
       ? nil
       : SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: delegate, userDriverDelegate: nil)
     self.init(

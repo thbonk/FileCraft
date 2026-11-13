@@ -27,4 +27,11 @@ internal enum TestEnvironment {
   ///
   /// The CI workflow sets `TEST_RUNNER_CI`; xcodebuild passes it to the test host as `CI`.
   internal static let isCI = ProcessInfo.processInfo.environment["CI"] == "true"
+
+  /// The time limit of a performance check: `limit` on a Mac in use, five times as much on a shared CI machine,
+  /// whose speed varies from run to run. The limits stay far below the regressions they catch, such as the
+  /// selection hangs of 0.4 to 7 seconds of finding B1.
+  internal static func timeLimit(_ limit: Duration) -> Duration {
+    isCI ? limit * 5 : limit
+  }
 }
