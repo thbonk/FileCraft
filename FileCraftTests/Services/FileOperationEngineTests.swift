@@ -314,6 +314,22 @@ internal struct FileOperationEngineTests {
     #expect(QuarantineTests.quarantine(of: applications.appending(path: "Tool.app")) == "0183;6533c2a1;Safari;6E4C2B1A")
   }
 
+  /// Finder lifts translocation only for an app moved on its own. Moved together with other items, the app might
+  /// otherwise run in place next to files that came with it, which translocation keeps it from loading.
+  @Test
+  internal func `An app moved together with other items stays translocated`() async throws {
+    let directory = try TemporaryDirectory()
+    _ = try directory.createFolder("Downloads/Tool.app/Contents")
+    let app = directory.url.appending(path: "Downloads/Tool.app")
+    let plugIn = try directory.createFile("Downloads/PlugIn.dylib")
+    try QuarantineTests.setQuarantine("0083;6533c2a1;Safari;6E4C2B1A", on: app)
+    let applications = try directory.createFolder("Applications")
+
+    _ = try await run(FileOperationRequest(kind: .move, sources: [app, plugIn], destination: applications))
+
+    #expect(QuarantineTests.quarantine(of: applications.appending(path: "Tool.app")) == "0083;6533c2a1;Safari;6E4C2B1A")
+  }
+
   @Test
   internal func `Moving a folder that is not an app keeps its quarantine`() async throws {
     let directory = try TemporaryDirectory()

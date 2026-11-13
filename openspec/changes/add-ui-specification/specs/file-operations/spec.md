@@ -136,11 +136,15 @@ Edit > Undo (⌘Z) and Edit > Redo (⇧⌘Z) SHALL cover rename, move, copy (und
 - **THEN** the three files return to their original folder
 
 ### Requirement: Metadata and move semantics
-Copies SHALL preserve extended attributes, access control lists, tags, Finder information, permissions where allowed, and creation and modification dates. A move within one volume SHALL be a rename that never copies data. A move across volumes SHALL copy and then delete each source item only after its copy completed successfully. A moved or copied application that carries the download quarantine SHALL be allowed to run in place, as after a move in Finder: FileCraft adds the quarantine's do-not-translocate flag and keeps the quarantine otherwise, so macOS no longer runs the application from a temporary copy (App Translocation) while Gatekeeper's checks stay.
+Copies SHALL preserve extended attributes, access control lists, tags, Finder information, permissions where allowed, and creation and modification dates. A move within one volume SHALL be a rename that never copies data. A move across volumes SHALL copy and then delete each source item only after its copy completed successfully. An application that carries the download quarantine and is moved or copied on its own SHALL be allowed to run in place, as after a move in Finder: FileCraft adds the quarantine's do-not-translocate flag and keeps the quarantine otherwise, so macOS no longer runs the application from a temporary copy (App Translocation) while Gatekeeper's checks stay. An application moved or copied together with other items, or reached by merging folders, SHALL keep its quarantine unchanged, as in Finder, so that it does not run in place next to files that came with it.
 
 #### Scenario: Downloaded application moved to Applications
 - **WHEN** the user moves an application downloaded from the internet from Downloads to Applications
 - **THEN** macOS runs the application from Applications instead of a temporary copy, and its quarantine is otherwise unchanged
+
+#### Scenario: Downloaded application moved with other items
+- **WHEN** the user moves a downloaded application together with a file from the same download
+- **THEN** the application's quarantine is unchanged, so macOS still runs it from a temporary copy
 
 #### Scenario: Cross-volume move interrupted
 - **WHEN** a move from the startup volume to an external drive is cancelled halfway
